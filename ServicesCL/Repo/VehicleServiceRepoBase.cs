@@ -11,12 +11,12 @@ namespace ServicesCL.Repo
 {
     public class VehicleServiceRepoBase<T> : IVehicleServiceRepoBase<T> where T : class
     {
-        private readonly ApplicationDbContext _context = null;
+        //private readonly ApplicationDbContext _context = null;
         private readonly DbSet<T> _dbSet = null;
 
         public VehicleServiceRepoBase(ApplicationDbContext _context)
         {
-            this._context = _context;
+            //this._context = _context;
             _dbSet = _context.Set<T>();
         }
 
