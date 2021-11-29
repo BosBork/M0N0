@@ -13,7 +13,7 @@ namespace EntitiesCL.EFModels
         [MaxLength(100)]
         public string Name { get; set; }
 
-        [MaxLength(10)]
+        [MaxLength(100)]
         public string Abrv { get; set; }
 
         public ICollection<VehicleModel> VehicleModels { get; set; }
