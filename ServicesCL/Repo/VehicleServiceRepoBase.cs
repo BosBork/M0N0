@@ -9,12 +9,12 @@ using System.Text;
 
 namespace ServicesCL.Repo
 {
-    public class VehicleRepoBase<T> : IVehicleRepoBase<T> where T : class
+    public class VehicleServiceRepoBase<T> : IVehicleServiceRepoBase<T> where T : class
     {
         private readonly ApplicationDbContext _context = null;
         private readonly DbSet<T> _dbSet = null;
 
-        public VehicleRepoBase(ApplicationDbContext _context)
+        public VehicleServiceRepoBase(ApplicationDbContext _context)
         {
             this._context = _context;
             _dbSet = _context.Set<T>();

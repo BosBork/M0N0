@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ServicesCL.Interfaces
 {
-    public interface IVehicleRepoBase<T>
+    public interface IVehicleServiceRepoBase<T>
     {
         IQueryable<T> FindAll();
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
