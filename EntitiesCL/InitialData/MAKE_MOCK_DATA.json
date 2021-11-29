@@ -1,0 +1,357 @@
+[
+ {
+   "VehicleMakeId": 1,
+   "Name": "Acura",
+   "Abrv": "ACURA"
+ },
+ {
+   "VehicleMakeId": 2,
+   "Name": "Alfa Romeo",
+   "Abrv": "ALFA"
+ },
+ {
+   "VehicleMakeId": 3,
+   "Name": "AMC",
+   "Abrv": "AMC"
+ },
+ {
+   "VehicleMakeId": 4,
+   "Name": "Aston Martin",
+   "Abrv": "ASTON"
+ },
+ {
+   "VehicleMakeId": 5,
+   "Name": "Audi",
+   "Abrv": "AUDI"
+ },
+ {
+   "VehicleMakeId": 6,
+   "Name": "Avanti",
+   "Abrv": "AVANTI"
+ },
+ {
+   "VehicleMakeId": 7,
+   "Name": "Bentley",
+   "Abrv": "BENTL"
+ },
+ {
+   "VehicleMakeId": 8,
+   "Name": "BMW",
+   "Abrv": "BMW"
+ },
+ {
+   "VehicleMakeId": 9,
+   "Name": "Buick",
+   "Abrv": "BUICK"
+ },
+ {
+   "VehicleMakeId": 10,
+   "Name": "Cadillac",
+   "Abrv": "CAD"
+ },
+ {
+   "VehicleMakeId": 11,
+   "Name": "Chevrolet",
+   "Abrv": "CHEV"
+ },
+ {
+   "VehicleMakeId": 12,
+   "Name": "Chrysler",
+   "Abrv": "CHRY"
+ },
+ {
+   "VehicleMakeId": 13,
+   "Name": "Daewoo",
+   "Abrv": "DAEW"
+ },
+ {
+   "VehicleMakeId": 14,
+   "Name": "Daihatsu",
+   "Abrv": "DAIHAT"
+ },
+ {
+   "VehicleMakeId": 15,
+   "Name": "Datsun",
+   "Abrv": "DATSUN"
+ },
+ {
+   "VehicleMakeId": 16,
+   "Name": "DeLorean",
+   "Abrv": "DELOREAN"
+ },
+ {
+   "VehicleMakeId": 17,
+   "Name": "Dodge",
+   "Abrv": "DODGE"
+ },
+ {
+   "VehicleMakeId": 18,
+   "Name": "Eagle",
+   "Abrv": "EAGLE"
+ },
+ {
+   "VehicleMakeId": 19,
+   "Name": "Ferrari",
+   "Abrv": "FER"
+ },
+ {
+   "VehicleMakeId": 20,
+   "Name": "FIAT",
+   "Abrv": "FIAT"
+ },
+ {
+   "VehicleMakeId": 21,
+   "Name": "Fisker",
+   "Abrv": "FISK"
+ },
+ {
+   "VehicleMakeId": 22,
+   "Name": "Ford",
+   "Abrv": "FORD"
+ },
+ {
+   "VehicleMakeId": 23,
+   "Name": "Freightliner",
+   "Abrv": "FREIGHT"
+ },
+ {
+   "VehicleMakeId": 24,
+   "Name": "Geo",
+   "Abrv": "GEO"
+ },
+ {
+   "VehicleMakeId": 25,
+   "Name": "GMC",
+   "Abrv": "GMC"
+ },
+ {
+   "VehicleMakeId": 26,
+   "Name": "Honda",
+   "Abrv": "HONDA"
+ },
+ {
+   "VehicleMakeId": 27,
+   "Name": "HUMMER",
+   "Abrv": "AMGEN"
+ },
+ {
+   "VehicleMakeId": 28,
+   "Name": "Hyundai",
+   "Abrv": "HYUND"
+ },
+ {
+   "VehicleMakeId": 29,
+   "Name": "Infiniti",
+   "Abrv": "INFIN"
+ },
+ {
+   "VehicleMakeId": 30,
+   "Name": "Isuzu",
+   "Abrv": "ISU"
+ },
+ {
+   "VehicleMakeId": 31,
+   "Name": "Jaguar",
+   "Abrv": "JAG"
+ },
+ {
+   "VehicleMakeId": 32,
+   "Name": "Jeep",
+   "Abrv": "JEEP"
+ },
+ {
+   "VehicleMakeId": 33,
+   "Name": "Kia",
+   "Abrv": "KIA"
+ },
+ {
+   "VehicleMakeId": 34,
+   "Name": "Lamborghini",
+   "Abrv": "LAM"
+ },
+ {
+   "VehicleMakeId": 35,
+   "Name": "Lancia",
+   "Abrv": "LAN"
+ },
+ {
+   "VehicleMakeId": 36,
+   "Name": "Land Rover",
+   "Abrv": "ROV"
+ },
+ {
+   "VehicleMakeId": 37,
+   "Name": "Lexus",
+   "Abrv": "LEXUS"
+ },
+ {
+   "VehicleMakeId": 38,
+   "Name": "Lincoln",
+   "Abrv": "LINC"
+ },
+ {
+   "VehicleMakeId": 39,
+   "Name": "Lotus",
+   "Abrv": "LOTUS"
+ },
+ {
+   "VehicleMakeId": 40,
+   "Name": "Maserati",
+   "Abrv": "MAS"
+ },
+ {
+   "VehicleMakeId": 41,
+   "Name": "Maybach",
+   "Abrv": "MAYBACH"
+ },
+ {
+   "VehicleMakeId": 42,
+   "Name": "Mazda",
+   "Abrv": "MAZDA"
+ },
+ {
+   "VehicleMakeId": 43,
+   "Name": "McLaren",
+   "Abrv": "MCLAREN"
+ },
+ {
+   "VehicleMakeId": 44,
+   "Name": "Mercedes-Benz",
+   "Abrv": "MB"
+ },
+ {
+   "VehicleMakeId": 45,
+   "Name": "Mercury",
+   "Abrv": "MERC"
+ },
+ {
+   "VehicleMakeId": 46,
+   "Name": "Merkur",
+   "Abrv": "MERKUR"
+ },
+ {
+   "VehicleMakeId": 47,
+   "Name": "MINI",
+   "Abrv": "MINI"
+ },
+ {
+   "VehicleMakeId": 48,
+   "Name": "Mitsubishi",
+   "Abrv": "MIT"
+ },
+ {
+   "VehicleMakeId": 49,
+   "Name": "Nissan",
+   "Abrv": "NISSAN"
+ },
+ {
+   "VehicleMakeId": 50,
+   "Name": "Oldsmobile",
+   "Abrv": "OLDS"
+ },
+ {
+   "VehicleMakeId": 51,
+   "Name": "Peugeot",
+   "Abrv": "PEUG"
+ },
+ {
+   "VehicleMakeId": 52,
+   "Name": "Plymouth",
+   "Abrv": "PLYM"
+ },
+ {
+   "VehicleMakeId": 53,
+   "Name": "Pontiac",
+   "Abrv": "PONT"
+ },
+ {
+   "VehicleMakeId": 54,
+   "Name": "Porsche",
+   "Abrv": "POR"
+ },
+ {
+   "VehicleMakeId": 55,
+   "Name": "RAM",
+   "Abrv": "RAM"
+ },
+ {
+   "VehicleMakeId": 56,
+   "Name": "Renault",
+   "Abrv": "REN"
+ },
+ {
+   "VehicleMakeId": 57,
+   "Name": "Rolls-Royce",
+   "Abrv": "RR"
+ },
+ {
+   "VehicleMakeId": 58,
+   "Name": "Saab",
+   "Abrv": "SAAB"
+ },
+ {
+   "VehicleMakeId": 59,
+   "Name": "Saturn",
+   "Abrv": "SATURN"
+ },
+ {
+   "VehicleMakeId": 60,
+   "Name": "Scion",
+   "Abrv": "SCION"
+ },
+ {
+   "VehicleMakeId": 61,
+   "Name": "smart",
+   "Abrv": "SMART"
+ },
+ {
+   "VehicleMakeId": 62,
+   "Name": "SRT",
+   "Abrv": "SRT"
+ },
+ {
+   "VehicleMakeId": 63,
+   "Name": "Sterling",
+   "Abrv": "STERL"
+ },
+ {
+   "VehicleMakeId": 64,
+   "Name": "Subaru",
+   "Abrv": "SUB"
+ },
+ {
+   "VehicleMakeId": 65,
+   "Name": "Suzuki",
+   "Abrv": "SUZUKI"
+ },
+ {
+   "VehicleMakeId": 66,
+   "Name": "Tesla",
+   "Abrv": "TESLA"
+ },
+ {
+   "VehicleMakeId": 67,
+   "Name": "Toyota",
+   "Abrv": "TOYOTA"
+ },
+ {
+   "VehicleMakeId": 68,
+   "Name": "Triumph",
+   "Abrv": "TRI"
+ },
+ {
+   "VehicleMakeId": 69,
+   "Name": "Volkswagen",
+   "Abrv": "VOLKS"
+ },
+ {
+   "VehicleMakeId": 70,
+   "Name": "Volvo",
+   "Abrv": "VOLVO"
+ },
+ {
+   "VehicleMakeId": 71,
+   "Name": "Yugo",
+   "Abrv": "YUGO"
+ }
+]
