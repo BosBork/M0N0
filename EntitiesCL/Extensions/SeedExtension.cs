@@ -10,7 +10,7 @@ namespace EntitiesCL.Extensions
     {
         public static List<TEntity> SeedDataFromJson<TEntity>(string fileName, string ext="json")
         {
-            string currentDirectory = Path.Combine(Directory.GetCurrentDirectory(), "..", "EntitiesCL", "MOCK", $"{fileName}.{ext}");
+            string currentDirectory = Path.Combine(Directory.GetCurrentDirectory(), "..", "EntitiesCL", "InitialData", $"{fileName}.{ext}");
             string fullPath = Path.GetFullPath(currentDirectory);
 
             #region Test

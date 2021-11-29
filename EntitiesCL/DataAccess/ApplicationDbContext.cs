@@ -12,9 +12,9 @@ namespace EntitiesCL.DataAccess
         public virtual DbSet<VehicleMake> VehicleMakes { get; set; }
         public virtual DbSet<VehicleModel> VehicleModels { get; set; }
 
-        public ApplicationDbContext()
-        {
-        }
+        //public ApplicationDbContext()
+        //{
+        //}
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
