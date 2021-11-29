@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ServicesCL.Interfaces.UOW;
+using ServicesCL.Repo.UOW;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +29,9 @@ namespace UI
         {
             services.AddDbContextPool<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IRepoWrapper, RepoWrapper>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

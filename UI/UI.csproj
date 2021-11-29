@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EntitiesCL\EntitiesCL.csproj" />
+    <ProjectReference Include="..\ServicesCL\ServicesCL.csproj" />
   </ItemGroup>
 
 </Project>
