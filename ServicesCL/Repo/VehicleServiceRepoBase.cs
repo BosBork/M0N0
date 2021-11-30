@@ -9,7 +9,7 @@ using System.Text;
 
 namespace ServicesCL.Repo
 {
-    public class VehicleServiceRepoBase<T> : IVehicleServiceRepoBase<T> where T : class
+    public abstract class VehicleServiceRepoBase<T> : IVehicleServiceRepoBase<T> where T : class
     {
         //private readonly ApplicationDbContext _context = null;
         private readonly DbSet<T> _dbSet = null;

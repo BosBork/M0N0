@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ServicesCL.Interfaces
 {
-    public interface IModelRepo : IVehicleServiceRepoBase<VehicleModel>
+    public interface IModelRepo /*: IVehicleServiceRepoBase<VehicleModel>*/
     {
     }
 }

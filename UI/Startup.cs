@@ -34,6 +34,8 @@ namespace UI
 
             services.AddScoped<IRepoWrapper, RepoWrapper>();
 
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddControllersWithViews();
         }
 
