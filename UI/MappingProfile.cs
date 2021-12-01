@@ -13,7 +13,13 @@ namespace UI
         public MappingProfile()
         {
             CreateMap<VehicleMake, VehicleMakeDTO>();
+            CreateMap<VehicleMakeCreateDTO, VehicleMake>();
+
+            
             CreateMap<VehicleModel, VehicleModelDTO>();
+            CreateMap<VehicleMakeUpdateDTO, VehicleMake>();
+
+
         }
     }
 }

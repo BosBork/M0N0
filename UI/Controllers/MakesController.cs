@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 
 namespace UI.Controllers
 {
+    //[Route("api/make")]
+    //[ApiController]
     public class MakesController : Controller
     {
         private readonly IMapper _mapper;
@@ -23,6 +25,7 @@ namespace UI.Controllers
             _mapper = mapper;
         }
 
+        #region Get
         [HttpGet]
         public IActionResult Index([FromQuery] MakeParams makesParams)
         {
@@ -54,8 +57,8 @@ namespace UI.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult GetVehicleMakeById(int id)
+        [HttpGet/*("{id}", Name = "VehicleMakeById")*/]
+        public IActionResult GetVehicleMakeById(int id) //Use GUID
         {
             try
             {
@@ -77,12 +80,12 @@ namespace UI.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult GetVehiclesMakesById(int id)
+        [HttpGet/*("id", Name = "ModelsOfVehicleById")*/]
+        public IActionResult GetModelsOfVehicleById(int id)
         {
             try
             {
-                var makesModels = _repo.VehicleMake.GetVehicleMakesModelsById(id);
+                var makesModels = _repo.VehicleMake.GetModelsOfVehicleById(id);
 
                 if (makesModels == null)
                 {
@@ -99,36 +102,110 @@ namespace UI.Controllers
             }
         }
 
+        #endregion
+
+        #region PostPutDelete
+        [HttpPost]
+        public IActionResult CreateVehicleMake([FromBody] VehicleMakeCreateDTO vehicleMake)
+        {
+
+            try
+            {
+                if (vehicleMake == null)
+                {
+                    return BadRequest("VehicleMake Object is NULL");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("ModelState is Invalid");
+                }
+
+                VehicleMake makeEntity = _mapper.Map<VehicleMake>(vehicleMake);
+
+                #region test
+                //var makeEntity = new VehicleMake()
+                //{
+                //    Name = vehicleMake.Name,
+                //    Abrv = vehicleMake.Abrv
+                //}; 
+                #endregion
+
+                _repo.VehicleMake.CreateVehicleMake(makeEntity);
+                _repo.Save();
+
+                VehicleMakeDTO createdVehicleMake = _mapper.Map<VehicleMakeDTO>(makeEntity);
+
+                #region test
+                //return CreatedAtRoute("VehicleMakeById", new { id = createdVehicleMake.VehicleMakeId }, createdVehicleMake); 
+                #endregion
+                return CreatedAtAction(nameof(GetVehicleMakeById), new { id = createdVehicleMake.VehicleMakeId }, createdVehicleMake);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
 
+        [HttpPut]
+        public IActionResult UpdateVehicleMake(int id, [FromBody] VehicleMakeUpdateDTO vehicleMake)
+        {
+
+            try
+            {
+                if (vehicleMake == null)
+                {
+                    return BadRequest("VehicleMake Object is NULL");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("ModelState is Invalid");
+                }
+
+                VehicleMake makeEntity = _repo.VehicleMake.GetVehicleMakeById(id);
+                if (makeEntity == null)
+                {
+                    return NotFound();
+                }
+
+                _mapper.Map(vehicleMake, makeEntity);
+
+                _repo.VehicleMake.UpdateVehicleMake(makeEntity);
+                _repo.Save();
+
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
 
+        [HttpDelete]
+        public IActionResult DeleteVehicleMake(int id)
+        {
+            try
+            {
+                VehicleMake vehicleMake = _repo.VehicleMake.GetVehicleMakeById(id);
+                if (vehicleMake == null)
+                {
+                    return NotFound();
+                }
 
+                _repo.VehicleMake.DeleteVehicleMake(vehicleMake);
+                _repo.Save();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        #endregion
 
 
 

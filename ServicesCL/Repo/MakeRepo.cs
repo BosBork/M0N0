@@ -18,6 +18,7 @@ namespace ServicesCL.Repo
 
         }
 
+        #region old
         //public IEnumerable<VehicleMake> GetVehicleMakes(MakeParams makeParams)
         //{
         //    return FindAll()
@@ -25,7 +26,23 @@ namespace ServicesCL.Repo
         //        .Skip((makeParams.PageNumber - 1) * makeParams.PageSize)
         //        .Take(makeParams.PageSize)
         //        .ToList();
-        //}
+        //} 
+        #endregion
+
+        public void UpdateVehicleMake(VehicleMake vehicleMake)
+        {
+            Update(vehicleMake);
+        }
+
+        public void CreateVehicleMake(VehicleMake vehicleMake)
+        {
+            Create(vehicleMake);
+        }
+
+        public void DeleteVehicleMake(VehicleMake vehicleMake)
+        {
+            Delete(vehicleMake);
+        }
 
         public PagedList<VehicleMake> GetAllVehicleMakes(MakeParams makeParams)
         {
@@ -46,10 +63,11 @@ namespace ServicesCL.Repo
                 .FirstOrDefault();
         }
 
-        public VehicleMake GetVehicleMakesModelsById(int vehicleMakeId)
+        public VehicleMake GetModelsOfVehicleById(int vehicleMakeId)
         {
             return FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId))
                 .Include(models => models.VehicleModels).FirstOrDefault();
         }
+
     }
 }

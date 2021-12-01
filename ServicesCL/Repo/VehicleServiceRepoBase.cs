@@ -22,7 +22,7 @@ namespace ServicesCL.Repo
 
         public void Create(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Add(entity);
         }
 
         public void Delete(T entity /*object id*/)
