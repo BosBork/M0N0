@@ -8,6 +8,7 @@ using ServicesCL.Interfaces.UOW;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace UI.Controllers
@@ -30,10 +31,15 @@ namespace UI.Controllers
         public async Task<IActionResult> Index([FromQuery] MakeParams makeParams)
         {
             #region test
-            //if (string.IsNullOrEmpty(makeParams.First) || string.IsNullOrWhiteSpace(makeParams.First))
+            if (string.IsNullOrEmpty(makeParams.First) || !makeParams.First.All(Char.IsLetterOrDigit))
+            {
+                return BadRequest("Something Went Wrong With Your Request");
+            }
+
+            //if (string.IsNullOrEmpty(makeParams.First) || !Regex.IsMatch(makeParams.First, @"^[a-zA-Z0-9]+$"))
             //{
             //    return BadRequest("Something Went Wrong With Your Request");
-            //} 
+            //}
             #endregion
 
             try

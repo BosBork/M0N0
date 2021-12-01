@@ -1,5 +1,6 @@
 ﻿using EntitiesCL.DataAccess;
 using EntitiesCL.EFModels;
+using EntitiesCL.Helpers;
 using ServicesCL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,10 @@ namespace ServicesCL.Repo
 {
     public class ModelRepo : VehicleServiceRepoBase<VehicleModel>, IModelRepo
     {
-        public ModelRepo(ApplicationDbContext context): base(context)
+        private readonly ISortHelper<VehicleModel> _sortHelper;
+        public ModelRepo(ApplicationDbContext context, ISortHelper<VehicleModel> sortHelper) : base(context)
         {
-
+            _sortHelper = sortHelper;
         }
     }
 }

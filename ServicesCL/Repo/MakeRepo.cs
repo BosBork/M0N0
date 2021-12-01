@@ -9,14 +9,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace ServicesCL.Repo
 {
     public class MakeRepo : VehicleServiceRepoBase<VehicleMake>, IMakeRepo
     {
-        public MakeRepo(ApplicationDbContext context) :base(context)
+        private readonly ISortHelper<VehicleMake> _sortHelper;
+        public MakeRepo(ApplicationDbContext context, ISortHelper<VehicleMake> sortHelper) :base(context)
         {
-
+            _sortHelper = sortHelper;
         }
 
         #region old
@@ -65,9 +67,13 @@ namespace ServicesCL.Repo
             //var makes = FindByCondition(x => x.Name.StartsWith(First)).OrderBy(x => x.Name);
             #endregion
 
-            var makes = (makeParams.First == "All" ? FindAll() : FindByCondition(x => x.Name.StartsWith(makeParams.First.Substring(0, 1)))).OrderBy(x=>x.Name);
+            var makes = (makeParams.First == "All" ? FindAll() : FindByCondition(x => x.Name.StartsWith(makeParams.First.Trim().Substring(0, 1))));
 
-            return await PagedList<VehicleMake>.ToPagedListAsync(makes, makeParams.PageNumber, makeParams.PageSize);
+            SearchByName(ref makes, makeParams.Name);
+
+            var sortedMakes = _sortHelper.ApplySort(makes, makeParams.OrderBy);
+
+            return await PagedList<VehicleMake>.ToPagedListAsync(/*makes.OrderBy(x=>x.Name)*/sortedMakes, makeParams.PageNumber, makeParams.PageSize);
         }
 
 
@@ -82,6 +88,18 @@ namespace ServicesCL.Repo
             return FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId))
                 .Include(models => models.VehicleModels).FirstOrDefault();
         }
+
+
+        #region Methods
+        private void SearchByName(ref IQueryable<VehicleMake> vehicleMakes, string vehicleMakeName)
+        {
+            if (!vehicleMakes.Any() || string.IsNullOrWhiteSpace(vehicleMakeName))
+                return;
+
+            vehicleMakes = vehicleMakes.Where(o => o.Name.ToLower().Contains(vehicleMakeName.Trim().ToLower()));
+        }
+
+        #endregion
 
     }
 }

@@ -1,4 +1,6 @@
 using EntitiesCL.DataAccess;
+using EntitiesCL.EFModels;
+using EntitiesCL.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,6 +33,11 @@ namespace UI
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc();
+
+            #region Sorting
+            services.AddScoped<ISortHelper<VehicleMake>, SortHelper<VehicleMake>>();
+            services.AddScoped<ISortHelper<VehicleModel>, SortHelper<VehicleModel>>(); 
+            #endregion
 
             services.AddScoped<IRepoWrapper, RepoWrapper>();
 

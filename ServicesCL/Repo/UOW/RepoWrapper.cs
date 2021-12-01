@@ -1,4 +1,6 @@
 ﻿using EntitiesCL.DataAccess;
+using EntitiesCL.EFModels;
+using EntitiesCL.Helpers;
 using ServicesCL.Interfaces;
 using ServicesCL.Interfaces.UOW;
 using System;
@@ -10,10 +12,15 @@ namespace ServicesCL.Repo.UOW
     public class RepoWrapper : IRepoWrapper
     {
 
+        private readonly ISortHelper<VehicleMake> _makeSortHelper;
+        private readonly ISortHelper<VehicleModel> _modelSortHelper;
+
         private readonly ApplicationDbContext _context;
-        public RepoWrapper(ApplicationDbContext context)
+        public RepoWrapper(ApplicationDbContext context, ISortHelper<VehicleMake> makeSortHelper, ISortHelper<VehicleModel> modelSortHelper)
         {
             _context = context;
+            _makeSortHelper = makeSortHelper;
+            _modelSortHelper = modelSortHelper;
         }
 
         #region Test
@@ -32,7 +39,7 @@ namespace ServicesCL.Repo.UOW
             {
                 if (makeRepo == null)
                 {
-                    makeRepo = new MakeRepo(_context);
+                    makeRepo = new MakeRepo(_context, _makeSortHelper);
                 }
                 return makeRepo;
             }
@@ -46,7 +53,7 @@ namespace ServicesCL.Repo.UOW
             {
                 if (modelRepo == null)
                 {
-                    modelRepo = new ModelRepo(_context);
+                    modelRepo = new ModelRepo(_context, _modelSortHelper);
                 }
                 return modelRepo;
             }

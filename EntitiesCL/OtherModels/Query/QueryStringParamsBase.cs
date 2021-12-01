@@ -21,5 +21,7 @@ namespace EntitiesCL.OtherModels.Query
                 _pageSize = (value > maxPageSize) ? maxPageSize : value;
             }
         }
+
+        public string OrderBy { get; set; }
     }
 }
