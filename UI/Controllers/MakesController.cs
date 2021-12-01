@@ -27,11 +27,18 @@ namespace UI.Controllers
 
         #region Get
         [HttpGet]
-        public IActionResult Index([FromQuery] MakeParams makesParams)
+        public async Task<IActionResult> Index([FromQuery] MakeParams makeParams)
         {
+            #region test
+            //if (string.IsNullOrEmpty(makeParams.First) || string.IsNullOrWhiteSpace(makeParams.First))
+            //{
+            //    return BadRequest("Something Went Wrong With Your Request");
+            //} 
+            #endregion
+
             try
             {
-                var makes = _repo.VehicleMake.GetAllVehicleMakes(makesParams);
+                var makes = await _repo.VehicleMake.GetAllVehicleMakes(makeParams);
 
                 var vehicleMakesResult = _mapper.Map<IEnumerable<VehicleMakeDTO>>(makes);
 
