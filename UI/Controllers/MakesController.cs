@@ -31,10 +31,10 @@ namespace UI.Controllers
         public async Task<IActionResult> Index([FromQuery] MakeParams makeParams)
         {
             #region test
-            if (string.IsNullOrEmpty(makeParams.First) || !makeParams.First.All(Char.IsLetterOrDigit))
-            {
-                return BadRequest("Something Went Wrong With Your Request");
-            }
+            //if (string.IsNullOrEmpty(makeParams.First) || !makeParams.First.All(Char.IsLetterOrDigit))
+            //{
+            //    return BadRequest("Something Went Wrong With Your Request");
+            //}
 
             //if (string.IsNullOrEmpty(makeParams.First) || !Regex.IsMatch(makeParams.First, @"^[a-zA-Z0-9]+$"))
             //{
@@ -48,6 +48,7 @@ namespace UI.Controllers
 
                 var vehicleMakesResult = _mapper.Map<IEnumerable<VehicleMakeDTO>>(makes);
 
+                //return View();
                 return Ok(vehicleMakesResult);
             }
             catch (Exception)

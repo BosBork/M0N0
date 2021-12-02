@@ -58,17 +58,9 @@ namespace ServicesCL.Repo
             //} 
             #endregion
 
-            #region Test
-            //if (makeParams.First == "All" || string.IsNullOrEmpty(makeParams.First))
-            //{
-            //    return await PagedList<VehicleMake>.ToPagedListAsync(FindAll().OrderBy(x => x.Name), makeParams.PageNumber, makeParams.PageSize);
-            //} 
-            //string First = makeParams.First.Substring(0, 1);
-            //var makes = FindByCondition(x => x.Name.StartsWith(First)).OrderBy(x => x.Name);
-            #endregion
+            var makes = FindAll();
 
-            var makes = (makeParams.First == "All" ? FindAll() : FindByCondition(x => x.Name.StartsWith(makeParams.First.Trim().Substring(0, 1))));
-
+            FilterByFirstChar(ref makes, makeParams.First);
             SearchByName(ref makes, makeParams.Name);
 
             var sortedMakes = _sortHelper.ApplySort(makes, makeParams.OrderBy);
@@ -91,6 +83,14 @@ namespace ServicesCL.Repo
 
 
         #region Methods
+        private void FilterByFirstChar(ref IQueryable<VehicleMake> vehicleMakes, string first)
+        {
+            if (!vehicleMakes.Any() || string.IsNullOrWhiteSpace(first))
+                return;
+
+            vehicleMakes = vehicleMakes.Where(x => x.Name.StartsWith(first.Trim().Substring(0, 1)));
+        }
+
         private void SearchByName(ref IQueryable<VehicleMake> vehicleMakes, string vehicleMakeName)
         {
             if (!vehicleMakes.Any() || string.IsNullOrWhiteSpace(vehicleMakeName))
@@ -98,7 +98,6 @@ namespace ServicesCL.Repo
 
             vehicleMakes = vehicleMakes.Where(o => o.Name.ToLower().Contains(vehicleMakeName.Trim().ToLower()));
         }
-
         #endregion
 
     }
