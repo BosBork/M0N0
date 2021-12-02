@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntitiesCL.EFModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,5 +13,10 @@ namespace EntitiesCL.OtherModels.DTOs
 
         public string Abrv { get; set; }
 
+        public int VehicleMakeId { get; set; }
+
+        #region Test_1
+        //public string VehicleMakeName { get; set; }
+        #endregion
     }
 }
