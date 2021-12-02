@@ -1,11 +1,12 @@
-﻿using System;
+﻿using EntitiesCL.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace EntitiesCL.EFModels
 {
-    public class VehicleMake
+    public class VehicleMake : IOther
     {
         public int VehicleMakeId { get; set; }
 

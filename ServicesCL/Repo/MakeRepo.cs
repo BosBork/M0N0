@@ -73,8 +73,9 @@ namespace ServicesCL.Repo
 
             var makes = FindAll();
 
-            FilterByFirstChar(ref makes, makeParams.First);
-            SearchByName(ref makes, makeParams.Name);
+            Other<VehicleMake>.FilterByFirstChar(ref makes, makeParams.First);
+
+            Other<VehicleMake>.SearchByName(ref makes, makeParams.Name);
 
             var sortedMakes = _sortHelper.ApplySort(makes, makeParams.OrderBy);
 
@@ -96,21 +97,21 @@ namespace ServicesCL.Repo
 
 
         #region Methods
-        private void FilterByFirstChar(ref IQueryable<VehicleMake> vehicleMakes, string first)
-        {
-            if (!vehicleMakes.Any() || string.IsNullOrWhiteSpace(first))
-                return;
+        //private void FilterByFirstChar(ref IQueryable<VehicleMake> vehicleMakes, string first)
+        //{
+        //    if (!vehicleMakes.Any() || string.IsNullOrWhiteSpace(first))
+        //        return;
 
-            vehicleMakes = vehicleMakes.Where(x => x.Name.StartsWith(first.Trim().Substring(0, 1)));
-        }
+        //    vehicleMakes = vehicleMakes.Where(x => x.Name.StartsWith(first.Trim().Substring(0, 1)));
+        //}
 
-        private void SearchByName(ref IQueryable<VehicleMake> vehicleMakes, string vehicleMakeName)
-        {
-            if (!vehicleMakes.Any() || string.IsNullOrWhiteSpace(vehicleMakeName))
-                return;
+        //private void SearchByName(ref IQueryable<VehicleMake> vehicleMakes, string vehicleMakeName)
+        //{
+        //    if (!vehicleMakes.Any() || string.IsNullOrWhiteSpace(vehicleMakeName))
+        //        return;
 
-            vehicleMakes = vehicleMakes.Where(o => o.Name.ToLower().Contains(vehicleMakeName.Trim().ToLower()));
-        }
+        //    vehicleMakes = vehicleMakes.Where(o => o.Name.ToLower().Contains(vehicleMakeName.Trim().ToLower()));
+        //}
         #endregion
 
     }
