@@ -13,8 +13,6 @@ using System.Threading.Tasks;
 
 namespace UI.Controllers
 {
-    //[Route("api/make")]
-    //[ApiController]
     public class MakesController : Controller
     {
         private readonly IMapper _mapper;
@@ -30,18 +28,6 @@ namespace UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Index([FromQuery] MakeParams makeParams)
         {
-            #region test
-            //if (string.IsNullOrEmpty(makeParams.First) || !makeParams.First.All(Char.IsLetterOrDigit))
-            //{
-            //    return BadRequest("Something Went Wrong With Your Request");
-            //}
-
-            //if (string.IsNullOrEmpty(makeParams.First) || !Regex.IsMatch(makeParams.First, @"^[a-zA-Z0-9]+$"))
-            //{
-            //    return BadRequest("Something Went Wrong With Your Request");
-            //}
-            #endregion
-
             try
             {
                 var makes = await _repo.VehicleMake.GetAllVehicleMakesAsync(makeParams);
@@ -71,7 +57,7 @@ namespace UI.Controllers
         }
 
 
-        [HttpGet/*("{id}", Name = "VehicleMakeById")*/]
+        [HttpGet]
         public async Task<IActionResult> GetVehicleMakeById(int id) //Use GUID
         {
             try
@@ -94,7 +80,7 @@ namespace UI.Controllers
         }
 
 
-        [HttpGet/*("id", Name = "ModelsOfVehicleById")*/]
+        [HttpGet]
         public async Task<IActionResult> GetModelsOfVehicleById(int id)
         {
             try
@@ -150,9 +136,6 @@ namespace UI.Controllers
 
                 VehicleMakeDTO createdVehicleMake = _mapper.Map<VehicleMakeDTO>(makeEntity);
 
-                #region test
-                //return CreatedAtRoute("VehicleMakeById", new { id = createdVehicleMake.VehicleMakeId }, createdVehicleMake); 
-                #endregion
                 return CreatedAtAction(nameof(GetVehicleMakeById), new { id = createdVehicleMake.VehicleMakeId }, createdVehicleMake);
             }
             catch (Exception)

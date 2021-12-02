@@ -45,8 +45,6 @@ namespace ServicesCL.Repo
             //.Include(x => x.VehicleMake) as IQueryable<VehicleModel>; 
             #endregion
 
-            //FilterByFirstChar(ref models, modelParams.First);
-
             Other<VehicleModel>.FilterByFirstChar(ref models, modelParams.First);
 
             Other<VehicleModel>.SearchByName(ref models, modelParams.Name);
@@ -61,24 +59,6 @@ namespace ServicesCL.Repo
             return await FindByCondition(x => x.VehicleModelId.Equals(vehicleModelId))
                 .FirstOrDefaultAsync();
         }
-
-        #region Methods
-        //private void FilterByFirstChar(ref IQueryable<VehicleModel> vehicleModels, string first)
-        //{
-        //    if (!vehicleModels.Any() || string.IsNullOrWhiteSpace(first))
-        //        return;
-
-        //    vehicleModels = vehicleModels.Where(x => x.Name.StartsWith(first.Trim().Substring(0, 1)));
-        //}
-
-        //private void SearchByName(ref IQueryable<VehicleModel> vehicleModels, string vehicleModelName)
-        //{
-        //    if (!vehicleModels.Any() || string.IsNullOrWhiteSpace(vehicleModelName))
-        //        return;
-
-        //    vehicleModels = vehicleModels.Where(o => o.Name.ToLower().Contains(vehicleModelName.Trim().ToLower()));
-        //}
-        #endregion
 
     }
 }
