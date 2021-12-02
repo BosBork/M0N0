@@ -95,11 +95,11 @@ namespace UI.Controllers
 
 
         [HttpGet/*("id", Name = "ModelsOfVehicleById")*/]
-        public IActionResult GetModelsOfVehicleById(int id)
+        public async Task<IActionResult> GetModelsOfVehicleById(int id)
         {
             try
             {
-                var makesModels = _repo.VehicleMake.GetModelsOfVehicleByIdAsync(id);
+                var makesModels = await _repo.VehicleMake.GetModelsOfVehicleByIdAsync(id);
 
                 if (makesModels == null)
                 {
@@ -220,15 +220,6 @@ namespace UI.Controllers
             }
         }
         #endregion
-
-
-
-
-
-
-
-
-
 
 
     }
