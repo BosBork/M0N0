@@ -16,5 +16,7 @@ namespace EntitiesCL.OtherModels.Query
         public string First { get; set; }/* = "All";*/
 
         public string Name { get; set; }
+
+        //public string Sort { get; set; } = "name asc";
     }
 }

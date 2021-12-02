@@ -50,6 +50,19 @@ namespace ServicesCL.Repo
 
         public async Task<PagedList<VehicleMake>> GetAllVehicleMakes(MakeParams makeParams)
         {
+            #region SimpleSort
+            //var makesx = FindAll();
+            //switch (makeParams.Sort.ToLower())
+            //{
+            //    case "name desc":
+            //        makesx = makesx.OrderByDescending(x => x.Name);
+            //        break;
+            //    default:
+            //        makesx = makesx.OrderBy(x => x.Name);
+            //        break;
+            //} 
+            #endregion
+
             #region Test
             //var max = ((int)Math.Ceiling(FindAll().Count() / (double)makeParams.PageSize));
             //if (makeParams.PageNumber > max)
