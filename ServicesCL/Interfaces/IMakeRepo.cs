@@ -10,9 +10,9 @@ namespace ServicesCL.Interfaces
 {
     public interface IMakeRepo /*: IVehicleServiceRepoBase<VehicleMake>*/
     {
-        Task<PagedList<VehicleMake>> GetAllVehicleMakes(MakeParams makeParams);
-        VehicleMake GetVehicleMakeById(int vehicleMakeId);
-        VehicleMake GetModelsOfVehicleById(int vehicleMakeId);
+        Task<PagedList<VehicleMake>> GetAllVehicleMakesAsync(MakeParams makeParams);
+        Task<VehicleMake> GetVehicleMakeByIdAsync(int vehicleMakeId);
+        Task<VehicleMake> GetModelsOfVehicleByIdAsync(int vehicleMakeId);
 
         void CreateVehicleMake(VehicleMake vehicleMake);
         void UpdateVehicleMake(VehicleMake vehicleMake);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ServicesCL.Interfaces.UOW
 {
@@ -8,6 +9,6 @@ namespace ServicesCL.Interfaces.UOW
     {
         IMakeRepo VehicleMake { get; }
         IModelRepo VehicleModel { get; }
-        void Save();
+        Task SaveAsync();
     }
 }

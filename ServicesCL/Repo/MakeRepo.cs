@@ -48,7 +48,7 @@ namespace ServicesCL.Repo
         }
 
 
-        public async Task<PagedList<VehicleMake>> GetAllVehicleMakes(MakeParams makeParams)
+        public async Task<PagedList<VehicleMake>> GetAllVehicleMakesAsync(MakeParams makeParams)
         {
             #region SimpleSort
             //var makesx = FindAll();
@@ -82,16 +82,16 @@ namespace ServicesCL.Repo
         }
 
 
-        public VehicleMake GetVehicleMakeById(int vehicleMakeId)
+        public async Task<VehicleMake> GetVehicleMakeByIdAsync(int vehicleMakeId)
         {
-            return FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId))
-                .FirstOrDefault();
+            return await FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId))
+                .FirstOrDefaultAsync();
         }
 
-        public VehicleMake GetModelsOfVehicleById(int vehicleMakeId)
+        public async Task<VehicleMake> GetModelsOfVehicleByIdAsync(int vehicleMakeId)
         {
-            return FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId))
-                .Include(models => models.VehicleModels).FirstOrDefault();
+            return await FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId))
+                .Include(models => models.VehicleModels).FirstOrDefaultAsync();
         }
 
 

@@ -6,6 +6,7 @@ using ServicesCL.Interfaces.UOW;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ServicesCL.Repo.UOW
 {
@@ -60,7 +61,11 @@ namespace ServicesCL.Repo.UOW
             //set { modelRepo = value; }
         }
 
-        public void Save() => _context.SaveChanges();
+        //public void Save() => _context.SaveChanges();
 
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

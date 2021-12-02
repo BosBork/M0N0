@@ -44,7 +44,7 @@ namespace UI.Controllers
 
             try
             {
-                var makes = await _repo.VehicleMake.GetAllVehicleMakes(makeParams);
+                var makes = await _repo.VehicleMake.GetAllVehicleMakesAsync(makeParams);
 
                 var vehicleMakesResult = _mapper.Map<IEnumerable<VehicleMakeDTO>>(makes);
 
@@ -72,11 +72,11 @@ namespace UI.Controllers
 
 
         [HttpGet/*("{id}", Name = "VehicleMakeById")*/]
-        public IActionResult GetVehicleMakeById(int id) //Use GUID
+        public async Task<IActionResult> GetVehicleMakeById(int id) //Use GUID
         {
             try
             {
-                var make = _repo.VehicleMake.GetVehicleMakeById(id);
+                var make = await _repo.VehicleMake.GetVehicleMakeByIdAsync(id);
 
                 if (make == null)
                 {
@@ -99,7 +99,7 @@ namespace UI.Controllers
         {
             try
             {
-                var makesModels = _repo.VehicleMake.GetModelsOfVehicleById(id);
+                var makesModels = _repo.VehicleMake.GetModelsOfVehicleByIdAsync(id);
 
                 if (makesModels == null)
                 {
@@ -120,7 +120,7 @@ namespace UI.Controllers
 
         #region PostPutDelete
         [HttpPost]
-        public IActionResult CreateVehicleMake([FromBody] VehicleMakeCreateDTO vehicleMake)
+        public async Task<IActionResult> CreateVehicleMake([FromBody] VehicleMakeCreateDTO vehicleMake)
         {
 
             try
@@ -146,7 +146,7 @@ namespace UI.Controllers
                 #endregion
 
                 _repo.VehicleMake.CreateVehicleMake(makeEntity);
-                _repo.Save();
+                await _repo.SaveAsync();
 
                 VehicleMakeDTO createdVehicleMake = _mapper.Map<VehicleMakeDTO>(makeEntity);
 
@@ -163,7 +163,7 @@ namespace UI.Controllers
 
 
         [HttpPut]
-        public IActionResult UpdateVehicleMake(int id, [FromBody] VehicleMakeUpdateDTO vehicleMake)
+        public async Task<IActionResult> UpdateVehicleMake(int id, [FromBody] VehicleMakeUpdateDTO vehicleMake)
         {
 
             try
@@ -178,7 +178,7 @@ namespace UI.Controllers
                     return BadRequest("ModelState is Invalid");
                 }
 
-                VehicleMake makeEntity = _repo.VehicleMake.GetVehicleMakeById(id);
+                VehicleMake makeEntity = await _repo.VehicleMake.GetVehicleMakeByIdAsync(id);
                 if (makeEntity == null)
                 {
                     return NotFound();
@@ -187,7 +187,7 @@ namespace UI.Controllers
                 _mapper.Map(vehicleMake, makeEntity);
 
                 _repo.VehicleMake.UpdateVehicleMake(makeEntity);
-                _repo.Save();
+                await _repo.SaveAsync();
 
                 return NoContent();
             }
@@ -199,18 +199,18 @@ namespace UI.Controllers
 
 
         [HttpDelete]
-        public IActionResult DeleteVehicleMake(int id)
+        public async Task<IActionResult> DeleteVehicleMake(int id)
         {
             try
             {
-                VehicleMake vehicleMake = _repo.VehicleMake.GetVehicleMakeById(id);
+                VehicleMake vehicleMake = await _repo.VehicleMake.GetVehicleMakeByIdAsync(id);
                 if (vehicleMake == null)
                 {
                     return NotFound();
                 }
 
                 _repo.VehicleMake.DeleteVehicleMake(vehicleMake);
-                _repo.Save();
+                await _repo.SaveAsync();
 
                 return NoContent();
             }
