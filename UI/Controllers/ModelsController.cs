@@ -3,6 +3,7 @@ using EntitiesCL.EFModels;
 using EntitiesCL.OtherModels.DTOs;
 using EntitiesCL.OtherModels.Query;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ServicesCL.Interfaces.UOW;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,8 @@ namespace UI.Controllers
                 var models = await _repo.VehicleModel.GetAllVehicleModelsAsync(modelParams);
 
                 var vehicleModelsResult = _mapper.Map<IEnumerable<VehicleModelDTO>>(models);
+
+                ViewBag.DPSelectListItem = new SelectList(await _repo.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text", modelParams.MakeIdFilterSelected);
 
                 #region Test_1
                 //foreach (var item in models)

@@ -14,5 +14,7 @@ namespace EntitiesCL.OtherModels.Query
         public string First { get; set; }
 
         public string Name { get; set; }
+
+        public int? MakeIdFilterSelected { get; set; }
     }
 }
