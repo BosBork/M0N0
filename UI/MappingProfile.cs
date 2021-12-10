@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UI.ViewModels;
 
 namespace UI
 {
@@ -20,6 +21,15 @@ namespace UI
             CreateMap<VehicleModel, VehicleModelDTO>();
             CreateMap<VehicleModelCreateDTO, VehicleModel>();
             CreateMap<VehicleModelUpdateDTO, VehicleModel>();
+
+
+
+            CreateMap<VehicleModel, VehicleModelVM>();
+            CreateMap<VehicleModelDTO, VehicleModelVM>();
+
+            CreateMap<VehicleMake, VehicleMakeVM>();
+            CreateMap<VehicleMakeDTO, VehicleMakeVM>();
+
         }
     }
 }
