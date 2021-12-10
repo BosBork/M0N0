@@ -14,4 +14,8 @@
     <ProjectReference Include="..\ServicesCL\ServicesCL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\" />
+  </ItemGroup>
+
 </Project>
