@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<form asp-action="Index" method="get">
+    <div>
+        <label for="filter">Filter by MakeName: </label>
+        <select id="filter" name="MakeIdFilterSelected" asp-items="ViewBag.DPSelectListItem"></select>
+    </div>
+    <input type="submit" value="Filter" />
+</form>

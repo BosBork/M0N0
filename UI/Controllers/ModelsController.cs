@@ -46,7 +46,9 @@ namespace UI.Controllers
                 //} 
                 #endregion
 
-                return Ok(vehicleModelsResult);
+                return View();
+
+                //return Ok(vehicleModelsResult);
             }
             catch (Exception)
             {
