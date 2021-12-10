@@ -2,10 +2,11 @@
     ViewData["Title"] = "Index";
 }
 
-<form asp-action="Index" method="get">
-    <div>
-        <label for="filter">Filter by MakeName: </label>
-        <select id="filter" name="MakeIdFilterSelected" asp-items="ViewBag.DPSelectListItem"></select>
+<form asp-action="Index" method="get" class="form-inline">
+    <div class="form-group mb-2">
+        <label for="filter" class="mr-2">Filter by MakeName: </label>
+        <select id="filter" class="form-control form-control-sm mr-1" name="MakeIdFilterSelected" asp-items="ViewBag.DPSelectListItem"></select>
     </div>
-    <input type="submit" value="Filter" />
+    <input type="submit" value="Filter" class="btn btn-sm btn-dark mb-2"/>
 </form>
+
