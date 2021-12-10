@@ -36,6 +36,12 @@ namespace ServicesCL.Repo
             Delete(vehicleMake);
         }
 
+        public async Task<List<SelectListItem>> GetAllMakesForDPSelectListItem()
+        {
+            var makes = FindAll()
+            .Select(x => new SelectListItem { Text = x.Name, Value = x.VehicleMakeId.ToString() });
+            return await makes.ToListAsync();
+        }
 
         public async Task<PagedList<VehicleMake>> GetAllVehicleMakesAsync(MakeParams makeParams)
         {
