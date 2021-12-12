@@ -48,7 +48,7 @@ namespace UI.Controllers
 
                 ViewBag.CurrentSearch = modelParams.Name;
 
-                return View();
+                return View(vehicleModelsResult);
 
                 //return Ok(vehicleModelsResult);
             }
