@@ -49,6 +49,8 @@ namespace ServicesCL.Repo
 
             Other<VehicleModel>.SearchByName(ref models, modelParams.Name);
 
+            Other<VehicleModel>.FilterByMatchingIds(ref models, modelParams.MakeIdFilterSelected); //for dropdown filter
+
             var sortedModels = _sortHelper.ApplySort(models, modelParams.OrderBy);
 
             return await PagedList<VehicleModel>.ToPagedListAsync(sortedModels, modelParams.PageNumber, modelParams.PageSize);
@@ -59,6 +61,7 @@ namespace ServicesCL.Repo
             return await FindByCondition(x => x.VehicleModelId.Equals(vehicleModelId))
                 .FirstOrDefaultAsync();
         }
+
 
     }
 }

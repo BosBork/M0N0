@@ -7,5 +7,6 @@ namespace EntitiesCL.Helpers
     public interface IOther
     {
         string Name { get; set; }
+        int VehicleMakeId { get; set; }
     }
 }

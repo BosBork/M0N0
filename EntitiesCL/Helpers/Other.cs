@@ -23,5 +23,14 @@ namespace EntitiesCL.Helpers
 
             vehicle = vehicle.Where(o => o.Name.ToLower().Contains(name.Trim().ToLower()));
         }
+
+        public static void FilterByMatchingIds(ref IQueryable<T> vehicle, int? idSelected)
+        {
+            if (!vehicle.Any() || !idSelected.HasValue)
+                return;
+
+            vehicle = vehicle.Where(x => x.VehicleMakeId == idSelected);
+        }
+
     }
 }

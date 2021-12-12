@@ -46,6 +46,8 @@ namespace UI.Controllers
                 //} 
                 #endregion
 
+                ViewBag.CurrentSearch = modelParams.Name;
+
                 return View();
 
                 //return Ok(vehicleModelsResult);
