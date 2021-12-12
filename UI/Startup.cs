@@ -72,7 +72,7 @@ namespace UI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Makes}/{action=Index}/{id?}");
             });
 
             //app.UseEndpoints(endpoints =>
