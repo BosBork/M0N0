@@ -1,11 +1,10 @@
-﻿@model IEnumerable<VehicleModelDTO>
+﻿@model PagedList<VehicleModelDTO>
 
 @{
     ViewData["Title"] = "List of Models";
 }
 
 <form asp-action="Index" method="get" class="form-inline">
-
     <div class="form-group mb-2">
         <label for="src" class="mr-2">Search by ModelName:</label>
         <input type="text" name="name" id="src" value="@ViewBag.CurrentSearch" />
@@ -18,47 +17,56 @@
         </select>
     </div>
 
-    <input type="hidden" name="OrderBy" value="@ViewBag.CurrentSort"/>
+    <input type="hidden" name="OrderBy" value="@ViewBag.CurrentSort" />
 
     <input type="submit" value="Filter" class="btn btn-sm btn-dark mb-2" />
 </form>
 
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>
-                <a asp-action="Index" asp-route-orderby="@ViewBag.NameSortParam" asp-route-name="@ViewBag.CurrentSearch" asp-route-makeidfilterselected="@ViewBag.CurrentFilter">Name</a>
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-orderby="@ViewBag.AbrvSortParam" asp-route-name="@ViewBag.CurrentSearch" asp-route-makeidfilterselected="@ViewBag.CurrentFilter">Abrv</a>
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-orderby="@ViewBag.IdSortParam" asp-route-name="@ViewBag.CurrentSearch" asp-route-makeidfilterselected="@ViewBag.CurrentFilter">Make Id</a>
-                @*@Html.DisplayNameFor(model => model.VehicleMakeId)*@
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (!Model.Any())
+{
+    <div class="badge-danger p-2 text-center text-capitalize font-weight-bold">no results found!</div>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Abrv)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehicleMakeId)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
+                <th>
+                    <a asp-action="Index" asp-route-orderby="@ViewBag.NameSortParam" asp-route-name="@ViewBag.CurrentSearch" asp-route-makeidfilterselected="@ViewBag.CurrentFilter">Name</a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-orderby="@ViewBag.AbrvSortParam" asp-route-name="@ViewBag.CurrentSearch" asp-route-makeidfilterselected="@ViewBag.CurrentFilter">Abrv</a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-orderby="@ViewBag.IdSortParam" asp-route-name="@ViewBag.CurrentSearch" asp-route-makeidfilterselected="@ViewBag.CurrentFilter">Make Id</a>
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Abrv)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VehicleMakeId)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "UpdateVehicleModel", new { id = item.VehicleModelId }) |
+                        @Html.ActionLink("Details", "GetVehicleModelById", new { id = item.VehicleModelId }) |
+                        @Html.ActionLink("Delete", "DeleteVehicleModel", new { id = item.VehicleModelId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+@{await Html.RenderPartialAsync("_FooterPagingPartial", Model);}

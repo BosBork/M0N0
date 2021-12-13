@@ -1,0 +1,25 @@
+﻿@model PagedList<VehicleModelDTO>
+
+@{
+    var prevDisabled = !Model.HasPrevious ? "disabled" : "";
+    var nextDisabled = !Model.HasNext ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-orderby="@ViewBag.CurrentSort"
+   asp-route-name="@ViewBag.CurrentSearch"
+   asp-route-pagenumber="@(Model.CurrentPage - 1)"
+   asp-route-makeidfilterselected="@ViewBag.CurrentFilter"
+   class="btn btn-light btn-outline-dark @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-orderby="@ViewBag.CurrentSort"
+   asp-route-name="@ViewBag.CurrentSearch"
+   asp-route-pagenumber="@(Model.CurrentPage + 1)"
+   asp-route-makeidfilterselected="@ViewBag.CurrentFilter"
+   class="btn btn-light btn-outline-dark @nextDisabled">
+    Next
+</a>
+
+<span class="badge-dark p-1 float-right">@Model.CurrentPage</span>

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EntitiesCL.EFModels;
+using EntitiesCL.Helpers;
 using EntitiesCL.OtherModels.DTOs;
 using EntitiesCL.OtherModels.Query;
 using Microsoft.AspNetCore.Mvc;
@@ -34,9 +35,9 @@ namespace UI.Controllers
         {
             try
             {
-                var models = await _repo.VehicleModel.GetAllVehicleModelsAsync(modelParams);
+                var domain = await _repo.VehicleModel.GetAllVehicleModelsAsync(modelParams);
 
-                var vehicleModelsResult = _mapper.Map<IEnumerable<VehicleModelDTO>>(models);
+                var DomainToDTO = _mapper.Map<PagedList<VehicleModelDTO>>(domain);
 
                 ViewBag.DPSelectListItem = new SelectList(await _repo.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text", modelParams.MakeIdFilterSelected);
 
@@ -59,7 +60,7 @@ namespace UI.Controllers
 
                 ViewBag.CurrentSort = modelParams.OrderBy;
 
-                return View(vehicleModelsResult);
+                return View(DomainToDTO);
 
                 //return Ok(vehicleModelsResult);
             }
@@ -158,8 +159,29 @@ namespace UI.Controllers
             }
         }
 
+        //[HttpGet]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    try
+        //    {
+        //        var model = await _repo.VehicleModel.GetVehicleModelByIdAsync(id);
 
-        [HttpDelete]
+        //        if (model == null)
+        //        {
+        //            return NotFound("NOT FOUND");
+        //        }
+
+        //        var vehicleModelResult = _mapper.Map<VehicleModelDTO>(model);
+
+        //        return Ok(vehicleModelResult);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return StatusCode(500, "Internal server error");
+        //    }
+        //}
+
+        [HttpDelete, ActionName("Delete")]
         public async Task<IActionResult> DeleteVehicleModel(int id)
         {
             try

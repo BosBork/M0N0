@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using EntitiesCL.EFModels;
+using EntitiesCL.Helpers;
 using EntitiesCL.OtherModels.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UI.ViewModels;
+using static UI.AutoMapperPagedListConverter;
 
 namespace UI
 {
@@ -23,13 +25,12 @@ namespace UI
             CreateMap<VehicleModelUpdateDTO, VehicleModel>();
 
 
-
             CreateMap<VehicleModel, VehicleModelVM>();
             CreateMap<VehicleModelDTO, VehicleModelVM>();
 
             CreateMap<VehicleMake, VehicleMakeVM>();
             CreateMap<VehicleMakeDTO, VehicleMakeVM>();
-
+            CreateMap(typeof(PagedList<>), typeof(PagedList<>)).ConvertUsing(typeof(PagedListConverter<,>));
         }
     }
 }
