@@ -1,4 +1,4 @@
-﻿@model PagedList<VehicleModelDTO>
+﻿@model PagedList<VehicleModelVM>
 
 @{
     ViewData["Title"] = "List of Models";
@@ -67,6 +67,5 @@ else
     </table>
 
 }
-
 
 @{await Html.RenderPartialAsync("_FooterPagingPartial", Model);}

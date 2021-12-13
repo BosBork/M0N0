@@ -39,6 +39,8 @@ namespace UI.Controllers
 
                 var DomainToDTO = _mapper.Map<PagedList<VehicleModelDTO>>(domain);
 
+                var DTOToVM = _mapper.Map<PagedList<VehicleModelVM>>(DomainToDTO);
+
                 ViewBag.DPSelectListItem = new SelectList(await _repo.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text", modelParams.MakeIdFilterSelected);
 
                 #region Test_1
@@ -60,7 +62,7 @@ namespace UI.Controllers
 
                 ViewBag.CurrentSort = modelParams.OrderBy;
 
-                return View(DomainToDTO);
+                return View(DTOToVM);
 
                 //return Ok(vehicleModelsResult);
             }
