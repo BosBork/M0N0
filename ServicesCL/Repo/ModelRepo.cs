@@ -42,7 +42,7 @@ namespace ServicesCL.Repo
             var models = FindAll();
 
             #region Test_1
-            //.Include(x => x.VehicleMake) as IQueryable<VehicleModel>; 
+            //.Include(x => x.VehicleMake) as IQueryable<VehicleModel>;
             #endregion
 
             Other<VehicleModel>.FilterByFirstChar(ref models, modelParams.First);

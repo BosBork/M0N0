@@ -13,8 +13,13 @@
 
     <div class="form-group mb-2">
         <label for="filter" class="ml-2 mr-2">Filter by MakeName: </label>
-        <select id="filter" class="form-control form-control-sm mr-1" name="MakeIdFilterSelected" asp-items="ViewBag.DPSelectListItem"></select>
+        <select id="filter" class="form-control form-control-sm mr-1" name="MakeIdFilterSelected" asp-items="ViewBag.DPSelectListItem">
+            <option value="">All</option>
+        </select>
     </div>
+
+    <input type="hidden" name="OrderBy" value="@ViewBag.CurrentSort"/>
+
     <input type="submit" value="Filter" class="btn btn-sm btn-dark mb-2" />
 </form>
 
@@ -23,13 +28,14 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <a asp-action="Index" asp-route-orderby="@ViewBag.NameSortParam" asp-route-name="@ViewBag.CurrentSearch" asp-route-makeidfilterselected="@ViewBag.CurrentFilter">Name</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Abrv)
+                <a asp-action="Index" asp-route-orderby="@ViewBag.AbrvSortParam" asp-route-name="@ViewBag.CurrentSearch" asp-route-makeidfilterselected="@ViewBag.CurrentFilter">Abrv</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VehicleMakeId)
+                <a asp-action="Index" asp-route-orderby="@ViewBag.IdSortParam" asp-route-name="@ViewBag.CurrentSearch" asp-route-makeidfilterselected="@ViewBag.CurrentFilter">Make Id</a>
+                @*@Html.DisplayNameFor(model => model.VehicleMakeId)*@
             </th>
             <th></th>
         </tr>

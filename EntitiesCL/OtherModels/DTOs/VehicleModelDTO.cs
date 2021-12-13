@@ -16,6 +16,8 @@ namespace EntitiesCL.OtherModels.DTOs
 
         public int VehicleMakeId { get; set; }
 
+        //public VehicleMake VehicleMake { get; set; }
+
         #region Test_1
         //public string VehicleMakeName { get; set; }
         #endregion

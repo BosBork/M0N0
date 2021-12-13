@@ -9,11 +9,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UI.ViewModels;
 
 namespace UI.Controllers
 {
     public class ModelsController : Controller
     {
+        readonly string name_sort = nameof(VehicleModelVM.Name).ToLower();
+        readonly string abrv_sort = nameof(VehicleModelVM.Abrv).ToLower();
+        readonly string makeId_sort = nameof(VehicleModelVM.VehicleMakeId);
 
         private readonly IMapper _mapper;
         private readonly IRepoWrapper _repo;
@@ -43,10 +47,17 @@ namespace UI.Controllers
                 //    {
                 //        dto.VehicleMakeName = item.VehicleMake.Name;
                 //    }
-                //} 
+                //}
                 #endregion
 
                 ViewBag.CurrentSearch = modelParams.Name;
+                ViewBag.CurrentFilter = modelParams.MakeIdFilterSelected;
+
+                ViewBag.NameSortParam = modelParams.OrderBy == name_sort ? $"{name_sort} desc" : name_sort;
+                ViewBag.AbrvSortParam = modelParams.OrderBy == abrv_sort ? $"{abrv_sort} desc" : abrv_sort;
+                ViewBag.IdSortParam = modelParams.OrderBy == makeId_sort ? $"{makeId_sort} desc" : makeId_sort;
+
+                ViewBag.CurrentSort = modelParams.OrderBy;
 
                 return View(vehicleModelsResult);
 
