@@ -58,7 +58,7 @@ namespace ServicesCL.Repo
 
         public async Task<VehicleModel> GetVehicleModelByIdAsync(int vehicleModelId)
         {
-            return await FindByCondition(x => x.VehicleModelId.Equals(vehicleModelId))
+            return await FindByCondition(x => x.VehicleModelId.Equals(vehicleModelId)).Include(x=>x.VehicleMake)
                 .FirstOrDefaultAsync();
         }
 

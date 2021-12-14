@@ -27,6 +27,8 @@ namespace UI
 
             CreateMap<VehicleModel, VehicleModelVM>();
             CreateMap<VehicleModelDTO, VehicleModelVM>();
+            CreateMap<VehicleModelCreateVM, VehicleModelCreateDTO>();
+            CreateMap<VehicleModel, VehicleModelCreateVM>();
 
             CreateMap<VehicleMake, VehicleMakeVM>();
             CreateMap<VehicleMakeDTO, VehicleMakeVM>();

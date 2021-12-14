@@ -6,14 +6,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Dynamic;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using EntitiesCL.EFModels;
 
 namespace UI.ViewModels
 {
-    //public enum test {};
-    public class VehicleModelVM
+    public class VehicleModelCreateVM
     {
-        [BindNever]
         public int VehicleModelId { get; set; }
 
         [Required]
@@ -23,10 +20,8 @@ namespace UI.ViewModels
         [MaxLength(100)]
         public string Abrv { get; set; }
 
-        [Display(Name="Make")]
-        public int VehicleMakeId { get; set; }
-
-        public virtual VehicleMake VehicleMake { get; set; }
-
+        [DisplayName("Vehicle Make")]
+        [Required(ErrorMessage = "You must chose a make")]
+        public int? VehicleMakeId { get; set; }
     }
 }

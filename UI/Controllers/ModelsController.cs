@@ -63,8 +63,6 @@ namespace UI.Controllers
                 ViewBag.CurrentSort = modelParams.OrderBy;
 
                 return View(DTOToVM);
-
-                //return Ok(vehicleModelsResult);
             }
             catch (Exception)
             {
@@ -72,21 +70,21 @@ namespace UI.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet, ActionName("Details")]
         public async Task<IActionResult> GetVehicleModelById(int id) //Use GUID
         {
             try
             {
-                var model = await _repo.VehicleModel.GetVehicleModelByIdAsync(id);
+                VehicleModel model = await _repo.VehicleModel.GetVehicleModelByIdAsync(id);
 
                 if (model == null)
                 {
                     return NotFound("NOT FOUND");
                 }
 
-                var vehicleModelResult = _mapper.Map<VehicleModelDTO>(model);
+                VehicleModelVM DomainToVM = _mapper.Map<VehicleModelVM>(model);
 
-                return Ok(vehicleModelResult);
+                return View(DomainToVM);
             }
             catch (Exception)
             {
@@ -96,29 +94,38 @@ namespace UI.Controllers
         #endregion
 
         #region PostPutDelete
-        [HttpPost]
-        public async Task<IActionResult> CreateVehicleModel([FromBody] VehicleModelCreateDTO vehicleModel)
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.DPSelectListItem = new SelectList(await _repo.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text");
+            return View();
+        }
+
+        [HttpPost, ActionName("Create")]
+        public async Task<IActionResult> CreateVehicleModel(VehicleModelCreateVM vehicleModelCreateVM)
         {
             try
             {
-                if (vehicleModel == null)
+                if (vehicleModelCreateVM == null)
                 {
-                    return BadRequest("VehicleModel Object is NULL");
+                    return BadRequest("VehicleModelCreateVM Object is NULL");
                 }
 
-                if (!ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
-                    return BadRequest("ModelState is Invalid");
+                    VehicleModelCreateDTO VMtoDTO = _mapper.Map<VehicleModelCreateDTO>(vehicleModelCreateVM);
+                    VehicleModel DTOtoDomain = _mapper.Map<VehicleModel>(VMtoDTO);
+
+                    _repo.VehicleModel.CreateVehicleModel(DTOtoDomain);
+                    await _repo.SaveAsync();
+
+                    VehicleModelCreateVM DomainToVM = _mapper.Map<VehicleModelCreateVM>(DTOtoDomain);
+                    return RedirectToAction("Details", new { id = DomainToVM.VehicleModelId });
                 }
 
-                VehicleModel modelEntity = _mapper.Map<VehicleModel>(vehicleModel);
+                ViewBag.DPSelectListItem = new SelectList(await _repo.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text");
+                return View(vehicleModelCreateVM);
 
-                _repo.VehicleModel.CreateVehicleModel(modelEntity);
-                await _repo.SaveAsync();
-
-                VehicleModelDTO createdVehicleModel = _mapper.Map<VehicleModelDTO>(modelEntity);
-
-                return CreatedAtAction(nameof(GetVehicleModelById), new { id = createdVehicleModel.VehicleModelId }, createdVehicleModel);
             }
             catch (Exception)
             {

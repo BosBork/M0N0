@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UI
 {
-    public class AutoMapperPagedListConverter
+    public abstract class AutoMapperPagedListConverter
     {
         public class PagedListConverter<TSource, TDestination> : ITypeConverter<PagedList<TSource>, PagedList<TDestination>> where TSource : class where TDestination : class
         {
