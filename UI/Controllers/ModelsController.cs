@@ -94,11 +94,27 @@ namespace UI.Controllers
         #endregion
 
         #region PostPutDelete
+        #region CREATE
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+            #region RandomFill
+            string guid = Guid.NewGuid().ToString();
+            string rand = guid.Split('-')[1];
+
+            int[] random_vehicle_make_id = _repo.VehicleMake.FindAll().Select(x => x.VehicleMakeId).ToArray();
+            int index = new Random().Next(random_vehicle_make_id.Count());
+
+            var test = new VehicleModelCreateVM()
+            {
+                Name = $"Test Model {rand}",
+                Abrv = $"{rand}",
+                VehicleMakeId = random_vehicle_make_id[index]
+            };
+            #endregion
+
             ViewBag.DPSelectListItem = new SelectList(await _repo.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text");
-            return View();
+            return View(test);
         }
 
         [HttpPost, ActionName("Create")]
@@ -131,8 +147,8 @@ namespace UI.Controllers
             {
                 return StatusCode(500, "Internal server error");
             }
-        }
-
+        } 
+        #endregion
 
         [HttpPut]
         public async Task<IActionResult> UpdateVehicleModel(int id, [FromBody] VehicleModelUpdateDTO vehicleModel)
@@ -214,4 +230,9 @@ namespace UI.Controllers
         #endregion
 
     }
+
+
+
+
+
 }

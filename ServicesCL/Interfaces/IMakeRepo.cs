@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ServicesCL.Interfaces
 {
-    public interface IMakeRepo /*: IVehicleServiceRepoBase<VehicleMake>*/
+    public interface IMakeRepo : IVehicleServiceRepoBase<VehicleMake>
     {
         Task<List<SelectListItem>> GetAllMakesForDPSelectListItem();
         Task<PagedList<VehicleMake>> GetAllVehicleMakesAsync(MakeParams makeParams);

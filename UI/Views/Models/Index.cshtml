@@ -20,6 +20,7 @@
             <input type="hidden" name="OrderBy" value="@ViewBag.CurrentSort" />
             <input type="submit" value="Filter" class="btn btn-sm btn-dark mb-2" />
         </form>
+        <a asp-action="index" class="btn btn-sm btn-secondary mb-2 ml-1">Reset</a>
         <a asp-action="Create" class="btn btn-sm btn-dark mb-2 ml-1">Create New Model</a>
     </div>
 </div>
@@ -40,7 +41,7 @@ else
                     <a asp-action="Index" asp-route-orderby="@ViewBag.AbrvSortParam" asp-route-name="@ViewBag.CurrentSearch" asp-route-makeidfilterselected="@ViewBag.CurrentFilter">@Html.DisplayNameFor(model => model[0].Abrv)</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-orderby="@ViewBag.IdSortParam" asp-route-name="@ViewBag.CurrentSearch" asp-route-makeidfilterselected="@ViewBag.CurrentFilter">@Html.DisplayNameFor(model => model[0].VehicleMakeId)</a>
+                    <a asp-action="Index" asp-route-orderby="@ViewBag.IdSortParam" asp-route-name="@ViewBag.CurrentSearch" asp-route-makeidfilterselected="@ViewBag.CurrentFilter">@Html.DisplayNameFor(model => model[0].VehicleMakeId) ID</a>
                 </th>
                 <th></th>
             </tr>
