@@ -5,12 +5,16 @@ using EntitiesCL.OtherModels.DTOs;
 using EntitiesCL.OtherModels.Query;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 using ServicesCL.Interfaces.UOW;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UI.ViewModels;
+
 
 namespace UI.Controllers
 {
@@ -36,6 +40,15 @@ namespace UI.Controllers
             try
             {
                 var domain = await _repo.VehicleModel.GetAllVehicleModelsAsync(modelParams);
+
+                #region TestAutomapper
+                //var DomainToDTOTestFromController = new PagedList<VehicleModelDTO>(
+                //    domain.Select(u => _mapper.Map<VehicleModel, VehicleModelDTO>(u)).ToList(), 
+                //    domain.TotalCount, 
+                //    domain.CurrentPage, 
+                //    domain.PageSize
+                //    ); 
+                #endregion
 
                 var DomainToDTO = _mapper.Map<PagedList<VehicleModelDTO>>(domain);
 
@@ -118,6 +131,7 @@ namespace UI.Controllers
         }
 
         [HttpPost, ActionName("Create")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateVehicleModel(VehicleModelCreateVM vehicleModelCreateVM)
         {
             try
@@ -147,42 +161,107 @@ namespace UI.Controllers
             {
                 return StatusCode(500, "Internal server error");
             }
-        } 
+        }
         #endregion
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateVehicleModel(int id, [FromBody] VehicleModelUpdateDTO vehicleModel)
+        #region Edit
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id) //Use GUID
         {
             try
             {
-                if (vehicleModel == null)
+                VehicleModel model = await _repo.VehicleModel.GetVehicleModelByIdAsync(id);
+
+                if (model == null)
                 {
-                    return BadRequest("VehicleMake Object is NULL");
+                    return NotFound("NOT FOUND");
                 }
 
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest("ModelState is Invalid");
-                }
+                VehicleModelUpdateVM DomainToVM = _mapper.Map<VehicleModelUpdateVM>(model);
 
-                VehicleModel modelEntity = await _repo.VehicleModel.GetVehicleModelByIdAsync(id);
-                if (modelEntity == null)
-                {
-                    return NotFound();
-                }
-
-                _mapper.Map(vehicleModel, modelEntity);
-
-                _repo.VehicleModel.UpdateVehicleModel(modelEntity);
-                await _repo.SaveAsync();
-
-                return NoContent();
+                ViewData["DPSelectListItem"] = new SelectList(await _repo.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text");
+                return View(DomainToVM);
             }
             catch (Exception)
             {
                 return StatusCode(500, "Internal server error");
             }
         }
+
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateVehicleModel(int id, VehicleModelUpdateVM vehicleModelEditVM)
+        {
+            #region Other
+            //VehicleModel modelEntity = await _repo.VehicleModel.GetVehicleModelByIdAsync(id);
+
+            //if (modelEntity == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //if (await TryUpdateModelAsync(modelEntity, "", s => s.Name, s => s.Abrv, s => s.VehicleMakeId))
+            //{
+            //    try
+            //    {
+            //        _mapper.Map(vehicleModelEditVM, modelEntity);
+            //        _repo.VehicleModel.UpdateVehicleModel(modelEntity);
+            //        await _repo.SaveAsync();
+
+            //        return RedirectToAction(nameof(Index));
+            //    }
+
+            //    catch (DbUpdateException)
+            //    {
+            //        ModelState.AddModelError("", "Unable to save changes. " +
+            //            "Try again, and if the problem persists, " +
+            //            "see your system administrator.");
+            //    }
+            //}
+
+            //return View(vehicleModelEditVM); 
+            #endregion
+
+            try
+            {
+                if (id != vehicleModelEditVM.VehicleModelId)
+                {
+                    return NotFound();
+                }
+
+                if (vehicleModelEditVM == null)
+                {
+                    return BadRequest("VehicleModelEditVM Object is NULL");
+                }
+
+                if (ModelState.IsValid)
+                {
+                    VehicleModel modelEntity = await _repo.VehicleModel.GetVehicleModelByIdAsync(id);
+
+                    if (modelEntity == null)
+                    {
+                        return NotFound();
+                    }
+
+                    VehicleModelUpdateDTO VMtoDTO = _mapper.Map<VehicleModelUpdateDTO>(vehicleModelEditVM);
+                    VehicleModel DTOtoDomain = _mapper.Map<VehicleModel>(VMtoDTO);
+                    //VehicleModel VMToDomain = _mapper.Map<VehicleModel>(vehicleModelEditVM);
+
+                    _repo.VehicleModel.UpdateVehicleModel(DTOtoDomain);
+                    await _repo.SaveAsync();
+
+                    return RedirectToAction("Details", new { id });
+                }
+
+                ViewData["DPSelectListItem"] = new SelectList(await _repo.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text");
+                return View(vehicleModelEditVM);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        #endregion
 
         //[HttpGet]
         //public async Task<IActionResult> Delete(int id)
@@ -207,6 +286,7 @@ namespace UI.Controllers
         //}
 
         [HttpDelete, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteVehicleModel(int id)
         {
             try
@@ -232,7 +312,25 @@ namespace UI.Controllers
     }
 
 
+    //public static class TempDataExtensions
+    //{
+    //    public static void Put<T>(this ITempDataDictionary tempData, string key, T value) where T : class
+    //    {
+    //        tempData[key] = JsonConvert.SerializeObject(value);
+    //    }
 
+    //    public static T Get<T>(this ITempDataDictionary tempData, string key) where T : class
+    //    {
+    //        object o;
+    //        tempData.TryGetValue(key, out o);
+    //        return o == null ? null : JsonConvert.DeserializeObject<T>((string)o);
+    //    }
+    //    public static T Peek<T>(this ITempDataDictionary tempData, string key) where T : class
+    //    {
+    //        object o = tempData.Peek(key);
+    //        return o == null ? null : JsonConvert.DeserializeObject<T>((string)o);
+    //    }
+    //}
 
 
 }

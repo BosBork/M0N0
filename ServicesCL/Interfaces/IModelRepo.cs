@@ -1,5 +1,6 @@
 ﻿using EntitiesCL.EFModels;
 using EntitiesCL.Helpers;
+using EntitiesCL.OtherModels.DTOs;
 using EntitiesCL.OtherModels.Query;
 using System;
 using System.Collections.Generic;
