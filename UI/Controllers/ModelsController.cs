@@ -15,7 +15,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using UI.ViewModels;
 
-
 namespace UI.Controllers
 {
     public class ModelsController : Controller
@@ -194,16 +193,16 @@ namespace UI.Controllers
 
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateVehicleModel(int id, VehicleModelUpdateVM vehicleModelEditVM)
+        public async Task<IActionResult> UpdateVehicleModel(int id, VehicleModelUpdateVM vehicleModelUpdateVM)
         {
             try
             {
-                if (id != vehicleModelEditVM.VehicleModelId)
+                if (id != vehicleModelUpdateVM.VehicleModelId)
                 {
                     return NotFound();
                 }
 
-                if (vehicleModelEditVM == null)
+                if (vehicleModelUpdateVM == null)
                 {
                     return BadRequest("VehicleModelEditVM Object is NULL");
                 }
@@ -217,7 +216,7 @@ namespace UI.Controllers
                         return NotFound();
                     }
 
-                    VehicleModelUpdateDTO VMtoDTO = _mapper.Map<VehicleModelUpdateDTO>(vehicleModelEditVM);
+                    VehicleModelUpdateDTO VMtoDTO = _mapper.Map<VehicleModelUpdateDTO>(vehicleModelUpdateVM);
                     VehicleModel DTOtoDomain = _mapper.Map<VehicleModel>(VMtoDTO);
                     //VehicleModel VMToDomain = _mapper.Map<VehicleModel>(vehicleModelEditVM);
 
@@ -228,7 +227,7 @@ namespace UI.Controllers
                 }
 
                 ViewData["DPSelectListItem"] = new SelectList(await _repo.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text");
-                return View(vehicleModelEditVM);
+                return View(vehicleModelUpdateVM);
             }
             catch (Exception)
             {

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using EntitiesCL.EFModels;
+using EntitiesCL.Helpers;
 using EntitiesCL.OtherModels.DTOs;
 using EntitiesCL.OtherModels.Query;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using ServicesCL.Interfaces.UOW;
 using System;
@@ -10,11 +12,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using UI.ViewModels;
+using UI.ViewModels.Make;
 
 namespace UI.Controllers
 {
     public class MakesController : Controller
     {
+        readonly string name_sort = nameof(VehicleMakeVM.Name).ToLower();
+        readonly string abrv_sort = nameof(VehicleMakeVM.Abrv).ToLower();
+
         private readonly IMapper _mapper;
         private readonly IRepoWrapper _repo;
 
@@ -24,119 +31,117 @@ namespace UI.Controllers
             _mapper = mapper;
         }
 
-        #region Get
+        #region IndexDetails
+        #region Index
         [HttpGet]
         public async Task<IActionResult> Index([FromQuery] MakeParams makeParams)
         {
             try
             {
-                var makes = await _repo.VehicleMake.GetAllVehicleMakesAsync(makeParams);
+                var domain = await _repo.VehicleMake.GetAllVehicleMakesAsync(makeParams);
 
-                var vehicleMakesResult = _mapper.Map<IEnumerable<VehicleMakeDTO>>(makes);
+                var DomainToDTO = _mapper.Map<PagedList<VehicleMakeDTO>>(domain);
 
-                //return View();
-                return Ok(vehicleMakesResult);
+                var DTOToVM = _mapper.Map<PagedList<VehicleMakeVM>>(DomainToDTO);
+
+                ViewBag.CurrentSearch = makeParams.Name;
+
+                ViewBag.NameSortParam = makeParams.OrderBy == name_sort ? $"{name_sort} desc" : name_sort;
+                ViewBag.AbrvSortParam = makeParams.OrderBy == abrv_sort ? $"{abrv_sort} desc" : abrv_sort;
+
+                ViewBag.CurrentSort = makeParams.OrderBy;
+
+                return View(DTOToVM);
             }
             catch (Exception)
             {
                 return StatusCode(500, "Internal server error");
             }
-
-            #region Headers
-            //var metadata = new
-            //{
-            //    makes.TotalCount,
-            //    makes.PageSize,
-            //    makes.CurrentPage,
-            //    makes.TotalPages,
-            //    makes.HasNext,
-            //    makes.HasPrevious
-            //};
-            //Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata)); 
-            #endregion
         }
+        #endregion
 
-
-        [HttpGet]
+        #region Details
+        [HttpGet, ActionName("Details")]
         public async Task<IActionResult> GetVehicleMakeById(int id) //Use GUID
         {
             try
             {
-                var make = await _repo.VehicleMake.GetVehicleMakeByIdAsync(id);
+                VehicleMake model = await _repo.VehicleMake.GetVehicleMakeByIdAsync(id);
 
-                if (make == null)
+                if (model == null)
                 {
                     return NotFound("NOT FOUND");
                 }
 
-                var vehicleMakeResult = _mapper.Map<VehicleMakeDTO>(make);
+                VehicleMakeVM DomainToVM = _mapper.Map<VehicleMakeVM>(model);
 
-                return Ok(vehicleMakeResult);
+                return View(DomainToVM);
             }
             catch (Exception)
             {
                 return StatusCode(500, "Internal server error");
             }
         }
-
-
-        [HttpGet]
-        public async Task<IActionResult> GetModelsOfVehicleById(int id)
-        {
-            try
-            {
-                var makesModels = await _repo.VehicleMake.GetModelsOfVehicleByIdAsync(id);
-
-                if (makesModels == null)
-                {
-                    return NotFound("NOT FOUND");
-                }
-
-                var vehicleMakeResult = _mapper.Map<VehicleMakeDTO>(makesModels);
-
-                return Ok(vehicleMakeResult);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Internal server error");
-            }
-        }
-
+        #endregion
         #endregion
 
-        #region PostPutDelete
-        [HttpPost]
-        public async Task<IActionResult> CreateVehicleMake([FromBody] VehicleMakeCreateDTO vehicleMake)
+        #region CreateEditDelete
+        #region CREATE
+        [HttpGet]
+        public IActionResult Create()
         {
+            return View();
+        }
 
+        [HttpPost, ActionName("Create")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateVehicleMake(VehicleMakeCreateVM vehicleMakeCreateVM)
+        {
             try
             {
-                if (vehicleMake == null)
+                if (vehicleMakeCreateVM == null)
                 {
-                    return BadRequest("VehicleMake Object is NULL");
+                    return BadRequest("VehicleMakeCreateVM Object is NULL");
                 }
 
-                if (!ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
-                    return BadRequest("ModelState is Invalid");
+                    VehicleMakeCreateDTO VMtoDTO = _mapper.Map<VehicleMakeCreateDTO>(vehicleMakeCreateVM);
+                    VehicleMake DTOtoDomain = _mapper.Map<VehicleMake>(VMtoDTO);
+
+                    _repo.VehicleMake.CreateVehicleMake(DTOtoDomain);
+                    await _repo.SaveAsync();
+
+                    VehicleMakeCreateVM DomainToVM = _mapper.Map<VehicleMakeCreateVM>(DTOtoDomain);
+                    return RedirectToAction("Details", new { id = DomainToVM.VehicleMakeId });
                 }
 
-                VehicleMake makeEntity = _mapper.Map<VehicleMake>(vehicleMake);
+                return View(vehicleMakeCreateVM);
 
-                #region test
-                //var makeEntity = new VehicleMake()
-                //{
-                //    Name = vehicleMake.Name,
-                //    Abrv = vehicleMake.Abrv
-                //}; 
-                #endregion
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        #endregion
 
-                _repo.VehicleMake.CreateVehicleMake(makeEntity);
-                await _repo.SaveAsync();
+        #region EDIT
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id) //Use GUID
+        {
+            try
+            {
+                VehicleMake model = await _repo.VehicleMake.GetVehicleMakeByIdAsync(id);
 
-                VehicleMakeDTO createdVehicleMake = _mapper.Map<VehicleMakeDTO>(makeEntity);
+                if (model == null)
+                {
+                    return NotFound("NOT FOUND");
+                }
 
-                return CreatedAtAction(nameof(GetVehicleMakeById), new { id = createdVehicleMake.VehicleMakeId }, createdVehicleMake);
+                VehicleMakeUpdateVM DomainToVM = _mapper.Map<VehicleMakeUpdateVM>(model);
+
+                return View(DomainToVM);
             }
             catch (Exception)
             {
@@ -144,35 +149,65 @@ namespace UI.Controllers
             }
         }
 
-
-        [HttpPut]
-        public async Task<IActionResult> UpdateVehicleMake(int id, [FromBody] VehicleMakeUpdateDTO vehicleMake)
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateVehicleMake(int id, VehicleMakeUpdateVM vehicleMakeUpdateVM)
         {
-
             try
             {
-                if (vehicleMake == null)
-                {
-                    return BadRequest("VehicleMake Object is NULL");
-                }
-
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest("ModelState is Invalid");
-                }
-
-                VehicleMake makeEntity = await _repo.VehicleMake.GetVehicleMakeByIdAsync(id);
-                if (makeEntity == null)
+                if (id != vehicleMakeUpdateVM.VehicleMakeId)
                 {
                     return NotFound();
                 }
 
-                _mapper.Map(vehicleMake, makeEntity);
+                if (vehicleMakeUpdateVM == null)
+                {
+                    return BadRequest("VehicleMakeEditVM Object is NULL");
+                }
 
-                _repo.VehicleMake.UpdateVehicleMake(makeEntity);
-                await _repo.SaveAsync();
+                if (ModelState.IsValid)
+                {
+                    VehicleMake modelEntity = await _repo.VehicleMake.GetVehicleMakeByIdAsync(id);
 
-                return NoContent();
+                    if (modelEntity == null)
+                    {
+                        return NotFound();
+                    }
+
+                    VehicleMakeUpdateDTO VMtoDTO = _mapper.Map<VehicleMakeUpdateDTO>(vehicleMakeUpdateVM);
+                    VehicleMake DTOtoDomain = _mapper.Map<VehicleMake>(VMtoDTO);
+
+                    _repo.VehicleMake.UpdateVehicleMake(DTOtoDomain);
+                    await _repo.SaveAsync();
+
+                    return RedirectToAction("Details", new { id });
+                }
+
+                return View(vehicleMakeUpdateVM);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        #endregion
+
+        #region DELETE
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                VehicleMake model = await _repo.VehicleMake.GetVehicleMakeByIdAsync(id);
+
+                if (model == null)
+                {
+                    return NotFound("NOT FOUND");
+                }
+
+                VehicleMakeVM DomainToVM = _mapper.Map<VehicleMakeVM>(model);
+
+                return View(DomainToVM);
             }
             catch (Exception)
             {
@@ -180,8 +215,8 @@ namespace UI.Controllers
             }
         }
 
-
-        [HttpDelete]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteVehicleMake(int id)
         {
             try
@@ -195,7 +230,7 @@ namespace UI.Controllers
                 _repo.VehicleMake.DeleteVehicleMake(vehicleMake);
                 await _repo.SaveAsync();
 
-                return NoContent();
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception)
             {
@@ -203,7 +238,6 @@ namespace UI.Controllers
             }
         }
         #endregion
-
-
+        #endregion
     }
 }

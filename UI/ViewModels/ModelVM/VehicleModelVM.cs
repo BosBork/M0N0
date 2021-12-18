@@ -13,7 +13,7 @@ namespace UI.ViewModels
     //public enum test {};
     public class VehicleModelVM
     {
-        [BindNever]
+        [BindNever] //test
         public int VehicleModelId { get; set; }
 
         [Required]
