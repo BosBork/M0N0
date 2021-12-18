@@ -1,4 +1,5 @@
-﻿@model PagedList<VehicleModelVM>
+﻿@model IPagedList 
+    <!--dynamic-->
 
 @{
     var prevDisabled = !Model.HasPrevious ? "disabled" : "";

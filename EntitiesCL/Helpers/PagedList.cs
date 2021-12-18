@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EntitiesCL.Helpers
 {
-    public class PagedList<T> : List<T>
+    public class PagedList<T> : List<T>, IPagedList //IPagedList samo za _FooterPagingPartial, radi i dynamic, vidit View Components
     {
         public int CurrentPage { get; private set; }
         public int TotalPages { get; private set; }

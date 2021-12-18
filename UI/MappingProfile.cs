@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using UI.ViewModels;
+using UI.ViewModels.Make;
 using static UI.AutoMapperPagedListConverter;
 
 namespace UI
@@ -16,10 +17,21 @@ namespace UI
     {
         public MappingProfile()
         {
+            #region Make
             CreateMap<VehicleMake, VehicleMakeDTO>();
             CreateMap<VehicleMakeCreateDTO, VehicleMake>();
             CreateMap<VehicleMakeUpdateDTO, VehicleMake>();
-            
+
+            CreateMap<VehicleMake, VehicleMakeVM>();
+            CreateMap<VehicleMakeDTO, VehicleMakeVM>();
+            CreateMap<VehicleMakeCreateVM, VehicleMakeCreateDTO>();
+            CreateMap<VehicleMakeUpdateVM, VehicleMakeUpdateDTO>();
+
+            CreateMap<VehicleMake, VehicleMakeCreateVM>();
+            CreateMap<VehicleMake, VehicleMakeUpdateVM>();
+            #endregion
+
+            #region Model
             CreateMap<VehicleModel, VehicleModelDTO>();
             CreateMap<VehicleModelCreateDTO, VehicleModel>();
             CreateMap<VehicleModelUpdateDTO, VehicleModel>();
@@ -31,10 +43,9 @@ namespace UI
 
             CreateMap<VehicleModel, VehicleModelCreateVM>();
             CreateMap<VehicleModel, VehicleModelUpdateVM>();
-            //CreateMap<VehicleModelUpdateVM, VehicleModel>();
+            #endregion
 
-            CreateMap<VehicleMake, VehicleMakeVM>();
-            CreateMap<VehicleMakeDTO, VehicleMakeVM>();
+            //CreateMap<VehicleModelUpdateVM, VehicleModel>();
 
             //unbound generic types
             CreateMap(typeof(PagedList<>), typeof(PagedList<>)).ConvertUsing(typeof(PagedListConverter<,>));

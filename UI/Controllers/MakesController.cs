@@ -10,6 +10,7 @@ using ServicesCL.Interfaces.UOW;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UI.ViewModels;
@@ -51,6 +52,7 @@ namespace UI.Controllers
 
                 ViewBag.CurrentSort = makeParams.OrderBy;
 
+                Response.StatusCode = (int)HttpStatusCode.OK;
                 return View(DTOToVM);
             }
             catch (Exception)
@@ -75,6 +77,7 @@ namespace UI.Controllers
 
                 VehicleMakeVM DomainToVM = _mapper.Map<VehicleMakeVM>(model);
 
+                Response.StatusCode = (int)HttpStatusCode.OK;
                 return View(DomainToVM);
             }
             catch (Exception)
@@ -113,6 +116,8 @@ namespace UI.Controllers
                     await _repo.SaveAsync();
 
                     VehicleMakeCreateVM DomainToVM = _mapper.Map<VehicleMakeCreateVM>(DTOtoDomain);
+
+                    Response.StatusCode = (int)HttpStatusCode.Created;
                     return RedirectToAction("Details", new { id = DomainToVM.VehicleMakeId });
                 }
 
@@ -141,6 +146,7 @@ namespace UI.Controllers
 
                 VehicleMakeUpdateVM DomainToVM = _mapper.Map<VehicleMakeUpdateVM>(model);
 
+                Response.StatusCode = (int)HttpStatusCode.OK;
                 return View(DomainToVM);
             }
             catch (Exception)
@@ -180,6 +186,7 @@ namespace UI.Controllers
                     _repo.VehicleMake.UpdateVehicleMake(DTOtoDomain);
                     await _repo.SaveAsync();
 
+                    Response.StatusCode = (int)HttpStatusCode.OK;
                     return RedirectToAction("Details", new { id });
                 }
 
@@ -207,6 +214,7 @@ namespace UI.Controllers
 
                 VehicleMakeVM DomainToVM = _mapper.Map<VehicleMakeVM>(model);
 
+                Response.StatusCode = (int)HttpStatusCode.OK;
                 return View(DomainToVM);
             }
             catch (Exception)
@@ -230,6 +238,7 @@ namespace UI.Controllers
                 _repo.VehicleMake.DeleteVehicleMake(vehicleMake);
                 await _repo.SaveAsync();
 
+                Response.StatusCode = (int)HttpStatusCode.OK;
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)

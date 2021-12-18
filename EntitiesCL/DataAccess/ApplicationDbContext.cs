@@ -3,6 +3,7 @@ using EntitiesCL.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace EntitiesCL.DataAccess
@@ -23,6 +24,20 @@ namespace EntitiesCL.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            //base.OnModelCreating(modelBuilder);
+
+            //foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            //{
+            //    relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            //}
+
+            //modelBuilder
+            //    .Entity<VehicleMake>()
+            //    .HasMany(x => x.VehicleModels)
+            //    .WithOne(x => x.VehicleMake)
+            //    .OnDelete(DeleteBehavior.Restrict); 
+
             modelBuilder.Entity<VehicleMake>().HasData(SeedExtension.SeedDataFromJson<VehicleMake>("MAKE_MOCK_DATA"));
             modelBuilder.Entity<VehicleModel>().HasData(SeedExtension.SeedDataFromJson<VehicleModel>("MODEL_MOCK_DATA"));
         }

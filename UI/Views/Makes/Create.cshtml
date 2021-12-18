@@ -1,17 +1,16 @@
-﻿@model VehicleModelUpdateVM
+﻿@model VehicleMakeCreateVM
 
 @{
-    ViewData["Title"] = "Edit Vehicle Model";
+    ViewData["Title"] = "Create";
 }
 
-<h4>Edit Vehicle Model</h4>
+<h4>Create a new vehicle make</h4>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="VehicleModelId" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -23,14 +22,7 @@
                 <span asp-validation-for="Abrv" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="VehicleMakeId" class="control-label"></label>
-                <select asp-for="VehicleMakeId" class="form-control" asp-items="@ViewData["DPSelectListItem"] as SelectList">
-                    @*<option disable value="">----Select----</option>*@
-                </select>
-                <span asp-validation-for="VehicleMakeId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

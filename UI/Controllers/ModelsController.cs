@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UI.ViewModels;
+using System.Net;
 
 namespace UI.Controllers
 {
@@ -75,6 +76,7 @@ namespace UI.Controllers
 
                 ViewBag.CurrentSort = modelParams.OrderBy;
 
+                Response.StatusCode = (int)HttpStatusCode.OK;
                 return View(DTOToVM);
             }
             catch (Exception)
@@ -99,6 +101,7 @@ namespace UI.Controllers
 
                 VehicleModelVM DomainToVM = _mapper.Map<VehicleModelVM>(model);
 
+                Response.StatusCode = (int)HttpStatusCode.OK;
                 return View(DomainToVM);
             }
             catch (Exception)
@@ -114,23 +117,30 @@ namespace UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            #region RandomFill
-            string guid = Guid.NewGuid().ToString();
-            string rand = guid.Split('-')[1];
-
-            int[] random_vehicle_make_id = _repo.VehicleMake.FindAll().Select(x => x.VehicleMakeId).ToArray();
-            int index = new Random().Next(random_vehicle_make_id.Count());
-
-            var test = new VehicleModelCreateVM()
+            try
             {
-                Name = $"Test Model {rand}",
-                Abrv = $"{rand}",
-                VehicleMakeId = random_vehicle_make_id[index]
-            };
-            #endregion
+                #region RandomFill
+                string guid = Guid.NewGuid().ToString();
+                string rand = guid.Split('-')[1];
 
-            ViewBag.DPSelectListItem = new SelectList(await _repo.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text");
-            return View(test);
+                int[] random_vehicle_make_id = _repo.VehicleMake.FindAll().Select(x => x.VehicleMakeId).ToArray();
+                int index = new Random().Next(random_vehicle_make_id.Count());
+
+                var test = new VehicleModelCreateVM()
+                {
+                    Name = $"Test Model {rand}",
+                    Abrv = $"{rand}",
+                    VehicleMakeId = random_vehicle_make_id[index]
+                };
+                #endregion
+                ViewBag.DPSelectListItem = new SelectList(await _repo.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text");
+                Response.StatusCode = (int)HttpStatusCode.OK;
+                return View(test);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpPost, ActionName("Create")]
@@ -153,12 +163,13 @@ namespace UI.Controllers
                     await _repo.SaveAsync();
 
                     VehicleModelCreateVM DomainToVM = _mapper.Map<VehicleModelCreateVM>(DTOtoDomain);
+
+                    Response.StatusCode = (int)HttpStatusCode.Created;
                     return RedirectToAction("Details", new { id = DomainToVM.VehicleModelId });
                 }
 
                 ViewBag.DPSelectListItem = new SelectList(await _repo.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text");
                 return View(vehicleModelCreateVM);
-
             }
             catch (Exception)
             {
@@ -183,6 +194,8 @@ namespace UI.Controllers
                 VehicleModelUpdateVM DomainToVM = _mapper.Map<VehicleModelUpdateVM>(model);
 
                 ViewData["DPSelectListItem"] = new SelectList(await _repo.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text");
+
+                Response.StatusCode = (int)HttpStatusCode.OK;
                 return View(DomainToVM);
             }
             catch (Exception)
@@ -222,7 +235,7 @@ namespace UI.Controllers
 
                     _repo.VehicleModel.UpdateVehicleModel(DTOtoDomain);
                     await _repo.SaveAsync();
-
+                    Response.StatusCode = (int)HttpStatusCode.OK;
                     return RedirectToAction("Details", new { id });
                 }
 
@@ -251,6 +264,7 @@ namespace UI.Controllers
 
                 VehicleModelVM DomainToVM = _mapper.Map<VehicleModelVM>(model);
 
+                Response.StatusCode = (int)HttpStatusCode.OK;
                 return View(DomainToVM);
             }
             catch (Exception)
@@ -274,6 +288,7 @@ namespace UI.Controllers
                 _repo.VehicleModel.DeleteVehicleModel(vehicleModel);
                 await _repo.SaveAsync();
 
+                Response.StatusCode = (int)HttpStatusCode.OK;
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
