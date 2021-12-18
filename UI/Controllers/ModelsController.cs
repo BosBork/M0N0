@@ -33,7 +33,8 @@ namespace UI.Controllers
             _mapper = mapper;
         }
 
-        #region GET
+        #region IndexDetails
+        #region Index
         [HttpGet]
         public async Task<IActionResult> Index([FromQuery] ModelParams modelParams)
         {
@@ -81,8 +82,10 @@ namespace UI.Controllers
             {
                 return StatusCode(500, "Internal server error");
             }
-        }
+        } 
+        #endregion
 
+        #region Details
         [HttpGet, ActionName("Details")]
         public async Task<IActionResult> GetVehicleModelById(int id) //Use GUID
         {
@@ -103,10 +106,11 @@ namespace UI.Controllers
             {
                 return StatusCode(500, "Internal server error");
             }
-        }
+        } 
+        #endregion
         #endregion
 
-        #region PostPutDelete
+        #region CreateEditDelete
         #region CREATE
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -164,7 +168,7 @@ namespace UI.Controllers
         }
         #endregion
 
-        #region Edit
+        #region EDIT
         [HttpGet]
         public async Task<IActionResult> Edit(int id) //Use GUID
         {
@@ -263,29 +267,30 @@ namespace UI.Controllers
         }
         #endregion
 
-        //[HttpGet]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    try
-        //    {
-        //        var model = await _repo.VehicleModel.GetVehicleModelByIdAsync(id);
+        #region DELETE
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var model = await _repo.VehicleModel.GetVehicleModelByIdAsync(id);
 
-        //        if (model == null)
-        //        {
-        //            return NotFound("NOT FOUND");
-        //        }
+                if (model == null)
+                {
+                    return NotFound("NOT FOUND");
+                }
 
-        //        var vehicleModelResult = _mapper.Map<VehicleModelDTO>(model);
+                VehicleModelVM DomainToVM = _mapper.Map<VehicleModelVM>(model);
 
-        //        return Ok(vehicleModelResult);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return StatusCode(500, "Internal server error");
-        //    }
-        //}
+                return View(DomainToVM);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
-        [HttpDelete, ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteVehicleModel(int id)
         {
@@ -300,37 +305,15 @@ namespace UI.Controllers
                 _repo.VehicleModel.DeleteVehicleModel(vehicleModel);
                 await _repo.SaveAsync();
 
-                return NoContent();
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception)
             {
                 return StatusCode(500, "Internal server error");
             }
-        }
+        } 
+        #endregion
         #endregion
 
     }
-
-
-    //public static class TempDataExtensions
-    //{
-    //    public static void Put<T>(this ITempDataDictionary tempData, string key, T value) where T : class
-    //    {
-    //        tempData[key] = JsonConvert.SerializeObject(value);
-    //    }
-
-    //    public static T Get<T>(this ITempDataDictionary tempData, string key) where T : class
-    //    {
-    //        object o;
-    //        tempData.TryGetValue(key, out o);
-    //        return o == null ? null : JsonConvert.DeserializeObject<T>((string)o);
-    //    }
-    //    public static T Peek<T>(this ITempDataDictionary tempData, string key) where T : class
-    //    {
-    //        object o = tempData.Peek(key);
-    //        return o == null ? null : JsonConvert.DeserializeObject<T>((string)o);
-    //    }
-    //}
-
-
 }

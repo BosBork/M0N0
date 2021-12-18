@@ -7,8 +7,10 @@ namespace EntitiesCL.OtherModels.DTOs
 {
     public class VehicleMakeUpdateDTO
     {
-        [Required(ErrorMessage = "Name is required")]
-        [MaxLength(100, ErrorMessage = "MaxLength for name is 100")]
+        public int VehicleMakeId { get; set; }
+
+        //[Required(ErrorMessage = "Name is required")]
+        //[MaxLength(100, ErrorMessage = "MaxLength for name is 100")]
         public string Name { get; set; }
 
         public string Abrv { get; set; }
