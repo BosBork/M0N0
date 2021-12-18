@@ -196,36 +196,6 @@ namespace UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateVehicleModel(int id, VehicleModelUpdateVM vehicleModelEditVM)
         {
-            #region Other
-            //VehicleModel modelEntity = await _repo.VehicleModel.GetVehicleModelByIdAsync(id);
-
-            //if (modelEntity == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //if (await TryUpdateModelAsync(modelEntity, "", s => s.Name, s => s.Abrv, s => s.VehicleMakeId))
-            //{
-            //    try
-            //    {
-            //        _mapper.Map(vehicleModelEditVM, modelEntity);
-            //        _repo.VehicleModel.UpdateVehicleModel(modelEntity);
-            //        await _repo.SaveAsync();
-
-            //        return RedirectToAction(nameof(Index));
-            //    }
-
-            //    catch (DbUpdateException)
-            //    {
-            //        ModelState.AddModelError("", "Unable to save changes. " +
-            //            "Try again, and if the problem persists, " +
-            //            "see your system administrator.");
-            //    }
-            //}
-
-            //return View(vehicleModelEditVM); 
-            #endregion
-
             try
             {
                 if (id != vehicleModelEditVM.VehicleModelId)
