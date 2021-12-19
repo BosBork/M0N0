@@ -10,6 +10,7 @@ namespace ServicesCL.Interfaces
     {
         IQueryable<T> FindAll();
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
+        bool FindIfExists(Expression<Func<T, bool>> expression);
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);

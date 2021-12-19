@@ -107,6 +107,12 @@ namespace UI.Controllers
                     return BadRequest("VehicleMakeCreateVM Object is NULL");
                 }
 
+                if (_repo.VehicleMake.FindIfExists(x => x.Name.Equals(vehicleMakeCreateVM.Name)))
+                {
+                    ModelState.AddModelError(nameof(VehicleMakeVM.Name), "This Make Already Exists");
+                    return View(vehicleMakeCreateVM);
+                }
+
                 if (ModelState.IsValid)
                 {
                     VehicleMakeCreateDTO VMtoDTO = _mapper.Map<VehicleMakeCreateDTO>(vehicleMakeCreateVM);
@@ -169,6 +175,12 @@ namespace UI.Controllers
                 if (vehicleMakeUpdateVM == null)
                 {
                     return BadRequest("VehicleMakeEditVM Object is NULL");
+                }
+
+                if (_repo.VehicleMake.FindIfExists(x => x.Name.Equals(vehicleMakeUpdateVM.Name) && !x.VehicleMakeId.Equals(id)))
+                {
+                    ModelState.AddModelError(nameof(VehicleMakeVM.Name), "This Make Already Exists");
+                    return View(vehicleMakeUpdateVM);
                 }
 
                 if (ModelState.IsValid)

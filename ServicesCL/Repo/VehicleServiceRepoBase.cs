@@ -36,6 +36,11 @@ namespace ServicesCL.Repo
             return _dbSet.AsNoTracking();
         }
 
+        public bool FindIfExists(Expression<Func<T, bool>> expression)
+        {
+            return _dbSet.Any(expression);
+        }
+
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
             return _dbSet.Where(expression).AsNoTracking();
