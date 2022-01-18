@@ -1,0 +1,115 @@
+2022-01-18 17:33:58.783 +01:00 [INF] Application Is Starting
+2022-01-18 17:34:00.968 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-01-18 17:34:00.976 +01:00 [INF] Hosting environment: Development
+2022-01-18 17:34:00.977 +01:00 [INF] Content root path: C:\Users\Terez\Desktop\ON GITHUB\2\Mono Zadatak 3\WORK\MonoCarsSolution drugi dio - korekcija\Project.WebAPI
+2022-01-18 17:34:01.020 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/weatherforecast  
+2022-01-18 17:34:01.081 +01:00 [INF] Executing endpoint 'Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI)'
+2022-01-18 17:34:01.112 +01:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[Project.WebAPI.WeatherForecast] Get() on controller Project.WebAPI.Controllers.WeatherForecastController (Project.WebAPI).
+2022-01-18 17:34:01.123 +01:00 [INF] Executing action method Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI) - Validation state: "Valid"
+2022-01-18 17:34:01.130 +01:00 [INF] Executed action method Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 1.5221ms.
+2022-01-18 17:34:01.136 +01:00 [INF] Executing ObjectResult, writing value of type 'Project.WebAPI.WeatherForecast[]'.
+2022-01-18 17:34:01.175 +01:00 [INF] Executed action Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI) in 54.1017ms
+2022-01-18 17:34:01.176 +01:00 [INF] Executed endpoint 'Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI)'
+2022-01-18 17:34:01.181 +01:00 [INF] Request finished in 164.4111ms 200 application/json; charset=utf-8
+2022-01-18 17:36:40.547 +01:00 [INF] Application Is Starting
+2022-01-18 17:36:42.497 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-01-18 17:36:42.497 +01:00 [INF] Hosting environment: Development
+2022-01-18 17:36:42.503 +01:00 [INF] Content root path: C:\Users\Terez\Desktop\ON GITHUB\2\Mono Zadatak 3\WORK\MonoCarsSolution drugi dio - korekcija\Project.WebAPI
+2022-01-18 17:36:42.536 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/weatherforecast  
+2022-01-18 17:36:42.587 +01:00 [INF] Executing endpoint 'Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI)'
+2022-01-18 17:36:42.618 +01:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[Project.WebAPI.WeatherForecast] Get() on controller Project.WebAPI.Controllers.WeatherForecastController (Project.WebAPI).
+2022-01-18 17:36:42.629 +01:00 [INF] Executing action method Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI) - Validation state: "Valid"
+2022-01-18 17:36:42.636 +01:00 [INF] Executed action method Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 1.4301ms.
+2022-01-18 17:36:42.642 +01:00 [INF] Executing ObjectResult, writing value of type 'Project.WebAPI.WeatherForecast[]'.
+2022-01-18 17:36:42.675 +01:00 [INF] Executed action Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI) in 48.0973ms
+2022-01-18 17:36:42.676 +01:00 [INF] Executed endpoint 'Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI)'
+2022-01-18 17:36:42.680 +01:00 [INF] Request finished in 147.3635ms 200 application/json; charset=utf-8
+2022-01-18 17:37:12.021 +01:00 [INF] Application Is Starting
+2022-01-18 17:37:13.665 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-01-18 17:37:13.665 +01:00 [INF] Hosting environment: Development
+2022-01-18 17:37:13.666 +01:00 [INF] Content root path: C:\Users\Terez\Desktop\ON GITHUB\2\Mono Zadatak 3\WORK\MonoCarsSolution drugi dio - korekcija\Project.WebAPI
+2022-01-18 17:37:13.702 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/weatherforecast  
+2022-01-18 17:37:13.761 +01:00 [INF] Executing endpoint 'Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI)'
+2022-01-18 17:37:13.789 +01:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[Project.WebAPI.WeatherForecast] Get() on controller Project.WebAPI.Controllers.WeatherForecastController (Project.WebAPI).
+2022-01-18 17:37:13.801 +01:00 [INF] Executing action method Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI) - Validation state: "Valid"
+2022-01-18 17:37:13.808 +01:00 [INF] Executed action method Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 1.7463ms.
+2022-01-18 17:37:13.814 +01:00 [INF] Executing ObjectResult, writing value of type 'Project.WebAPI.WeatherForecast[]'.
+2022-01-18 17:37:13.854 +01:00 [INF] Executed action Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI) in 56.0105ms
+2022-01-18 17:37:13.855 +01:00 [INF] Executed endpoint 'Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI)'
+2022-01-18 17:37:13.859 +01:00 [INF] Request finished in 159.6933ms 200 application/json; charset=utf-8
+2022-01-18 17:37:17.461 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger  
+2022-01-18 17:37:17.475 +01:00 [INF] Request finished in 8.1074ms 301 
+2022-01-18 17:37:17.483 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger/index.html  
+2022-01-18 17:37:17.518 +01:00 [INF] Request finished in 34.8522ms 200 text/html;charset=utf-8
+2022-01-18 17:37:17.549 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger/swagger-ui.css  
+2022-01-18 17:37:17.551 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger/swagger-ui-standalone-preset.js  
+2022-01-18 17:37:17.551 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger/swagger-ui-bundle.js  
+2022-01-18 17:37:17.606 +01:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2022-01-18 17:37:17.606 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-01-18 17:37:17.608 +01:00 [INF] Request finished in 58.9633ms 200 text/css
+2022-01-18 17:37:17.608 +01:00 [INF] Request finished in 57.1801ms 200 application/javascript
+2022-01-18 17:37:17.621 +01:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2022-01-18 17:37:17.621 +01:00 [INF] Request finished in 69.9078ms 200 application/javascript
+2022-01-18 17:37:17.815 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger/favicon-16x16.png  
+2022-01-18 17:37:17.817 +01:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2022-01-18 17:37:17.818 +01:00 [INF] Request finished in 2.6626ms 200 image/png
+2022-01-18 17:37:17.844 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger/v1/swagger.json  
+2022-01-18 17:37:17.933 +01:00 [INF] Request finished in 88.6841ms 200 application/json;charset=utf-8
+2022-01-18 17:39:03.224 +01:00 [INF] Application Is Starting
+2022-01-18 17:39:05.070 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-01-18 17:39:05.070 +01:00 [INF] Hosting environment: Development
+2022-01-18 17:39:05.071 +01:00 [INF] Content root path: C:\Users\Terez\Desktop\ON GITHUB\2\Mono Zadatak 3\WORK\MonoCarsSolution drugi dio - korekcija\Project.WebAPI
+2022-01-18 17:39:05.117 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/weatherforecast  
+2022-01-18 17:39:05.199 +01:00 [INF] Executing endpoint 'Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI)'
+2022-01-18 17:39:05.256 +01:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[Project.WebAPI.WeatherForecast] Get() on controller Project.WebAPI.Controllers.WeatherForecastController (Project.WebAPI).
+2022-01-18 17:39:05.268 +01:00 [INF] Executing action method Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI) - Validation state: "Valid"
+2022-01-18 17:39:05.278 +01:00 [INF] Executed action method Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 1.6932ms.
+2022-01-18 17:39:05.283 +01:00 [INF] Executing ObjectResult, writing value of type 'Project.WebAPI.WeatherForecast[]'.
+2022-01-18 17:39:05.320 +01:00 [INF] Executed action Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI) in 53.9284ms
+2022-01-18 17:39:05.321 +01:00 [INF] Executed endpoint 'Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI)'
+2022-01-18 17:39:05.327 +01:00 [INF] Request finished in 214.1053ms 200 application/json; charset=utf-8
+2022-01-18 17:39:37.266 +01:00 [INF] Application Is Starting
+2022-01-18 17:39:38.552 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-01-18 17:39:38.556 +01:00 [INF] Hosting environment: Development
+2022-01-18 17:39:38.557 +01:00 [INF] Content root path: C:\Users\Terez\Desktop\ON GITHUB\2\Mono Zadatak 3\WORK\MonoCarsSolution drugi dio - korekcija\Project.WebAPI
+2022-01-18 17:39:38.583 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/weatherforecast  
+2022-01-18 17:39:38.636 +01:00 [INF] Executing endpoint 'Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI)'
+2022-01-18 17:39:38.663 +01:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[Project.WebAPI.WeatherForecast] Get() on controller Project.WebAPI.Controllers.WeatherForecastController (Project.WebAPI).
+2022-01-18 17:39:38.674 +01:00 [INF] Executing action method Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI) - Validation state: "Valid"
+2022-01-18 17:39:38.681 +01:00 [INF] Executed action method Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 1.1508ms.
+2022-01-18 17:39:38.686 +01:00 [INF] Executing ObjectResult, writing value of type 'Project.WebAPI.WeatherForecast[]'.
+2022-01-18 17:39:38.716 +01:00 [INF] Executed action Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI) in 43.9932ms
+2022-01-18 17:39:38.717 +01:00 [INF] Executed endpoint 'Project.WebAPI.Controllers.WeatherForecastController.Get (Project.WebAPI)'
+2022-01-18 17:39:38.721 +01:00 [INF] Request finished in 141.634ms 200 application/json; charset=utf-8
+2022-01-18 17:39:41.800 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/  
+2022-01-18 17:39:41.804 +01:00 [INF] Request finished in 4.1186ms 301 
+2022-01-18 17:39:41.814 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/index.html  
+2022-01-18 17:39:41.843 +01:00 [INF] Request finished in 28.6786ms 200 text/html;charset=utf-8
+2022-01-18 17:39:41.874 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger-ui.css  
+2022-01-18 17:39:41.874 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger-ui-bundle.js  
+2022-01-18 17:39:41.914 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger-ui-standalone-preset.js  
+2022-01-18 17:39:41.944 +01:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2022-01-18 17:39:41.944 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-01-18 17:39:41.947 +01:00 [INF] Request finished in 37.5492ms 200 application/javascript
+2022-01-18 17:39:41.947 +01:00 [INF] Request finished in 72.8391ms 200 text/css
+2022-01-18 17:39:41.947 +01:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2022-01-18 17:39:41.947 +01:00 [INF] Request finished in 73.4074ms 200 application/javascript
+2022-01-18 17:39:42.140 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/favicon-16x16.png  
+2022-01-18 17:39:42.142 +01:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2022-01-18 17:39:42.142 +01:00 [INF] Request finished in 2.6015ms 200 image/png
+2022-01-18 17:39:42.163 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger/v1/swagger.json  
+2022-01-18 17:39:42.241 +01:00 [INF] Request finished in 78.5304ms 200 application/json;charset=utf-8
+2022-01-18 17:42:40.214 +01:00 [INF] Application Is Starting
+2022-01-18 17:42:41.381 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-01-18 17:42:41.381 +01:00 [INF] Hosting environment: Development
+2022-01-18 17:42:41.382 +01:00 [INF] Content root path: C:\Users\Terez\Desktop\ON GITHUB\2\Mono Zadatak 3\WORK\MonoCarsSolution drugi dio - korekcija\Project.WebAPI
+2022-01-18 17:42:41.401 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger/index.html  
+2022-01-18 17:42:41.478 +01:00 [INF] Request finished in 80.6451ms 404 
+2022-01-18 17:43:23.593 +01:00 [INF] Application Is Starting
+2022-01-18 17:43:24.829 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-01-18 17:43:24.829 +01:00 [INF] Hosting environment: Development
+2022-01-18 17:43:24.830 +01:00 [INF] Content root path: C:\Users\Terez\Desktop\ON GITHUB\2\Mono Zadatak 3\WORK\MonoCarsSolution drugi dio - korekcija\Project.WebAPI
+2022-01-18 17:43:24.865 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger/index.html  
+2022-01-18 17:43:24.932 +01:00 [INF] Request finished in 69.6465ms 200 text/html;charset=utf-8
+2022-01-18 17:43:25.175 +01:00 [INF] Request starting HTTP/2.0 GET https://localhost:44324/swagger/v1/swagger.json  
+2022-01-18 17:43:25.304 +01:00 [INF] Request finished in 129.3059ms 200 application/json;charset=utf-8
