@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Project.DAL
 {
-    public class VehicleModel : IOther
+    public class VehicleModel : IQueryHelper
     {
         public int VehicleModelId { get; set; }
 

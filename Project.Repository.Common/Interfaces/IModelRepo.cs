@@ -16,8 +16,8 @@ namespace Project.Repository.Common.Interfaces
         Task<PagedList<IVehicleModelDTO>> GetAllVehicleModelsAsync(ModelParams makeParams);
         Task<IVehicleModelDTO> GetVehicleModelByIdAsync(int VehicleModelId);
 
-        Task<IVehicleModelCreateDTO> CreateVehicleModel(IVehicleModelCreateDTO vehicleModel);
-        Task<IVehicleModelUpdateDTO> UpdateVehicleModel(IVehicleModelUpdateDTO VehicleModel);
+        Task<int> CreateVehicleModel(IVehicleModelCreateDTO vehicleModel);
+        Task<int> UpdateVehicleModel(IVehicleModelUpdateDTO VehicleModel);
         Task DeleteVehicleModel(IVehicleModelDTO VehicleModel);
     }
 }

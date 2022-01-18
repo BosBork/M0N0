@@ -40,22 +40,31 @@ namespace Project.Repository.Repo
             return await result;
         }
 
-        public async Task<IVehicleMakeCreateDTO> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
+        //public async Task<IVehicleMakeCreateDTO> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
+        //{
+        //    VehicleMake mapped = _mapper.Map<VehicleMake>(vehicleMake);
+        //    VehicleMake makeCreated = await Create(mapped);
+        //    await SaveAsync();
+        //    IVehicleMakeCreateDTO makeBackTo = _mapper.Map<IVehicleMakeCreateDTO>(makeCreated);
+        //    return makeBackTo;
+        //}
+
+        public async Task<int> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
         {
             VehicleMake mapped = _mapper.Map<VehicleMake>(vehicleMake);
             VehicleMake makeCreated = await Create(mapped);
             await SaveAsync();
-            IVehicleMakeCreateDTO makeBackTo = _mapper.Map<IVehicleMakeCreateDTO>(makeCreated);
-            return makeBackTo;
+            //IVehicleMakeCreateDTO makeBackTo = _mapper.Map<IVehicleMakeCreateDTO>(makeCreated);
+            return makeCreated.VehicleMakeId;
         }
 
-        public async Task<IVehicleMakeUpdateDTO> UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
+        public async Task<int> UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
         {
             VehicleMake mapped = _mapper.Map<VehicleMake>(vehicleMake);
             VehicleMake makeCreated = await Update(mapped, mapped.VehicleMakeId);
             await SaveAsync();
-            IVehicleMakeUpdateDTO makeBackTo = _mapper.Map<IVehicleMakeUpdateDTO>(makeCreated);
-            return makeBackTo;
+            //IVehicleMakeUpdateDTO makeBackTo = _mapper.Map<IVehicleMakeUpdateDTO>(makeCreated);
+            return makeCreated.VehicleMakeId;
         }
 
         public async Task DeleteVehicleMake(IVehicleMakeDTO vehicleMake)
@@ -74,9 +83,9 @@ namespace Project.Repository.Repo
         {
             IQueryable<VehicleMake> makes = FindAll();
 
-            Other<VehicleMake>.FilterByFirstChar(ref makes, makeParams.First);
+            QueryHelper<VehicleMake>.FilterByFirstChar(ref makes, makeParams.First);
 
-            Other<VehicleMake>.SearchByName(ref makes, makeParams.Name);
+            QueryHelper<VehicleMake>.SearchByName(ref makes, makeParams.Name);
 
             IQueryable<VehicleMake> sortedMakes = _sortHelper.ApplySort(makes, makeParams.OrderBy);
 

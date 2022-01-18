@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Project.Common
 {
-    public abstract class Other<T> where T : class, IOther
+    public abstract class QueryHelper<T> where T : class, IQueryHelper
     {
         public static void FilterByFirstChar(ref IQueryable<T> vehicle, string first)
         {

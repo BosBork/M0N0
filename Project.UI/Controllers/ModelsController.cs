@@ -153,10 +153,10 @@ namespace Project.UI.Controllers
 
                     var createdModel = await _servicesWrapper.VehicleModel.CreateVehicleModel(VMtoDTO);
 
-                    var DTOtoVM = _mapper.Map<VehicleModelCreateVM>(createdModel);
+                    //var DTOtoVM = _mapper.Map<VehicleModelCreateVM>(createdModel);
 
                     Response.StatusCode = (int)HttpStatusCode.Created;
-                    return RedirectToAction("Details", new { id = DTOtoVM.VehicleModelId });
+                    return RedirectToAction("Details", new { id = createdModel });
                 }
 
                 ViewBag.DPSelectListItem = new SelectList(

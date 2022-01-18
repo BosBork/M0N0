@@ -35,12 +35,17 @@ namespace Project.Service
             return await _repo.FindAllMakeIdsForRandom();
         }
 
-        public async Task<IVehicleMakeUpdateDTO> UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
+        public async Task<int> UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
         {
             return await _repo.UpdateVehicleMake(vehicleMake);
         }
 
-        public async Task<IVehicleMakeCreateDTO> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
+        //public async Task<IVehicleMakeCreateDTO> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
+        //{
+        //    return await _repo.CreateVehicleMake(vehicleMake);
+        //}
+
+        public async Task<int> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
         {
             return await _repo.CreateVehicleMake(vehicleMake);
         }

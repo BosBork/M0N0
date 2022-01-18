@@ -19,9 +19,14 @@ namespace Project.Service
             _repo = repo;
         }
 
-        public async Task<IVehicleModelCreateDTO> CreateVehicleModel(IVehicleModelCreateDTO vehicleModel)
+        public async Task<int> CreateVehicleModel(IVehicleModelCreateDTO vehicleModel)
         {
             return await _repo.CreateVehicleModel(vehicleModel);
+        }
+
+        public async Task<int> UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModel)
+        {
+            return await _repo.UpdateVehicleModel(vehicleModel);
         }
 
         public async Task DeleteVehicleModel(IVehicleModelDTO vehicleModel)
@@ -39,9 +44,6 @@ namespace Project.Service
             return await _repo.GetVehicleModelByIdAsync(vehicleModelId);
         }
 
-        public async Task<IVehicleModelUpdateDTO> UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModel)
-        {
-            return await _repo.UpdateVehicleModel(vehicleModel);
-        }
+
     }
 }

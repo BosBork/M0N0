@@ -24,22 +24,22 @@ namespace Project.Repository.Repo
             _sortHelper = sortHelper;
         }
 
-        public async Task<IVehicleModelUpdateDTO> UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModel)
+        public async Task<int> UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModel)
         {
             VehicleModel mapped = _mapper.Map<VehicleModel>(vehicleModel);
             VehicleModel modelCreated = await Update(mapped, mapped.VehicleModelId);
             await SaveAsync();
-            IVehicleModelUpdateDTO modelBackTo = _mapper.Map<IVehicleModelUpdateDTO>(modelCreated);
-            return modelBackTo;
+            //IVehicleModelUpdateDTO modelBackTo = _mapper.Map<IVehicleModelUpdateDTO>(modelCreated);
+            return modelCreated.VehicleModelId;
         }
 
-        public async Task<IVehicleModelCreateDTO> CreateVehicleModel(IVehicleModelCreateDTO vehicleModel)
+        public async Task<int> CreateVehicleModel(IVehicleModelCreateDTO vehicleModel)
         {
             VehicleModel mapped = _mapper.Map<VehicleModel>(vehicleModel);
             VehicleModel modelCreated = await Create(mapped);
             await SaveAsync();
-            IVehicleModelCreateDTO modelBackTo = _mapper.Map<IVehicleModelCreateDTO>(modelCreated);
-            return modelBackTo;
+            //IVehicleModelCreateDTO modelBackTo = _mapper.Map<IVehicleModelCreateDTO>(modelCreated);
+            return modelCreated.VehicleModelId;
         }
 
         public async Task DeleteVehicleModel(IVehicleModelDTO VehicleModel)
@@ -56,11 +56,11 @@ namespace Project.Repository.Repo
             //.Include(x => x.VehicleMake) as IQueryable<VehicleModel>;
             #endregion
 
-            Other<VehicleModel>.FilterByFirstChar(ref models, modelParams.First);
+            QueryHelper<VehicleModel>.FilterByFirstChar(ref models, modelParams.First);
 
-            Other<VehicleModel>.SearchByName(ref models, modelParams.Name);
+            QueryHelper<VehicleModel>.SearchByName(ref models, modelParams.Name);
 
-            Other<VehicleModel>.FilterByMatchingIds(ref models, modelParams.MakeIdFilterSelected); //for dropdown filter
+            QueryHelper<VehicleModel>.FilterByMatchingIds(ref models, modelParams.MakeIdFilterSelected); //for dropdown filter
 
             IQueryable<VehicleModel> sortedModels = _sortHelper.ApplySort(models, modelParams.OrderBy);
 

@@ -19,8 +19,8 @@ namespace Project.Service.Common
         Task<IVehicleMakeDTO> GetVehicleMakeByIdAsync(int vehicleMakeId);
         Task<IVehicleMakeDTO> GetModelsOfVehicleByIdAsync(int vehicleMakeId);
 
-        Task<IVehicleMakeCreateDTO> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake);
-        Task<IVehicleMakeUpdateDTO> UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake);
+        Task<int> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake);
+        Task<int> UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake);
 
         Task DeleteVehicleMake(IVehicleMakeDTO vehicleMake);
 

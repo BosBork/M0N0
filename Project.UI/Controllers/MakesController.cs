@@ -119,11 +119,15 @@ namespace Project.UI.Controllers
 
                     var createdMake = await _servicesWrapper.VehicleMake.CreateVehicleMake(VMtoDTO);
 
-                    var DTOtoVM = _mapper.Map<VehicleMakeCreateVM>(createdMake);
+                    //var get_created_by_id = await _servicesWrapper.VehicleMake.GetVehicleMakeByIdAsync(createdMake);
+
+                    //var DTOtoVM = _mapper.Map<VehicleMakeCreateVM>(/*createdMake*/get_created_by_id);
 
                     Response.StatusCode = (int)HttpStatusCode.Created;
 
-                    return RedirectToAction("Details", new { id = DTOtoVM.VehicleMakeId });
+                    //return RedirectToAction("Details", new { id = DTOtoVM.VehicleMakeId });
+                    return RedirectToAction("Details", new { id = createdMake });
+
                 }
 
                 return View(vehicleMakeCreateVM);
