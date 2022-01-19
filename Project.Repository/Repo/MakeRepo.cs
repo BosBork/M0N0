@@ -40,6 +40,7 @@ namespace Project.Repository.Repo
             return await result;
         }
 
+        #region Kanta
         //public async Task<IVehicleMakeCreateDTO> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
         //{
         //    VehicleMake mapped = _mapper.Map<VehicleMake>(vehicleMake);
@@ -47,7 +48,8 @@ namespace Project.Repository.Repo
         //    await SaveAsync();
         //    IVehicleMakeCreateDTO makeBackTo = _mapper.Map<IVehicleMakeCreateDTO>(makeCreated);
         //    return makeBackTo;
-        //}
+        //} 
+        #endregion
 
         public async Task<int> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
         {

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
+using AutoMapper.Extensions.ExpressionMapping;
 
 namespace Project.WebAPI
 {
@@ -35,6 +36,8 @@ namespace Project.WebAPI
                 });
             });
 
+            services.AddAutoMapper(cfg => cfg.AddExpressionMapping(), typeof(Startup));
+
             services.AddControllers();
         }
 
@@ -50,7 +53,9 @@ namespace Project.WebAPI
             app.UseSwaggerUI(
                 c => {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mono Vehicles v1");
-                    //c.RoutePrefix = string.Empty; //launchUrl in launchSettings.json must be empty for the swagger root page to load correctly
+                    #region extra
+                    //c.RoutePrefix = string.Empty; //launchUrl in launchSettings.json must be empty for the swagger root page to load correctly 
+                    #endregion
                 });
 
             app.UseHttpsRedirection();

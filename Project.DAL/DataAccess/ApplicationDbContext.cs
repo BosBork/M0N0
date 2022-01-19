@@ -13,9 +13,11 @@ namespace Project.DAL.DataAccess
         public virtual DbSet<VehicleMake> VehicleMakes { get; set; }
         public virtual DbSet<VehicleModel> VehicleModels { get; set; }
 
+        #region old
         //public ApplicationDbContext()
         //{
-        //}
+        //} 
+        #endregion
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -25,6 +27,7 @@ namespace Project.DAL.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+            #region old
             //base.OnModelCreating(modelBuilder);
 
             //foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
@@ -36,7 +39,8 @@ namespace Project.DAL.DataAccess
             //    .Entity<VehicleMake>()
             //    .HasMany(x => x.VehicleModels)
             //    .WithOne(x => x.VehicleMake)
-            //    .OnDelete(DeleteBehavior.Restrict); 
+            //    .OnDelete(DeleteBehavior.Restrict);  
+            #endregion
 
             modelBuilder.Entity<VehicleMake>().HasData(SeedExtension.SeedDataFromJson<VehicleMake>("MAKE_MOCK_DATA"));
             modelBuilder.Entity<VehicleModel>().HasData(SeedExtension.SeedDataFromJson<VehicleModel>("MODEL_MOCK_DATA"));
