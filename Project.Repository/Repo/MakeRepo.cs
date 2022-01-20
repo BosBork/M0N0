@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Project.Model.Common;
 using AutoMapper;
 using System.Linq.Expressions;
+using Project.Model.OtherModels.DTOs;
 
 namespace Project.Repository.Repo
 {
@@ -40,33 +41,20 @@ namespace Project.Repository.Repo
             return await result;
         }
 
-        #region Kanta
-        //public async Task<IVehicleMakeCreateDTO> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
-        //{
-        //    VehicleMake mapped = _mapper.Map<VehicleMake>(vehicleMake);
-        //    VehicleMake makeCreated = await Create(mapped);
-        //    await SaveAsync();
-        //    IVehicleMakeCreateDTO makeBackTo = _mapper.Map<IVehicleMakeCreateDTO>(makeCreated);
-        //    return makeBackTo;
-        //} 
-        #endregion
-
         public async Task<int> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
         {
             VehicleMake mapped = _mapper.Map<VehicleMake>(vehicleMake);
             VehicleMake makeCreated = await Create(mapped);
             await SaveAsync();
-            //IVehicleMakeCreateDTO makeBackTo = _mapper.Map<IVehicleMakeCreateDTO>(makeCreated);
             return makeCreated.VehicleMakeId;
         }
 
         public async Task<int> UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
         {
             VehicleMake mapped = _mapper.Map<VehicleMake>(vehicleMake);
-            VehicleMake makeCreated = await Update(mapped, mapped.VehicleMakeId);
+            await Update(mapped, vehicleMake.VehicleMakeId);
             await SaveAsync();
-            //IVehicleMakeUpdateDTO makeBackTo = _mapper.Map<IVehicleMakeUpdateDTO>(makeCreated);
-            return makeCreated.VehicleMakeId;
+            return mapped.VehicleMakeId;
         }
 
         public async Task DeleteVehicleMake(IVehicleMakeDTO vehicleMake)
@@ -101,10 +89,9 @@ namespace Project.Repository.Repo
             return _mapper.Map<IVehicleMakeDTO>(result);
         }
 
-        public async Task<IVehicleMakeDTO> GetModelsOfVehicleByIdAsync(int vehicleMakeId)
+        public async Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsAsync(int vehicleMakeId)
         {
-            var result = await FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId))
-                .Include(models => models.VehicleModels).FirstOrDefaultAsync();
+            var result = await FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId)).Include(models => models.VehicleModels).FirstOrDefaultAsync();
             return _mapper.Map<IVehicleMakeDTO>(result);
         }
 

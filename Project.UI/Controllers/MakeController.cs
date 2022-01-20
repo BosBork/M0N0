@@ -20,7 +20,7 @@ using Project.Model.Common;
 
 namespace Project.UI.Controllers
 {
-    public class MakesController : Controller
+    public class MakeController : Controller
     {
         readonly string name_sort = nameof(VehicleMakeVM.Name).ToLower();
         readonly string abrv_sort = nameof(VehicleMakeVM.Abrv).ToLower();
@@ -28,7 +28,7 @@ namespace Project.UI.Controllers
         private readonly IMapper _mapper;
         private readonly IServicesWrapper _servicesWrapper;
 
-        public MakesController(IMapper mapper, IServicesWrapper servicesWrapper)
+        public MakeController(IMapper mapper, IServicesWrapper servicesWrapper)
         {
             _mapper = mapper;
             _servicesWrapper = servicesWrapper;
@@ -188,9 +188,9 @@ namespace Project.UI.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var modelEntity = await _servicesWrapper.VehicleMake.GetVehicleMakeByIdAsync(id);
+                    var makeEntity = await _servicesWrapper.VehicleMake.GetVehicleMakeByIdAsync(id);
 
-                    if (modelEntity == null)
+                    if (makeEntity == null)
                     {
                         return NotFound();
                     }

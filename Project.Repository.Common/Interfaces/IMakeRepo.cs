@@ -15,7 +15,7 @@ namespace Project.Repository.Common.Interfaces
         Task<List<SelectListItem>> GetAllMakesForDPSelectListItem();
         Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(MakeParams makeParams);
         Task<IVehicleMakeDTO> GetVehicleMakeByIdAsync(int vehicleMakeId);
-        Task<IVehicleMakeDTO> GetModelsOfVehicleByIdAsync(int vehicleMakeId);
+        Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsAsync(int vehicleMakeId);
 
         Task<int> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake);
         Task<int> UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake); 

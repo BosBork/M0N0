@@ -28,16 +28,16 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Makes\Create.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Makes\Delete.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Makes\Details.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Makes\Edit.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Makes\Index.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Models\Create.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Models\Delete.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Models\Details.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Models\Edit.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Models\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Make\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Make\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Make\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Make\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Make\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Model\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Model\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Model\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Model\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Model\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Shared\_FooterPagingPartial.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Shared\_ValidationScriptsPartial.cshtml" />
@@ -46,43 +46,43 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Makes\Create.cshtml" />
+    <UpToDateCheckInput Remove="Views\Make\Create.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Makes\Delete.cshtml" />
+    <UpToDateCheckInput Remove="Views\Make\Delete.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Makes\Details.cshtml" />
+    <UpToDateCheckInput Remove="Views\Make\Details.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Makes\Edit.cshtml" />
+    <UpToDateCheckInput Remove="Views\Make\Edit.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Makes\Index.cshtml" />
+    <UpToDateCheckInput Remove="Views\Make\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Models\Create.cshtml" />
+    <UpToDateCheckInput Remove="Views\Model\Create.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Models\Delete.cshtml" />
+    <UpToDateCheckInput Remove="Views\Model\Delete.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Models\Details.cshtml" />
+    <UpToDateCheckInput Remove="Views\Model\Details.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Models\Edit.cshtml" />
+    <UpToDateCheckInput Remove="Views\Model\Edit.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Models\Index.cshtml" />
+    <UpToDateCheckInput Remove="Views\Model\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

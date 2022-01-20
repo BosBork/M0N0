@@ -40,10 +40,12 @@ namespace Project.Service
             return await _repo.UpdateVehicleMake(vehicleMake);
         }
 
+        #region Kanta
         //public async Task<IVehicleMakeCreateDTO> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
         //{
         //    return await _repo.CreateVehicleMake(vehicleMake);
-        //}
+        //} 
+        #endregion
 
         public async Task<int> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
         {
@@ -70,9 +72,9 @@ namespace Project.Service
             return await _repo.GetVehicleMakeByIdAsync(vehicleMakeId);
         }
 
-        public async Task<IVehicleMakeDTO> GetModelsOfVehicleByIdAsync(int vehicleMakeId)
+        public async Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsAsync(int vehicleMakeId)
         {
-            return await _repo.GetModelsOfVehicleByIdAsync(vehicleMakeId);
+            return await _repo.GetVehicleMakeByIdWithModelsAsync(vehicleMakeId);
         }
 
         #region worky

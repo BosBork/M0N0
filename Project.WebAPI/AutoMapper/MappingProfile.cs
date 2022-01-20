@@ -23,6 +23,8 @@ namespace Project.WebAPI
             CreateMap<IVehicleMakeUpdateDTO, VehicleMake>().ReverseMap();
             CreateMap<IVehicleMakeCreateDTO, VehicleMake>().ReverseMap();
 
+            CreateMap<IVehicleMakeDTO, VehicleMakeDTO>();
+
             //--------
 
             CreateMap<VehicleMake, VehicleMakeDTO>();

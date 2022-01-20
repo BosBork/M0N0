@@ -12,11 +12,12 @@ namespace Project.Model.Common
 
         string Abrv { get; set; }
 
-        IEnumerable<IVehicleModelDTO> VehicleModels { get; set; }
+        //IEnumerable<IVehicleModelDTO> VehicleModels { get; set; } // include
     }
 
-    public interface IVehicleMakeUpdateDTO : IVehicleMakeDTO
+    public interface IVehicleMakeUpdateDTO : IVehicleMakeCreateDTO
     {
+
     }
 
     public interface IVehicleMakeCreateDTO

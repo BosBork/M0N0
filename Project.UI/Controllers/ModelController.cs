@@ -20,7 +20,7 @@ using Project.Model.Common;
 
 namespace Project.UI.Controllers
 {
-    public class ModelsController : Controller
+    public class ModelController : Controller
     {
         readonly string name_sort = nameof(VehicleModelVM.Name).ToLower();
         readonly string abrv_sort = nameof(VehicleModelVM.Abrv).ToLower();
@@ -29,7 +29,7 @@ namespace Project.UI.Controllers
         private readonly IMapper _mapper;
         private readonly IServicesWrapper _servicesWrapper;
 
-        public ModelsController(IMapper mapper, IServicesWrapper servicesWrapper)
+        public ModelController(IMapper mapper, IServicesWrapper servicesWrapper)
         {
             _mapper = mapper;
             _servicesWrapper = servicesWrapper;

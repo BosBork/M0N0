@@ -44,7 +44,7 @@ namespace Project.WebAPI
             .WriteTo.File(
                 path: Path.Combine(Environment.CurrentDirectory, "WebApiLogs", "log-.txt"),
                 //path: Path.Combine(AppContext.BaseDirectory, "WebApiLogs", "log-.txt"),
-                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
+                //outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
                 rollingInterval: RollingInterval.Day,
                 restrictedToMinimumLevel: LogEventLevel.Information
             )

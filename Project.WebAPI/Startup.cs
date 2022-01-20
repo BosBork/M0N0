@@ -12,6 +12,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
 using AutoMapper.Extensions.ExpressionMapping;
+using Project.Common;
+using Project.DAL;
+using Project.Repository.Common.Interfaces.UOW;
+using Project.Service.Common;
+using Project.Repository.Repo.UOW;
+using Project.Service;
+using Project.DAL.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
 namespace Project.WebAPI
 {
@@ -27,6 +35,8 @@ namespace Project.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContextPool<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -36,9 +46,19 @@ namespace Project.WebAPI
                 });
             });
 
+            #region Sorting
+            services.AddScoped<ISortHelper<VehicleMake>, SortHelper<VehicleMake>>();
+            services.AddScoped<ISortHelper<VehicleModel>, SortHelper<VehicleModel>>();
+            #endregion
+
+            #region Wrappers
+            services.AddScoped<IRepoWrapper, RepoWrapper>();
+            services.AddScoped<IServicesWrapper, ServicesWrapper>();
+            #endregion
+
             services.AddAutoMapper(cfg => cfg.AddExpressionMapping(), typeof(Startup));
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
