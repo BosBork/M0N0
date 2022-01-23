@@ -12,7 +12,9 @@ namespace Project.Model.OtherModels.DTOs
 
         public string Abrv { get; set; }
 
-        //public virtual IEnumerable<IVehicleModelDTO> VehicleModels { get; set; } // include
+        public string ModelCount { get; set; }
+
+        public virtual IEnumerable<IVehicleModelDTO> VehicleModels { get; set; } // include
     }
 
     public class VehicleMakeUpdateDTO : VehicleMakeCreateDTO, IVehicleMakeUpdateDTO

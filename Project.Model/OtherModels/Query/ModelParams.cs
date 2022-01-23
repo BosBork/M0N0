@@ -11,7 +11,7 @@ namespace Project.Model.OtherModels.Query
           OrderBy = "name";
         }
 
-        public string First { get; set; }
+        //public string First { get; set; }
 
         public string Name { get; set; }
 

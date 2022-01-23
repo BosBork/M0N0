@@ -11,6 +11,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using Project.Model.OtherModels.DTOs;
+using Project.Common.Enums;
 
 namespace Project.Repository.Repo
 {
@@ -24,13 +25,22 @@ namespace Project.Repository.Repo
             _sortHelper = sortHelper;
         }
 
-        public async Task<int> UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModel)
+        #region old
+        //public async Task<int> UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModel)
+        //{
+        //    VehicleModel mapped = _mapper.Map<VehicleModel>(vehicleModel);
+        //    VehicleModel modelUpdated = await Update(mapped, mapped.VehicleModelId);
+        //    await SaveAsync();
+        //    //IVehicleModelUpdateDTO modelBackTo = _mapper.Map<IVehicleModelUpdateDTO>(modelUpdated);
+        //    return modelUpdated.VehicleModelId;
+        //} 
+        #endregion
+
+        public async Task UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModel)
         {
-            VehicleModel mapped = _mapper.Map<VehicleModel>(vehicleModel);
-            VehicleModel modelCreated = await Update(mapped, mapped.VehicleModelId);
+            var mapped = _mapper.Map<VehicleModel>(vehicleModel);
+            await Update(mapped, mapped.VehicleModelId);
             await SaveAsync();
-            //IVehicleModelUpdateDTO modelBackTo = _mapper.Map<IVehicleModelUpdateDTO>(modelCreated);
-            return modelCreated.VehicleModelId;
         }
 
         public async Task<int> CreateVehicleModel(IVehicleModelCreateDTO vehicleModel)
@@ -48,15 +58,18 @@ namespace Project.Repository.Repo
             await SaveAsync();
         }
 
-        public async Task<PagedList<IVehicleModelDTO>> GetAllVehicleModelsAsync(ModelParams modelParams)
+        public async Task<PagedList<IVehicleModelDTO>> GetAllVehicleModelsAsync(ModelParams modelParams, Include include)
         {
             IQueryable<VehicleModel> models = FindAll();
 
             #region Include
-            //.Include(x => x.VehicleMake) as IQueryable<VehicleModel>;
+            if (include == Include.Yes)
+            {
+                models = models.Include(x => x.VehicleMake) as IQueryable<VehicleModel>;
+            }
             #endregion
 
-            QueryHelper<VehicleModel>.FilterByFirstChar(ref models, modelParams.First);
+            //QueryHelper<VehicleModel>.FilterByFirstChar(ref models, modelParams.First);
 
             QueryHelper<VehicleModel>.SearchByName(ref models, modelParams.Name);
 
@@ -71,7 +84,8 @@ namespace Project.Repository.Repo
 
         public async Task<IVehicleModelDTO> GetVehicleModelByIdAsync(int vehicleModelId)
         {
-            var result = await FindByCondition(x => x.VehicleModelId.Equals(vehicleModelId)).Include(x => x.VehicleMake)
+            var result = await FindByCondition(x => x.VehicleModelId.Equals(vehicleModelId))
+                .Include(x => x.VehicleMake)
                 .FirstOrDefaultAsync();
             return _mapper.Map<IVehicleModelDTO>(result);
         }

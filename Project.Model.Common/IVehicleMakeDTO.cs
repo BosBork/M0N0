@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Project.Model.Common
@@ -12,7 +13,11 @@ namespace Project.Model.Common
 
         string Abrv { get; set; }
 
-        //IEnumerable<IVehicleModelDTO> VehicleModels { get; set; } // include
+        //string ModelCount { get; set; }
+
+        //[JsonIgnore]
+        //[IgnoreDataMember]
+        IEnumerable<IVehicleModelDTO> VehicleModels { get; set; } // include
     }
 
     public interface IVehicleMakeUpdateDTO : IVehicleMakeCreateDTO

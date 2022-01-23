@@ -8,16 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Project.Model.Common;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Project.Common.Enums;
 
 namespace Project.Repository.Common.Interfaces
 {
     public interface IModelRepo/* : IVehicleServiceRepoBase<VehicleModel>*/
     {
-        Task<PagedList<IVehicleModelDTO>> GetAllVehicleModelsAsync(ModelParams makeParams);
+        Task<PagedList<IVehicleModelDTO>> GetAllVehicleModelsAsync(ModelParams makeParams, Include include = Include.No);
         Task<IVehicleModelDTO> GetVehicleModelByIdAsync(int VehicleModelId);
 
         Task<int> CreateVehicleModel(IVehicleModelCreateDTO vehicleModel);
-        Task<int> UpdateVehicleModel(IVehicleModelUpdateDTO VehicleModel);
+        //Task<int> UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModelUpdateDTO);
+        Task UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModelUpdateDTO);
+
         Task DeleteVehicleModel(IVehicleModelDTO VehicleModel);
     }
 }

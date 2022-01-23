@@ -34,8 +34,11 @@ namespace Project.WebAPI
 
             #region Model
             CreateMap<IVehicleModelDTO, VehicleModel>().ReverseMap();
+                                                CreateMap<IVehicleModelDTO, IVehicleModelUpdateDTO>().ReverseMap();
             CreateMap<IVehicleModelUpdateDTO, VehicleModel>().ReverseMap();
             CreateMap<IVehicleModelCreateDTO, VehicleModel>().ReverseMap();
+
+            CreateMap<IVehicleModelDTO, VehicleModelDTO>();
 
             //--------
 

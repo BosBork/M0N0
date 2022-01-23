@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Project.Common;
+using Project.Common.Enums;
 using Project.DAL;
 using Project.DAL.DataAccess;
 using Project.Model.Common;
@@ -62,9 +63,9 @@ namespace Project.Service
             return await _repo.GetAllMakesForDPSelectListItem();
         }
 
-        public async Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(MakeParams makeParams)
+        public async Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(MakeParams makeParams, Include include)
         {
-            return await _repo.GetAllVehicleMakesAsync(makeParams);
+            return await _repo.GetAllVehicleMakesAsync(makeParams, include);
         }
 
         public async Task<IVehicleMakeDTO> GetVehicleMakeByIdAsync(int vehicleMakeId)
@@ -76,6 +77,11 @@ namespace Project.Service
         {
             return await _repo.GetVehicleMakeByIdWithModelsAsync(vehicleMakeId);
         }
+
+        //public async Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsCountAsync(int vehicleMakeId)
+        //{
+        //    return await _repo.GetVehicleMakeByIdWithModelsCountAsync(vehicleMakeId);
+        //}
 
         #region worky
         //public async Task UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)

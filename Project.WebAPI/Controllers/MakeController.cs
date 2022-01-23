@@ -2,14 +2,11 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Project.DAL;
-using Project.Model.Common;
+using Project.Common.Enums;
 using Project.Model.OtherModels.DTOs;
 using Project.Model.OtherModels.Query;
 using Project.Service.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Project.WebAPI.Controllers
@@ -57,14 +54,16 @@ namespace Project.WebAPI.Controllers
             #region ById
             [HttpGet("{id:int}", Name = "GetMake")]
             [ProducesResponseType(StatusCodes.Status200OK)]
+            [ProducesResponseType(StatusCodes.Status404NotFound)]
             [ProducesResponseType(StatusCodes.Status500InternalServerError)]
             public async Task<IActionResult> GetMake(int id)
             {
                 try
                 {
-                    var make = await _servicesWrapper.VehicleMake.GetVehicleMakeByIdAsync(id);
+                var make = await _servicesWrapper.VehicleMake.GetVehicleMakeByIdAsync(id);
+                //var make = await _servicesWrapper.VehicleMake.GetVehicleMakeByIdWithModelsCountAsync(id);
 
-                    if (make == null)
+                if (make == null)
                     {
                         return NotFound("NOT FOUND");
                     }
@@ -87,7 +86,7 @@ namespace Project.WebAPI.Controllers
 
             #region Create
             [HttpPost]
-            [ProducesResponseType(StatusCodes.Status404NotFound)]
+            [ProducesResponseType(StatusCodes.Status400BadRequest)]
             [ProducesResponseType(StatusCodes.Status201Created)]
             [ProducesResponseType(StatusCodes.Status500InternalServerError)]
             public async Task<IActionResult> CreateMake([FromBody] VehicleMakeCreateDTO vehicleMake)
@@ -118,41 +117,42 @@ namespace Project.WebAPI.Controllers
 
             #region Update
             [HttpPut("{id:int}")]
+            [ProducesResponseType(StatusCodes.Status400BadRequest)]
             [ProducesResponseType(StatusCodes.Status404NotFound)]
             [ProducesResponseType(StatusCodes.Status204NoContent)]
             [ProducesResponseType(StatusCodes.Status500InternalServerError)]
             public async Task<IActionResult> UpdateMake(int id, [FromBody] VehicleMakeUpdateDTO vehicleMake)
-            {
-                try
                 {
-                    if (vehicleMake == null)
+                    try
                     {
-                        return BadRequest("VehicleMake Object is NULL");
-                    }
+                        if (vehicleMake == null)
+                        {
+                            return BadRequest("VehicleMake Object is NULL");
+                        }
 
-                    if (!ModelState.IsValid)
+                        if (!ModelState.IsValid)
+                        {
+                            return BadRequest("ModelState is Invalid");
+                        }
+
+                        var makeEntity = await _servicesWrapper.VehicleMake.GetVehicleMakeByIdAsync(id);
+                        if (makeEntity == null)
+                        {
+                            return NotFound();
+                        }
+
+                        vehicleMake.VehicleMakeId = makeEntity.VehicleMakeId;
+                        await _servicesWrapper.VehicleMake.UpdateVehicleMake(vehicleMake);
+
+                        return NoContent();
+                    }
+                    catch (Exception ex)
                     {
-                        return BadRequest("ModelState is Invalid");
+                        _logger.LogError(ex, $"Something Went Wrong In The {nameof(UpdateMake)}");
+                        return StatusCode(500, "Internal server error");
                     }
-
-                    var makeEntity = await _servicesWrapper.VehicleMake.GetVehicleMakeByIdAsync(id);
-                    if (makeEntity == null)
-                    {
-                        return NotFound();
-                    }
-
-                    vehicleMake.VehicleMakeId = makeEntity.VehicleMakeId;
-                    await _servicesWrapper.VehicleMake.UpdateVehicleMake(vehicleMake);
-
-                    return NoContent();
                 }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, $"Something Went Wrong In The {nameof(UpdateMake)}");
-                    return StatusCode(500, "Internal server error");
-                }
-            }
-        #endregion
+            #endregion
 
             #region Delete
             [HttpDelete("{id:int}")]
@@ -175,7 +175,7 @@ namespace Project.WebAPI.Controllers
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, $"Something Went Wrong In The {nameof(UpdateMake)}");
+                    _logger.LogError(ex, $"Something Went Wrong In The {nameof(DeleteMake)}");
                     return StatusCode(500, "Internal server error");
                 }
             } 

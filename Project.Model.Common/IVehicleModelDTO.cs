@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Project.Model.Common
@@ -17,14 +18,14 @@ namespace Project.Model.Common
         IVehicleMakeDTO VehicleMake { get; set; }
     }
 
-    public interface IVehicleModelUpdateDTO : IVehicleModelDTO
+    public interface IVehicleModelUpdateDTO : IVehicleModelCreateDTO
     {
-
+        int VehicleModelId { get; set; }
     }
 
     public interface IVehicleModelCreateDTO
     {
-        int VehicleModelId { get; set; }
+        //int VehicleModelId { get; set; }
 
         string Name { get; set; }
 

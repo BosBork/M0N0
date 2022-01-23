@@ -15,6 +15,7 @@ using Project.Model.Common;
 using AutoMapper;
 using System.Linq.Expressions;
 using Project.Model.OtherModels.DTOs;
+using Project.Common.Enums;
 
 namespace Project.Repository.Repo
 {
@@ -69,11 +70,18 @@ namespace Project.Repository.Repo
             return await makes.ToListAsync();
         }
 
-        public async Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(MakeParams makeParams)
+        public async Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(MakeParams makeParams, Include include)
         {
             IQueryable<VehicleMake> makes = FindAll();
 
-            QueryHelper<VehicleMake>.FilterByFirstChar(ref makes, makeParams.First);
+            #region Include
+            if (include == Include.Yes)
+            {
+                makes = makes.Include(x => x.VehicleModels) as IQueryable<VehicleMake>;
+            }
+            #endregion
+
+            //QueryHelper<VehicleMake>.FilterByFirstChar(ref makes, makeParams.First);
 
             QueryHelper<VehicleMake>.SearchByName(ref makes, makeParams.Name);
 
@@ -91,9 +99,31 @@ namespace Project.Repository.Repo
 
         public async Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsAsync(int vehicleMakeId)
         {
-            var result = await FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId)).Include(models => models.VehicleModels).FirstOrDefaultAsync();
+            #region test
+            //var result = FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId));
+
+            //if (true)
+            //{
+            //    result = result.Include(models => models.VehicleModels);
+            //}
+
+            //await result.FirstOrDefaultAsync(); 
+            #endregion
+
+            var result = await FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId))
+                .Include(models => models.VehicleModels)
+                .FirstOrDefaultAsync();
+
             return _mapper.Map<IVehicleMakeDTO>(result);
         }
+
+        //public async Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsCountAsync(int vehicleMakeId)
+        //{
+        //    var result = await FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId)).Include(models => models.VehicleModels).FirstOrDefaultAsync();
+        //    var mappedResult = _mapper.Map<IVehicleMakeDTO>(result);
+        //    mappedResult.ModelCount = result.VehicleModels.Count < 1 ? "Nema" : result.VehicleModels.Count.ToString();
+        //    return mappedResult;
+        //}
 
     }
 }

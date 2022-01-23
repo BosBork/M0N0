@@ -15,13 +15,14 @@ namespace Project.Model.OtherModels.DTOs
         public virtual IVehicleMakeDTO VehicleMake { get; set; }
     }
 
-    public class VehicleModelUpdateDTO : VehicleModelDTO, IVehicleModelUpdateDTO
+    public class VehicleModelUpdateDTO : VehicleModelCreateDTO, IVehicleModelUpdateDTO
     {
+        public int VehicleModelId { get; set; }
     }
 
     public class VehicleModelCreateDTO : IVehicleModelCreateDTO
     {
-        public int VehicleModelId { get; set; }
+        //public int VehicleModelId { get; set; }
 
         public string Name { get; set; }
 
