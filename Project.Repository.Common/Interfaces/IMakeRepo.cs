@@ -20,7 +20,7 @@ namespace Project.Repository.Common.Interfaces
         //Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsCountAsync(int vehicleMakeId);
 
         Task<int> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake);
-        Task<int> UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake); 
+        Task/*<int>*/ UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake); 
         Task DeleteVehicleMake(IVehicleMakeDTO vehicleMake);
 
         Task<bool> FindIfExists(Expression<Func<IVehicleMakeDTO, bool>> selector);

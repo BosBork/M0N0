@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using static Project.WebAPI.AutoMapperPagedListConverter;
 using Project.Model.Common;
 using System.Linq.Expressions;
+using Project.WebAPI.ViewModels;
 
 namespace Project.WebAPI
 {
@@ -23,7 +24,8 @@ namespace Project.WebAPI
             CreateMap<IVehicleMakeUpdateDTO, VehicleMake>().ReverseMap();
             CreateMap<IVehicleMakeCreateDTO, VehicleMake>().ReverseMap();
 
-            CreateMap<IVehicleMakeDTO, VehicleMakeDTO>();
+            //CreateMap<IVehicleMakeDTO, VehicleMakeDTO>();
+            CreateMap<IVehicleMakeDTO, VehicleMakeVM>();
 
             //--------
 
@@ -34,11 +36,11 @@ namespace Project.WebAPI
 
             #region Model
             CreateMap<IVehicleModelDTO, VehicleModel>().ReverseMap();
-                                                CreateMap<IVehicleModelDTO, IVehicleModelUpdateDTO>().ReverseMap();
             CreateMap<IVehicleModelUpdateDTO, VehicleModel>().ReverseMap();
             CreateMap<IVehicleModelCreateDTO, VehicleModel>().ReverseMap();
 
-            CreateMap<IVehicleModelDTO, VehicleModelDTO>();
+            //CreateMap<IVehicleModelDTO, VehicleModelDTO>();
+            CreateMap<IVehicleModelDTO, VehicleModelVM>();
 
             //--------
 

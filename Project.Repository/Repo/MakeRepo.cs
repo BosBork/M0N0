@@ -50,12 +50,12 @@ namespace Project.Repository.Repo
             return makeCreated.VehicleMakeId;
         }
 
-        public async Task<int> UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
+        public async Task/*<int> */UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
         {
-            VehicleMake mapped = _mapper.Map<VehicleMake>(vehicleMake);
+            var mapped = _mapper.Map<VehicleMake>(vehicleMake);
             await Update(mapped, vehicleMake.VehicleMakeId);
             await SaveAsync();
-            return mapped.VehicleMakeId;
+            //return mapped.VehicleMakeId;
         }
 
         public async Task DeleteVehicleMake(IVehicleMakeDTO vehicleMake)

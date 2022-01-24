@@ -22,7 +22,7 @@ namespace Project.Service.Common
         //Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsCountAsync(int vehicleMakeId);
 
         Task<int> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake);
-        Task<int> UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake);
+        Task/*<int> */UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake);
 
         Task DeleteVehicleMake(IVehicleMakeDTO vehicleMake);
 

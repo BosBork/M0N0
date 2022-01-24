@@ -13,22 +13,17 @@ namespace Project.Model.Common
 
         string Abrv { get; set; }
 
-        //string ModelCount { get; set; }
-
-        //[JsonIgnore]
         //[IgnoreDataMember]
         IEnumerable<IVehicleModelDTO> VehicleModels { get; set; } // include
     }
 
     public interface IVehicleMakeUpdateDTO : IVehicleMakeCreateDTO
     {
-
+        int VehicleMakeId { get; set; }
     }
 
     public interface IVehicleMakeCreateDTO
     {
-        int VehicleMakeId { get; set; }
-
         string Name { get; set; }
 
         string Abrv { get; set; }

@@ -19,13 +19,11 @@ namespace Project.Model.OtherModels.DTOs
 
     public class VehicleMakeUpdateDTO : VehicleMakeCreateDTO, IVehicleMakeUpdateDTO
     {
-
+        public int VehicleMakeId { get; set; }
     }
 
     public class VehicleMakeCreateDTO : IVehicleMakeCreateDTO
     {
-        public int VehicleMakeId { get; set; }
-
         public string Name { get; set; }
 
         public string Abrv { get; set; }

@@ -36,9 +36,9 @@ namespace Project.Service
             return await _repo.FindAllMakeIdsForRandom();
         }
 
-        public async Task<int> UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
+        public async Task/*<int> */UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
         {
-            return await _repo.UpdateVehicleMake(vehicleMake);
+            /*return */await _repo.UpdateVehicleMake(vehicleMake);
         }
 
         #region Kanta

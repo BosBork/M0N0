@@ -25,8 +25,6 @@ namespace Project.Model.Common
 
     public interface IVehicleModelCreateDTO
     {
-        //int VehicleModelId { get; set; }
-
         string Name { get; set; }
 
         string Abrv { get; set; }

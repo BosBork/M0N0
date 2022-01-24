@@ -20,6 +20,10 @@ using Project.Repository.Repo.UOW;
 using Project.Service;
 using Project.DAL.DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Diagnostics;
+using Serilog;
+using Project.Common.GlobalError;
 
 namespace Project.WebAPI
 {
@@ -73,10 +77,35 @@ namespace Project.WebAPI
             app.UseSwaggerUI(
                 c => {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mono Vehicles v1");
+                    #region HideModelsSchemeFromUI
+                    c.DefaultModelExpandDepth(0);
+                    c.DefaultModelsExpandDepth(-1); 
+                    #endregion
                     #region extra
                     //c.RoutePrefix = string.Empty; //launchUrl in launchSettings.json must be empty for the swagger root page to load correctly 
                     #endregion
                 });
+
+            #region GlobalErrorHandling
+            app.UseExceptionHandler(error =>
+            {
+                error.Run(async context =>
+                {
+                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    context.Response.ContentType = "application/json";
+                    var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+                    if (contextFeature != null)
+                    {
+                        Log.Error($"Something Went Wrong in the {contextFeature.Error}");
+                        await context.Response.WriteAsync(new GlobalErrorDetails
+                        {
+                            StatusCode = context.Response.StatusCode,
+                            Message = "Internal Server Error! Please try Again Later!"
+                        }.ToString());
+                    }
+                });
+            });
+            #endregion
 
             app.UseHttpsRedirection();
 

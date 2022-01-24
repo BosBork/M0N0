@@ -22,8 +22,6 @@ namespace Project.Model.OtherModels.DTOs
 
     public class VehicleModelCreateDTO : IVehicleModelCreateDTO
     {
-        //public int VehicleModelId { get; set; }
-
         public string Name { get; set; }
 
         public string Abrv { get; set; }
