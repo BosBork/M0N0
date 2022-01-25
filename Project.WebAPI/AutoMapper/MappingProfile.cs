@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Project.DAL;
 using Project.Common;
-using Project.Model.OtherModels.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,8 @@ using System.Threading.Tasks;
 using static Project.WebAPI.AutoMapperPagedListConverter;
 using Project.Model.Common;
 using System.Linq.Expressions;
-using Project.WebAPI.ViewModels;
+using Project.WebAPI.ReadModels;
+using Project.Model.DTOs;
 
 namespace Project.WebAPI
 {
@@ -25,7 +25,7 @@ namespace Project.WebAPI
             CreateMap<IVehicleMakeCreateDTO, VehicleMake>().ReverseMap();
 
             //CreateMap<IVehicleMakeDTO, VehicleMakeDTO>();
-            CreateMap<IVehicleMakeDTO, VehicleMakeVM>();
+            CreateMap<IVehicleMakeDTO, VehicleMake_Read>();
 
             //--------
 
@@ -40,7 +40,7 @@ namespace Project.WebAPI
             CreateMap<IVehicleModelCreateDTO, VehicleModel>().ReverseMap();
 
             //CreateMap<IVehicleModelDTO, VehicleModelDTO>();
-            CreateMap<IVehicleModelDTO, VehicleModelVM>();
+            CreateMap<IVehicleModelDTO, VehicleModel_Read>();
 
             //--------
 

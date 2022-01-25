@@ -1,7 +1,6 @@
 ﻿using Project.DAL.DataAccess;
 using Project.DAL;
 using Project.Common;
-using Project.Model.OtherModels.Query;
 using Microsoft.EntityFrameworkCore;
 using Project.Repository.Common.Interfaces;
 using System.Threading.Tasks;
@@ -10,8 +9,8 @@ using Project.Model.Common;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using Project.Model.OtherModels.DTOs;
 using Project.Common.Enums;
+using Project.Model.Query;
 
 namespace Project.Repository.Repo
 {
@@ -71,11 +70,11 @@ namespace Project.Repository.Repo
 
             //QueryHelper<VehicleModel>.FilterByFirstChar(ref models, modelParams.First);
 
-            QueryHelper<VehicleModel>.SearchByName(ref models, modelParams.Name);
+            QueryHelper<VehicleModel>.SearchByName(ref models, modelParams.ModelFilter?.Name);
 
-            QueryHelper<VehicleModel>.FilterByMatchingIds(ref models, modelParams.MakeIdFilterSelected); //for dropdown filter
+            QueryHelper<VehicleModel>.FilterByMatchingIds(ref models, modelParams.ModelFilter?.MakeIdFilterSelected); //for dropdown filter
 
-            IQueryable<VehicleModel> sortedModels = _sortHelper.ApplySort(models, modelParams.OrderBy);
+            IQueryable<VehicleModel> sortedModels = _sortHelper.ApplySort(models, modelParams.ModelSort?.OrderBy);
 
             var mapped = await sortedModels.ToMappedPagedListAsync<IVehicleModelDTO>(modelParams.PageNumber, modelParams.PageSize, _mapper);
 

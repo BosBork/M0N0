@@ -1,6 +1,6 @@
 ﻿using Project.DAL;
 using Project.Common;
-using Project.Model.OtherModels.Query;
+using Project.Model.Query;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;

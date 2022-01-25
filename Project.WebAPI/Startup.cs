@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Diagnostics;
 using Serilog;
 using Project.Common.GlobalError;
+using Project.Common.Error;
 
 namespace Project.WebAPI
 {
@@ -87,24 +88,7 @@ namespace Project.WebAPI
                 });
 
             #region GlobalErrorHandling
-            app.UseExceptionHandler(error =>
-            {
-                error.Run(async context =>
-                {
-                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                    context.Response.ContentType = "application/json";
-                    var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
-                    if (contextFeature != null)
-                    {
-                        Log.Error($"Something Went Wrong in the {contextFeature.Error}");
-                        await context.Response.WriteAsync(new GlobalErrorDetails
-                        {
-                            StatusCode = context.Response.StatusCode,
-                            Message = "Internal Server Error! Please try Again Later!"
-                        }.ToString());
-                    }
-                });
-            });
+            app.ConfigGlobalExceptionHandler();
             #endregion
 
             app.UseHttpsRedirection();

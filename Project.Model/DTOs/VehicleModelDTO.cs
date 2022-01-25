@@ -1,6 +1,6 @@
 ﻿using Project.Model.Common;
 
-namespace Project.Model.OtherModels.DTOs
+namespace Project.Model.DTOs
 {
     public class VehicleModelDTO : IVehicleModelDTO
     {

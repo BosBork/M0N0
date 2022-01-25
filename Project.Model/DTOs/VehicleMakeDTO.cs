@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-namespace Project.Model.OtherModels.DTOs
+namespace Project.Model.DTOs
 {
     public class VehicleMakeDTO : IVehicleMakeDTO
     {

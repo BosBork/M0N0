@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using Project.DAL;
 using Project.Common;
-using Project.Model.OtherModels.DTOs;
-using Project.Model.OtherModels.Query;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -17,6 +15,7 @@ using Project.UI.ViewModels;
 using Project.UI.ViewModels.Make;
 using Project.Service.Common;
 using Project.Model.Common;
+using Project.Model.Query;
 
 namespace Project.UI.Controllers
 {
@@ -45,12 +44,12 @@ namespace Project.UI.Controllers
 
                 var DTOToVM = _mapper.Map<PagedList<VehicleMakeVM>>(DomainToDTO);
 
-                ViewBag.CurrentSearch = makeParams.Name;
+                ViewBag.CurrentSearch = makeParams.MakeFilter?.Name;
 
-                ViewBag.NameSortParam = makeParams.OrderBy == name_sort ? $"{name_sort} desc" : name_sort;
-                ViewBag.AbrvSortParam = makeParams.OrderBy == abrv_sort ? $"{abrv_sort} desc" : abrv_sort;
+                ViewBag.NameSortParam = makeParams.MakeSort?.OrderBy == name_sort ? $"{name_sort} desc" : name_sort;
+                ViewBag.AbrvSortParam = makeParams.MakeSort?.OrderBy == abrv_sort ? $"{abrv_sort} desc" : abrv_sort;
 
-                ViewBag.CurrentSort = makeParams.OrderBy;
+                ViewBag.CurrentSort = makeParams.MakeSort?.OrderBy;
 
                 Response.StatusCode = (int)HttpStatusCode.OK;
                 return View(DTOToVM);

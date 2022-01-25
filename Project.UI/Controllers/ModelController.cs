@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Project.DAL;
 using Project.Common;
-using Project.Model.OtherModels.DTOs;
-using Project.Model.OtherModels.Query;
+using Project.Model.DTOs;
+using Project.Model.Query;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -55,16 +55,17 @@ namespace Project.UI.Controllers
 
                 var DTOToVM = _mapper.Map<PagedList<VehicleModelVM>>(DomainToDTO);
 
-                ViewBag.DPSelectListItem = new SelectList(await _servicesWrapper.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text", modelParams.MakeIdFilterSelected);
+                ViewBag.DPSelectListItem = new SelectList(
+                    await _servicesWrapper.VehicleMake.GetAllMakesForDPSelectListItem(), "Value", "Text", modelParams.ModelFilter?.MakeIdFilterSelected);
 
-                ViewBag.CurrentSearch = modelParams.Name;
-                ViewBag.CurrentFilter = modelParams.MakeIdFilterSelected;
+                ViewBag.CurrentSearch = modelParams.ModelFilter?.Name;
+                ViewBag.CurrentFilter = modelParams.ModelFilter?.MakeIdFilterSelected;
 
-                ViewBag.NameSortParam = modelParams.OrderBy == name_sort ? $"{name_sort} desc" : name_sort;
-                ViewBag.AbrvSortParam = modelParams.OrderBy == abrv_sort ? $"{abrv_sort} desc" : abrv_sort;
-                ViewBag.IdSortParam = modelParams.OrderBy == makeId_sort ? $"{makeId_sort} desc" : makeId_sort;
+                ViewBag.NameSortParam = modelParams.ModelSort?.OrderBy == name_sort ? $"{name_sort} desc" : name_sort;
+                ViewBag.AbrvSortParam = modelParams.ModelSort?.OrderBy == abrv_sort ? $"{abrv_sort} desc" : abrv_sort;
+                ViewBag.IdSortParam = modelParams.ModelSort?.OrderBy == makeId_sort ? $"{makeId_sort} desc" : makeId_sort;
 
-                ViewBag.CurrentSort = modelParams.OrderBy;
+                ViewBag.CurrentSort = modelParams.ModelSort?.OrderBy;
 
                 Response.StatusCode = (int)HttpStatusCode.OK;
                 return View(DTOToVM);

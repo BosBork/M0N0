@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Project.DAL;
 using Project.Common;
-using Project.Model.OtherModels.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +11,7 @@ using Project.UI.ViewModels.Make;
 using static Project.UI.AutoMapperPagedListConverter;
 using Project.Model.Common;
 using System.Linq.Expressions;
+using Project.Model.DTOs;
 
 namespace Project.UI
 {

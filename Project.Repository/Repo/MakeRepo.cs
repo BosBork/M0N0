@@ -1,7 +1,6 @@
 ﻿using Project.DAL.DataAccess;
 using Project.DAL;
 using Project.Common;
-using Project.Model.OtherModels.Query;
 using Microsoft.EntityFrameworkCore;
 using Project.Repository.Common.Interfaces;
 using System;
@@ -14,8 +13,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Project.Model.Common;
 using AutoMapper;
 using System.Linq.Expressions;
-using Project.Model.OtherModels.DTOs;
 using Project.Common.Enums;
+using Project.Model.Query;
 
 namespace Project.Repository.Repo
 {
@@ -83,9 +82,9 @@ namespace Project.Repository.Repo
 
             //QueryHelper<VehicleMake>.FilterByFirstChar(ref makes, makeParams.First);
 
-            QueryHelper<VehicleMake>.SearchByName(ref makes, makeParams.Name);
+            QueryHelper<VehicleMake>.SearchByName(ref makes, makeParams.MakeFilter?.Name);
 
-            IQueryable<VehicleMake> sortedMakes = _sortHelper.ApplySort(makes, makeParams.OrderBy);
+            IQueryable<VehicleMake> sortedMakes = _sortHelper.ApplySort(makes, makeParams.MakeSort?.OrderBy);
 
             var mapped = await sortedMakes.ToMappedPagedListAsync<IVehicleMakeDTO>(makeParams.PageNumber, makeParams.PageSize, _mapper);
             return mapped;

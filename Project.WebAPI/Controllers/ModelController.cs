@@ -7,10 +7,10 @@ using Project.Common;
 using Project.Common.Enums;
 using Project.DAL;
 using Project.Model.Common;
-using Project.Model.OtherModels.DTOs;
-using Project.Model.OtherModels.Query;
+using Project.Model.DTOs;
+using Project.Model.Query;
 using Project.Service.Common;
-using Project.WebAPI.ViewModels;
+using Project.WebAPI.ReadModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,7 +42,7 @@ namespace Project.WebAPI.Controllers
         {
             var allModels = await _servicesWrapper.VehicleModel.GetAllVehicleModelsAsync(modelParams, Include.Yes);
 
-            return Ok(_mapper.Map<PagedList<VehicleModelVM>>(allModels)); //ViewModel test
+            return Ok(_mapper.Map<PagedList<VehicleModel_Read>>(allModels)); // "ViewModel" test
         }
         #endregion
 
@@ -60,7 +60,7 @@ namespace Project.WebAPI.Controllers
                 return NotFound("NOT FOUND");
             }
 
-            return Ok(_mapper.Map<VehicleModelVM>(model));
+            return Ok(_mapper.Map<VehicleModel_Read>(model));
         }
         #endregion
 

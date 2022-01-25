@@ -2,7 +2,7 @@
 using Project.Common.Enums;
 using Project.DAL;
 using Project.Model.Common;
-using Project.Model.OtherModels.Query;
+using Project.Model.Query;
 using Project.Repository.Common.Interfaces;
 using Project.Service.Common;
 using System;

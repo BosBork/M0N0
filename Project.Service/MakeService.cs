@@ -5,7 +5,7 @@ using Project.Common.Enums;
 using Project.DAL;
 using Project.DAL.DataAccess;
 using Project.Model.Common;
-using Project.Model.OtherModels.Query;
+using Project.Model.Query;
 using Project.Repository.Common.Interfaces;
 using Project.Repository.Repo;
 using Project.Service.Common;

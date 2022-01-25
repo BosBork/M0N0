@@ -16,19 +16,19 @@
                 {*@
             <li class="page-item @prevDisabled">
                 <a asp-action="Index"
-                   asp-route-orderby="@ViewBag.CurrentSort"
-                   asp-route-name="@ViewBag.CurrentSearch"
-                   asp-route-makeidfilterselected="@ViewBag.CurrentFilter"
+                   asp-route-modelsort.orderBy="@ViewBag.CurrentSort"
+                   asp-route-modelfilter.name="@ViewBag.CurrentSearch"
+                   asp-route-modelfilter.makeidfilterselected="@ViewBag.CurrentFilter"
                    class="page-link">
                     First
                 </a>
             </li>
             <li class="page-item @prevDisabled">
                 <a asp-action="Index"
-                   asp-route-orderby="@ViewBag.CurrentSort"
-                   asp-route-name="@ViewBag.CurrentSearch"
+                   asp-route-modelsort.orderby="@ViewBag.CurrentSort"
+                   asp-route-modelfilter.name="@ViewBag.CurrentSearch"
                    asp-route-pagenumber="@(Model.CurrentPage - 1)"
-                   asp-route-makeidfilterselected="@ViewBag.CurrentFilter"
+                   asp-route-modelfilter.makeidfilterselected="@ViewBag.CurrentFilter"
                    class="page-link">
                     Previous
                 </a>
@@ -39,10 +39,10 @@
             {
                 <li class="page-item @(PAGE == Model.CurrentPage ? active : "")">
                     <a asp-action="Index"
-                       asp-route-orderby="@ViewBag.CurrentSort"
-                       asp-route-name="@ViewBag.CurrentSearch"
+                       asp-route-modelsort.orderBy="@ViewBag.CurrentSort"
+                       asp-route-modelfilter.name="@ViewBag.CurrentSearch"
                        asp-route-pagenumber="@PAGE"
-                       asp-route-makeidfilterselected="@ViewBag.CurrentFilter"
+                       asp-route-modelfilter.makeidfilterselected="@ViewBag.CurrentFilter"
                        class="page-link">
                         @PAGE
                     </a>
@@ -53,20 +53,20 @@
                 {*@
             <li class="page-item @nextDisabled">
                 <a asp-action="Index"
-                   asp-route-orderby="@ViewBag.CurrentSort"
-                   asp-route-name="@ViewBag.CurrentSearch"
+                   asp-route-modelsort.orderBy="@ViewBag.CurrentSort"
+                   asp-route-modelfilter.name="@ViewBag.CurrentSearch"
                    asp-route-pagenumber="@(Model.CurrentPage + 1)"
-                   asp-route-makeidfilterselected="@ViewBag.CurrentFilter"
+                   asp-route-modelfilter.makeidfilterselected="@ViewBag.CurrentFilter"
                    class="page-link">
                     Next
                 </a>
             </li>
             <li class="page-item @nextDisabled">
                 <a asp-action="Index"
-                   asp-route-orderby="@ViewBag.CurrentSort"
-                   asp-route-name="@ViewBag.CurrentSearch"
+                   asp-route-modelsort.orderBy="@ViewBag.CurrentSort"
+                   asp-route-modelfilter.name="@ViewBag.CurrentSearch"
                    asp-route-pagenumber="@(Model.TotalPages)"
-                   asp-route-makeidfilterselected="@ViewBag.CurrentFilter"
+                   asp-route-modelfilter.makeidfilterselected="@ViewBag.CurrentFilter"
                    class="page-link">
                     Last
                 </a>

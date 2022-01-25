@@ -1,7 +1,7 @@
 ﻿using Project.DAL;
 using Project.Common;
-using Project.Model.OtherModels.DTOs;
-using Project.Model.OtherModels.Query;
+using Project.Model.DTOs;
+using Project.Model.Query;
 using System;
 using System.Collections.Generic;
 using System.Text;

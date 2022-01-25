@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Project.Common;
 using Project.Common.Enums;
-using Project.Model.OtherModels.DTOs;
-using Project.Model.OtherModels.Query;
+using Project.Model.DTOs;
+using Project.Model.Query;
 using Project.Service.Common;
-using Project.WebAPI.ViewModels;
+using Project.WebAPI.ReadModels;
 using System;
 using System.Threading.Tasks;
 
@@ -37,7 +37,7 @@ namespace Project.WebAPI.Controllers
         public async Task<IActionResult> GetMakes([FromQuery] MakeParams makeParams)
         {
             var allMakes = await _servicesWrapper.VehicleMake.GetAllVehicleMakesAsync(makeParams, Include.Yes);
-            return Ok(_mapper.Map<PagedList<VehicleMakeVM>>(allMakes)); //ViewModel test
+            return Ok(_mapper.Map<PagedList<VehicleMake_Read>>(allMakes)); // "ViewModel" test
         }
         #endregion
 
@@ -55,7 +55,7 @@ namespace Project.WebAPI.Controllers
                 return NotFound("NOT FOUND");
             }
 
-            return Ok(_mapper.Map<VehicleMakeVM>(make));
+            return Ok(_mapper.Map<VehicleMake_Read>(make));
         }
         #endregion
 

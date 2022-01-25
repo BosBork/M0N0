@@ -1,6 +1,6 @@
-﻿namespace Project.Model.OtherModels.Query
+﻿namespace Project.Model.Query
 {
-    public abstract class QueryStringParamsBase
+    public abstract class PagingParamsBase
     {
         const int maxPageSize = 50;
         public int PageNumber { get; set; } = 1;
@@ -16,7 +16,5 @@
                 _pageSize = (value > maxPageSize) ? maxPageSize : value;
             }
         }
-
-        public string OrderBy { get; set; }
     }
 }
