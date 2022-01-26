@@ -13,12 +13,6 @@ namespace Project.DAL.DataAccess
         public virtual DbSet<VehicleMake> VehicleMakes { get; set; }
         public virtual DbSet<VehicleModel> VehicleModels { get; set; }
 
-        #region old
-        //public ApplicationDbContext()
-        //{
-        //} 
-        #endregion
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

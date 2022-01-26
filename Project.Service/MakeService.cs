@@ -1,19 +1,13 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Project.Common;
 using Project.Common.Enums;
-using Project.DAL;
-using Project.DAL.DataAccess;
-using Project.Model.Common;
-using Project.Model.Query;
+using Project.Model.Common.Query.Make;
+using Project.Model.DTOs.Common;
 using Project.Repository.Common.Interfaces;
-using Project.Repository.Repo;
 using Project.Service.Common;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Project.Service
@@ -36,17 +30,10 @@ namespace Project.Service
             return await _repo.FindAllMakeIdsForRandom();
         }
 
-        public async Task/*<int> */UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
+        public async Task UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
         {
-            /*return */await _repo.UpdateVehicleMake(vehicleMake);
+            await _repo.UpdateVehicleMake(vehicleMake);
         }
-
-        #region Kanta
-        //public async Task<IVehicleMakeCreateDTO> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
-        //{
-        //    return await _repo.CreateVehicleMake(vehicleMake);
-        //} 
-        #endregion
 
         public async Task<int> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake)
         {
@@ -63,7 +50,7 @@ namespace Project.Service
             return await _repo.GetAllMakesForDPSelectListItem();
         }
 
-        public async Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(MakeParams makeParams, Include include)
+        public async Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(IMakeParams makeParams, Include include)
         {
             return await _repo.GetAllVehicleMakesAsync(makeParams, include);
         }
@@ -77,18 +64,5 @@ namespace Project.Service
         {
             return await _repo.GetVehicleMakeByIdWithModelsAsync(vehicleMakeId);
         }
-
-        //public async Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsCountAsync(int vehicleMakeId)
-        //{
-        //    return await _repo.GetVehicleMakeByIdWithModelsCountAsync(vehicleMakeId);
-        //}
-
-        #region worky
-        //public async Task UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
-        //{
-        //    await _repo.UpdateVehicleMake(vehicleMake);
-        //} 
-        #endregion
-
     }
 }

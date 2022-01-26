@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Project.Common;
 using Project.Common.Enums;
-using Project.DAL;
-using Project.Model.Common;
 using Project.Model.DTOs;
-using Project.Model.Query;
+using Project.Model.Query.Model;
 using Project.Service.Common;
 using Project.WebAPI.ReadModels;
 using System;
@@ -41,7 +38,10 @@ namespace Project.WebAPI.Controllers
         public async Task<IActionResult> GetModels([FromQuery] ModelParams modelParams)
         {
             var allModels = await _servicesWrapper.VehicleModel.GetAllVehicleModelsAsync(modelParams, Include.Yes);
-
+            if (!allModels.Any())
+            {
+                return Ok("No Results Found!");
+            }
             return Ok(_mapper.Map<PagedList<VehicleModel_Read>>(allModels)); // "ViewModel" test
         }
         #endregion
@@ -118,21 +118,22 @@ namespace Project.WebAPI.Controllers
                 return BadRequest("ModelState is Invalid");
             }
 
-            var makeIdExists = await _servicesWrapper.VehicleMake
-                .FindIfExists(x => x.VehicleMakeId == vehicleModel.VehicleMakeId);
-            if (makeIdExists == false)
-            {
-                return NotFound("Make Id Doesnt Exist");
-            }
-
             var modelEntity = await _servicesWrapper.VehicleModel.GetVehicleModelByIdAsync(id);
             if (modelEntity == null)
             {
                 return NotFound("Model Id Doesnt Exist");
             }
 
-            vehicleModel.VehicleModelId = modelEntity.VehicleModelId;
-            await _servicesWrapper.VehicleModel.UpdateVehicleModel(vehicleModel);
+            bool makeIdExists = await _servicesWrapper.VehicleMake
+                .FindIfExists(x => x.VehicleMakeId.Equals(vehicleModel.VehicleMakeId));
+            if (makeIdExists == false)
+            {
+                return NotFound("Make Id Doesnt Exist");
+            }
+
+            _mapper.Map(vehicleModel, modelEntity);
+
+            await _servicesWrapper.VehicleModel.UpdateVehicleModel(modelEntity);
 
             return NoContent();
         }

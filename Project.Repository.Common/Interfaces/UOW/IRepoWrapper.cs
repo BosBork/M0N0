@@ -11,10 +11,5 @@ namespace Project.Repository.Common.Interfaces.UOW
         IMakeRepo VehicleMake { get; }
         IModelRepo VehicleModel { get; }
         Task SaveAsync();
-
-        #region Test
-        //Task<bool> FindIfExistsX<T>(Expression<Func<T, bool>> selector) where T : class; 
-        #endregion
-
     }
 }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Project.WebAPI
+namespace Project.AutoMapper.WebAPI
 {
     public abstract class AutoMapperPagedListConverter
     {

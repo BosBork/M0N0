@@ -1,16 +1,10 @@
-﻿using Project.Model.Common;
-using System;
+﻿using Project.Model.DTOs.Common;
 using System.Collections.Generic;
-using System.Text;
 namespace Project.Model.DTOs
 {
-    public class VehicleMakeDTO : IVehicleMakeDTO
+    public class VehicleMakeDTO : VehicleMakeUpdateDTO, IVehicleMakeDTO
     {
         public int VehicleMakeId { get; set; }
-
-        public string Name { get; set; }
-
-        public string Abrv { get; set; }
 
         public string ModelCount { get; set; }
 
@@ -19,7 +13,6 @@ namespace Project.Model.DTOs
 
     public class VehicleMakeUpdateDTO : VehicleMakeCreateDTO, IVehicleMakeUpdateDTO
     {
-        public int VehicleMakeId { get; set; }
     }
 
     public class VehicleMakeCreateDTO : IVehicleMakeCreateDTO

@@ -1,13 +1,9 @@
 ﻿using Project.Common;
 using Project.Common.Enums;
-using Project.DAL;
-using Project.Model.Common;
-using Project.Model.Query;
+using Project.Model.Common.Query.Model;
+using Project.Model.DTOs.Common;
 using Project.Repository.Common.Interfaces;
 using Project.Service.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Project.Service
@@ -26,9 +22,9 @@ namespace Project.Service
             return await _repo.CreateVehicleModel(vehicleModel);
         }
 
-        public async Task/*<int>*/ UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModelUpdateDTO)
+        public async Task UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModelUpdateDTO)
         {
-            /*return */await _repo.UpdateVehicleModel(vehicleModelUpdateDTO);
+            await _repo.UpdateVehicleModel(vehicleModelUpdateDTO);
         }
 
         public async Task DeleteVehicleModel(IVehicleModelDTO vehicleModel)
@@ -36,7 +32,7 @@ namespace Project.Service
             await _repo.DeleteVehicleModel(vehicleModel);
         }
 
-        public Task<PagedList<IVehicleModelDTO>> GetAllVehicleModelsAsync(ModelParams modelParams, Include include)
+        public Task<PagedList<IVehicleModelDTO>> GetAllVehicleModelsAsync(IModelParams modelParams, Include include)
         {
             return _repo.GetAllVehicleModelsAsync(modelParams, include);
         }

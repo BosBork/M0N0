@@ -22,7 +22,7 @@ namespace Project.Common
         }
     }
 
-    public class PagedList<T> : List<T>, IPagedList //IPagedList samo za _FooterPagingPartial, radi i dynamic, vidit View Components
+    public class PagedList<T> : List<T>, IPagedList
     {
         public int CurrentPage { get; private set; }
         public int TotalPages { get; private set; }

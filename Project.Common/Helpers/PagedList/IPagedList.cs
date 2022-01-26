@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Project.Common
 {
-    public interface IPagedList //IPagedList samo za _FooterPagingPartial, radi i dynamic, vidit View Components
+    public interface IPagedList
     {
         int CurrentPage { get; }
         int TotalPages { get; }

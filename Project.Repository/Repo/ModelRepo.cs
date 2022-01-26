@@ -5,12 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Project.Repository.Common.Interfaces;
 using System.Threading.Tasks;
 using System.Linq;
-using Project.Model.Common;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
 using Project.Common.Enums;
-using Project.Model.Query;
+using Project.Model.Common.Query.Model;
+using Project.Model.DTOs.Common;
 
 namespace Project.Repository.Repo
 {
@@ -24,20 +22,9 @@ namespace Project.Repository.Repo
             _sortHelper = sortHelper;
         }
 
-        #region old
-        //public async Task<int> UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModel)
-        //{
-        //    VehicleModel mapped = _mapper.Map<VehicleModel>(vehicleModel);
-        //    VehicleModel modelUpdated = await Update(mapped, mapped.VehicleModelId);
-        //    await SaveAsync();
-        //    //IVehicleModelUpdateDTO modelBackTo = _mapper.Map<IVehicleModelUpdateDTO>(modelUpdated);
-        //    return modelUpdated.VehicleModelId;
-        //} 
-        #endregion
-
-        public async Task UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModel)
+        public async Task UpdateVehicleModel(IVehicleModelUpdateDTO vehicleModelUpdate)
         {
-            var mapped = _mapper.Map<VehicleModel>(vehicleModel);
+            var mapped = _mapper.Map<VehicleModel>(vehicleModelUpdate);
             await Update(mapped, mapped.VehicleModelId);
             await SaveAsync();
         }
@@ -47,7 +34,6 @@ namespace Project.Repository.Repo
             VehicleModel mapped = _mapper.Map<VehicleModel>(vehicleModel);
             VehicleModel modelCreated = await Create(mapped);
             await SaveAsync();
-            //IVehicleModelCreateDTO modelBackTo = _mapper.Map<IVehicleModelCreateDTO>(modelCreated);
             return modelCreated.VehicleModelId;
         }
 
@@ -57,7 +43,7 @@ namespace Project.Repository.Repo
             await SaveAsync();
         }
 
-        public async Task<PagedList<IVehicleModelDTO>> GetAllVehicleModelsAsync(ModelParams modelParams, Include include)
+        public async Task<PagedList<IVehicleModelDTO>> GetAllVehicleModelsAsync(IModelParams modelParams, Include include)
         {
             IQueryable<VehicleModel> models = FindAll();
 
@@ -70,11 +56,11 @@ namespace Project.Repository.Repo
 
             //QueryHelper<VehicleModel>.FilterByFirstChar(ref models, modelParams.First);
 
-            QueryHelper<VehicleModel>.SearchByName(ref models, modelParams.ModelFilter?.Name);
+            QueryHelper<VehicleModel>.SearchByName(ref models, modelParams.Name);
 
-            QueryHelper<VehicleModel>.FilterByMatchingIds(ref models, modelParams.ModelFilter?.MakeIdFilterSelected); //for dropdown filter
+            QueryHelper<VehicleModel>.FilterByMatchingIds(ref models, modelParams.MakeIdFilterSelected); //for dropdown filter
 
-            IQueryable<VehicleModel> sortedModels = _sortHelper.ApplySort(models, modelParams.ModelSort?.OrderBy);
+            IQueryable<VehicleModel> sortedModels = _sortHelper.ApplySort(models, modelParams.OrderBy);
 
             var mapped = await sortedModels.ToMappedPagedListAsync<IVehicleModelDTO>(modelParams.PageNumber, modelParams.PageSize, _mapper);
 

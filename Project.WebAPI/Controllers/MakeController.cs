@@ -5,10 +5,10 @@ using Microsoft.Extensions.Logging;
 using Project.Common;
 using Project.Common.Enums;
 using Project.Model.DTOs;
-using Project.Model.Query;
+using Project.Model.Query.Make;
 using Project.Service.Common;
 using Project.WebAPI.ReadModels;
-using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Project.WebAPI.Controllers
@@ -37,6 +37,10 @@ namespace Project.WebAPI.Controllers
         public async Task<IActionResult> GetMakes([FromQuery] MakeParams makeParams)
         {
             var allMakes = await _servicesWrapper.VehicleMake.GetAllVehicleMakesAsync(makeParams, Include.Yes);
+            if (!allMakes.Any())
+            {
+                return Ok("No Results Found!");
+            }
             return Ok(_mapper.Map<PagedList<VehicleMake_Read>>(allMakes)); // "ViewModel" test
         }
         #endregion
@@ -110,8 +114,9 @@ namespace Project.WebAPI.Controllers
                 return NotFound();
             }
 
-            vehicleMake.VehicleMakeId = makeEntity.VehicleMakeId;
-            await _servicesWrapper.VehicleMake.UpdateVehicleMake(vehicleMake);
+            _mapper.Map(vehicleMake, makeEntity);
+
+            await _servicesWrapper.VehicleMake.UpdateVehicleMake(makeEntity);
 
             return NoContent();
         }

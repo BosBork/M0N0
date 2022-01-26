@@ -6,15 +6,13 @@ using Project.Repository.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Project.Model.Common;
 using AutoMapper;
 using System.Linq.Expressions;
 using Project.Common.Enums;
-using Project.Model.Query;
+using Project.Model.Common.Query.Make;
+using Project.Model.DTOs.Common;
 
 namespace Project.Repository.Repo
 {
@@ -49,12 +47,11 @@ namespace Project.Repository.Repo
             return makeCreated.VehicleMakeId;
         }
 
-        public async Task/*<int> */UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
+        public async Task UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake)
         {
             var mapped = _mapper.Map<VehicleMake>(vehicleMake);
-            await Update(mapped, vehicleMake.VehicleMakeId);
+            await Update(mapped, mapped.VehicleMakeId);
             await SaveAsync();
-            //return mapped.VehicleMakeId;
         }
 
         public async Task DeleteVehicleMake(IVehicleMakeDTO vehicleMake)
@@ -69,7 +66,7 @@ namespace Project.Repository.Repo
             return await makes.ToListAsync();
         }
 
-        public async Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(MakeParams makeParams, Include include)
+        public async Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(IMakeParams makeParams, Include include)
         {
             IQueryable<VehicleMake> makes = FindAll();
 
@@ -82,9 +79,9 @@ namespace Project.Repository.Repo
 
             //QueryHelper<VehicleMake>.FilterByFirstChar(ref makes, makeParams.First);
 
-            QueryHelper<VehicleMake>.SearchByName(ref makes, makeParams.MakeFilter?.Name);
+            QueryHelper<VehicleMake>.SearchByName(ref makes, makeParams.Name);
 
-            IQueryable<VehicleMake> sortedMakes = _sortHelper.ApplySort(makes, makeParams.MakeSort?.OrderBy);
+            IQueryable<VehicleMake> sortedMakes = _sortHelper.ApplySort(makes, makeParams.OrderBy);
 
             var mapped = await sortedMakes.ToMappedPagedListAsync<IVehicleMakeDTO>(makeParams.PageNumber, makeParams.PageSize, _mapper);
             return mapped;
@@ -115,14 +112,6 @@ namespace Project.Repository.Repo
 
             return _mapper.Map<IVehicleMakeDTO>(result);
         }
-
-        //public async Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsCountAsync(int vehicleMakeId)
-        //{
-        //    var result = await FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId)).Include(models => models.VehicleModels).FirstOrDefaultAsync();
-        //    var mappedResult = _mapper.Map<IVehicleMakeDTO>(result);
-        //    mappedResult.ModelCount = result.VehicleModels.Count < 1 ? "Nema" : result.VehicleModels.Count.ToString();
-        //    return mappedResult;
-        //}
 
     }
 }
