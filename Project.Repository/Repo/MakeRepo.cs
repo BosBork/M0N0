@@ -13,6 +13,7 @@ using System.Linq.Expressions;
 using Project.Common.Enums;
 using Project.Model.Common.Query.Make;
 using Project.Model.DTOs.Common;
+using Project.Model.Common;
 
 namespace Project.Repository.Repo
 {
@@ -60,13 +61,8 @@ namespace Project.Repository.Repo
             await SaveAsync();
         }
 
-        public async Task<List<SelectListItem>> GetAllMakesForDPSelectListItem()
-        {
-            IQueryable<SelectListItem> makes = FindAll().Select(x => new SelectListItem { Text = x.Name, Value = x.VehicleMakeId.ToString() });
-            return await makes.ToListAsync();
-        }
-
-        public async Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(IMakeParams makeParams, Include include)
+        public async Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(
+            IMakeFilter makeFilter, IMakeSort makeSort, IPagingParamsBase paging, Include include)
         {
             IQueryable<VehicleMake> makes = FindAll();
 
@@ -77,41 +73,28 @@ namespace Project.Repository.Repo
             }
             #endregion
 
-            //QueryHelper<VehicleMake>.FilterByFirstChar(ref makes, makeParams.First);
+            QueryHelper<VehicleMake>.SearchByName(ref makes, makeFilter.Name);
 
-            QueryHelper<VehicleMake>.SearchByName(ref makes, makeParams.Name);
+            IQueryable<VehicleMake> sortedMakes = _sortHelper.ApplySort(makes, makeSort.OrderBy);
 
-            IQueryable<VehicleMake> sortedMakes = _sortHelper.ApplySort(makes, makeParams.OrderBy);
-
-            var mapped = await sortedMakes.ToMappedPagedListAsync<IVehicleMakeDTO>(makeParams.PageNumber, makeParams.PageSize, _mapper);
+            var mapped = await sortedMakes.ToMappedPagedListAsync<IVehicleMakeDTO>(paging.PageNumber, paging.PageSize, _mapper);
             return mapped;
         }
 
-        public async Task<IVehicleMakeDTO> GetVehicleMakeByIdAsync(int vehicleMakeId)
+        public async Task<IVehicleMakeDTO> GetVehicleMakeByIdAsync(int vehicleMakeId, Include include)
         {
-            var result = await FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId)).FirstOrDefaultAsync();
-            return _mapper.Map<IVehicleMakeDTO>(result);
-        }
+            var findMatchingId = FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId));
 
-        public async Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsAsync(int vehicleMakeId)
-        {
-            #region test
-            //var result = FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId));
-
-            //if (true)
-            //{
-            //    result = result.Include(models => models.VehicleModels);
-            //}
-
-            //await result.FirstOrDefaultAsync(); 
+            #region Include
+            if (include == Include.Yes)
+            {
+                findMatchingId = findMatchingId.Include(models => models.VehicleModels);
+            }
             #endregion
 
-            var result = await FindByCondition(x => x.VehicleMakeId.Equals(vehicleMakeId))
-                .Include(models => models.VehicleModels)
-                .FirstOrDefaultAsync();
+            var result = await findMatchingId.FirstOrDefaultAsync();
 
             return _mapper.Map<IVehicleMakeDTO>(result);
         }
-
     }
 }

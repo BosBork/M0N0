@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Project.Common;
 using Project.Common.Enums;
+using Project.Model.Common;
 using Project.Model.Common.Query.Make;
 using Project.Model.DTOs.Common;
 using Project.Repository.Common.Interfaces;
@@ -45,24 +46,15 @@ namespace Project.Service
             await _repo.DeleteVehicleMake(vehicleMake);
         }
 
-        public async Task<List<SelectListItem>> GetAllMakesForDPSelectListItem()
+        public async Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(
+            IMakeFilter makeFilter, IMakeSort makeSort, IPagingParamsBase paging, Include include)
         {
-            return await _repo.GetAllMakesForDPSelectListItem();
+            return await _repo.GetAllVehicleMakesAsync(makeFilter, makeSort, paging, include);
         }
 
-        public async Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(IMakeParams makeParams, Include include)
+        public async Task<IVehicleMakeDTO> GetVehicleMakeByIdAsync(int vehicleMakeId, Include include)
         {
-            return await _repo.GetAllVehicleMakesAsync(makeParams, include);
-        }
-
-        public async Task<IVehicleMakeDTO> GetVehicleMakeByIdAsync(int vehicleMakeId)
-        {
-            return await _repo.GetVehicleMakeByIdAsync(vehicleMakeId);
-        }
-
-        public async Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsAsync(int vehicleMakeId)
-        {
-            return await _repo.GetVehicleMakeByIdWithModelsAsync(vehicleMakeId);
+            return await _repo.GetVehicleMakeByIdAsync(vehicleMakeId, include);
         }
     }
 }

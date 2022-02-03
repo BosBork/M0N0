@@ -1,5 +1,6 @@
 ﻿using Project.Common;
 using Project.Common.Enums;
+using Project.Model.Common;
 using Project.Model.Common.Query.Model;
 using Project.Model.DTOs.Common;
 using Project.Repository.Common.Interfaces;
@@ -32,9 +33,10 @@ namespace Project.Service
             await _repo.DeleteVehicleModel(vehicleModel);
         }
 
-        public Task<PagedList<IVehicleModelDTO>> GetAllVehicleModelsAsync(IModelParams modelParams, Include include)
+        public Task<PagedList<IVehicleModelDTO>> GetAllVehicleModelsAsync(
+            IModelFilter modelFilter, IModelSort modelSort, IPagingParamsBase paging, Include include)
         {
-            return _repo.GetAllVehicleModelsAsync(modelParams, include);
+            return _repo.GetAllVehicleModelsAsync(modelFilter, modelSort, paging, include);
         }
 
         public async Task<IVehicleModelDTO> GetVehicleModelByIdAsync(int vehicleModelId)

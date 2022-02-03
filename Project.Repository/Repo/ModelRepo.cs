@@ -9,6 +9,7 @@ using AutoMapper;
 using Project.Common.Enums;
 using Project.Model.Common.Query.Model;
 using Project.Model.DTOs.Common;
+using Project.Model.Common;
 
 namespace Project.Repository.Repo
 {
@@ -43,7 +44,8 @@ namespace Project.Repository.Repo
             await SaveAsync();
         }
 
-        public async Task<PagedList<IVehicleModelDTO>> GetAllVehicleModelsAsync(IModelParams modelParams, Include include)
+        public async Task<PagedList<IVehicleModelDTO>> GetAllVehicleModelsAsync(
+            IModelFilter modelFilter, IModelSort modelSort, IPagingParamsBase paging, Include include)
         {
             IQueryable<VehicleModel> models = FindAll();
 
@@ -54,15 +56,13 @@ namespace Project.Repository.Repo
             }
             #endregion
 
-            //QueryHelper<VehicleModel>.FilterByFirstChar(ref models, modelParams.First);
+            QueryHelper<VehicleModel>.SearchByName(ref models, modelFilter.Name);
 
-            QueryHelper<VehicleModel>.SearchByName(ref models, modelParams.Name);
+            QueryHelper<VehicleModel>.FilterByMatchingIds(ref models, modelFilter.MakeIdFilterSelected); //for dropdown filter
 
-            QueryHelper<VehicleModel>.FilterByMatchingIds(ref models, modelParams.MakeIdFilterSelected); //for dropdown filter
+            IQueryable<VehicleModel> sortedModels = _sortHelper.ApplySort(models, modelSort.OrderBy);
 
-            IQueryable<VehicleModel> sortedModels = _sortHelper.ApplySort(models, modelParams.OrderBy);
-
-            var mapped = await sortedModels.ToMappedPagedListAsync<IVehicleModelDTO>(modelParams.PageNumber, modelParams.PageSize, _mapper);
+            var mapped = await sortedModels.ToMappedPagedListAsync<IVehicleModelDTO>(paging.PageNumber, paging.PageSize, _mapper);
 
             return mapped;
         }
@@ -74,6 +74,5 @@ namespace Project.Repository.Repo
                 .FirstOrDefaultAsync();
             return _mapper.Map<IVehicleModelDTO>(result);
         }
-
     }
 }

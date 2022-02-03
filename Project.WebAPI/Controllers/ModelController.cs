@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Project.Common;
 using Project.Common.Enums;
+using Project.Model;
 using Project.Model.DTOs;
 using Project.Model.Query.Model;
 using Project.Service.Common;
@@ -35,9 +36,12 @@ namespace Project.WebAPI.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetModels([FromQuery] ModelParams modelParams)
+        public async Task<IActionResult> GetModels(
+            [FromQuery] ModelFilter modelFilter,
+            [FromQuery] ModelSort modelSort,
+            [FromQuery] PagingParamsBase paging)
         {
-            var allModels = await _servicesWrapper.VehicleModel.GetAllVehicleModelsAsync(modelParams, Include.Yes);
+            var allModels = await _servicesWrapper.VehicleModel.GetAllVehicleModelsAsync(modelFilter, modelSort, paging, Include.Yes);
             if (!allModels.Any())
             {
                 return Ok("No Results Found!");

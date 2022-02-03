@@ -7,16 +7,14 @@ using System.Linq.Expressions;
 using Project.Common.Enums;
 using Project.Model.Common.Query.Make;
 using Project.Model.DTOs.Common;
+using Project.Model.Common;
 
 namespace Project.Repository.Common.Interfaces
 {
     public interface IMakeRepo/* : IVehicleServiceRepoBase<VehicleMake>*/
     {
-        Task<List<SelectListItem>> GetAllMakesForDPSelectListItem();
-        Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(IMakeParams makeParams, Include include = Include.No);
-        Task<IVehicleMakeDTO> GetVehicleMakeByIdAsync(int vehicleMakeId);
-        Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsAsync(int vehicleMakeId);
-        //Task<IVehicleMakeDTO> GetVehicleMakeByIdWithModelsCountAsync(int vehicleMakeId);
+        Task<PagedList<IVehicleMakeDTO>> GetAllVehicleMakesAsync(IMakeFilter makeFilter, IMakeSort makeSort, IPagingParamsBase paging, Include include = Include.No);
+        Task<IVehicleMakeDTO> GetVehicleMakeByIdAsync(int vehicleMakeId, Include include = Include.No);
 
         Task<int> CreateVehicleMake(IVehicleMakeCreateDTO vehicleMake);
         Task UpdateVehicleMake(IVehicleMakeUpdateDTO vehicleMake); 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Project.Common;
 using Project.Common.Enums;
+using Project.Model;
 using Project.Model.DTOs;
 using Project.Model.Query.Make;
 using Project.Service.Common;
@@ -34,9 +35,12 @@ namespace Project.WebAPI.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetMakes([FromQuery] MakeParams makeParams)
+        public async Task<IActionResult> GetMakes(
+            [FromQuery] MakeFilter makeFilter, 
+            [FromQuery] MakeSort makeSort, 
+            [FromQuery] PagingParamsBase paging)
         {
-            var allMakes = await _servicesWrapper.VehicleMake.GetAllVehicleMakesAsync(makeParams, Include.Yes);
+            var allMakes = await _servicesWrapper.VehicleMake.GetAllVehicleMakesAsync(makeFilter, makeSort, paging, Include.Yes);
             if (!allMakes.Any())
             {
                 return Ok("No Results Found!");
@@ -52,7 +56,7 @@ namespace Project.WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetMake(int id)
         {
-            var make = await _servicesWrapper.VehicleMake.GetVehicleMakeByIdWithModelsAsync(id);
+            var make = await _servicesWrapper.VehicleMake.GetVehicleMakeByIdAsync(id, Include.Yes);
 
             if (make == null)
             {

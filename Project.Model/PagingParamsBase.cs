@@ -2,7 +2,7 @@
 
 namespace Project.Model
 {
-    public abstract class PagingParamsBase : IPagingParamsBase
+    public /*abstract */class PagingParamsBase : IPagingParamsBase
     {
         const int maxPageSize = 50;
         public int PageNumber { get; set; } = 1;
